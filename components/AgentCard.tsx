@@ -1,27 +1,23 @@
 "use client";
 
+import { useState } from "react";
 import { Agent } from "@/types/agent";
 import { getCategoryColor } from "@/lib/colors";
 import { downloadAgentConfig, downloadSkillConfig } from "@/lib/download";
-import { getStats, getTitle, getQuote, getAvatarType } from "@/lib/rpg";
+import { getTitle, getQuote, getAvatarType, getTags } from "@/lib/rpg";
 import PixelAvatar from "./PixelAvatar";
 
 interface AgentCardProps {
   agent: Agent;
 }
 
-const STAT_COLORS: Record<string, string> = {
-  creativity: "#ffd033",
-  reliability: "#44e878",
-  expertise: "#f07050",
-};
-
 export default function AgentCard({ agent }: AgentCardProps) {
+  const [expanded, setExpanded] = useState(false);
   const color = getCategoryColor(agent.category);
-  const stats = getStats(agent);
   const title = getTitle(agent);
   const quote = getQuote(agent);
   const avatarType = getAvatarType(agent);
+  const tags = getTags(agent);
 
   return (
     <div className="pixel-card flex flex-col">
@@ -42,7 +38,7 @@ export default function AgentCard({ agent }: AgentCardProps) {
         <div className="flex items-start gap-4">
           {/* Pixel avatar */}
           <div className="pt-1">
-            <PixelAvatar type={avatarType} color={color} size={4} />
+            <PixelAvatar type={avatarType} color={color} size={3} />
           </div>
 
           {/* Name + category + title */}
@@ -71,50 +67,38 @@ export default function AgentCard({ agent }: AgentCardProps) {
           <span className="card-emoji flex-shrink-0">{agent.emoji}</span>
         </div>
 
-        {/* Description */}
-        <p className="text-terminal m-0 line-clamp-3" style={{
-          fontSize: "22px",
-          color: "var(--text-secondary)",
-          lineHeight: 1.35,
-        }}>
-          {agent.description}
-        </p>
-
-        {/* RPG Stat bars — text labels instead of emoji */}
-        <div className="flex flex-col gap-1.5 mt-1">
-          <div className="stat-row">
-            <span className="stat-label">CRE</span>
-            <div className="stat-bar-bg">
-              <div className="stat-bar-fill" style={{
-                width: `${stats.creativity * 10}%`,
-                backgroundColor: STAT_COLORS.creativity,
-              }} />
-            </div>
-            <span className="stat-value" style={{ color: STAT_COLORS.creativity }}>{stats.creativity}</span>
-          </div>
-          <div className="stat-row">
-            <span className="stat-label">REL</span>
-            <div className="stat-bar-bg">
-              <div className="stat-bar-fill" style={{
-                width: `${stats.reliability * 10}%`,
-                backgroundColor: STAT_COLORS.reliability,
-              }} />
-            </div>
-            <span className="stat-value" style={{ color: STAT_COLORS.reliability }}>{stats.reliability}</span>
-          </div>
-          <div className="stat-row">
-            <span className="stat-label">EXP</span>
-            <div className="stat-bar-bg">
-              <div className="stat-bar-fill" style={{
-                width: `${stats.expertise * 10}%`,
-                backgroundColor: STAT_COLORS.expertise,
-              }} />
-            </div>
-            <span className="stat-value" style={{ color: STAT_COLORS.expertise }}>{stats.expertise}</span>
-          </div>
+        {/* Description — click to expand/collapse */}
+        <div
+          onClick={() => setExpanded(!expanded)}
+          style={{ cursor: "pointer" }}
+        >
+          <p className={`text-terminal m-0 ${expanded ? "" : "line-clamp-3"}`} style={{
+            fontSize: "22px",
+            color: "var(--text-secondary)",
+            lineHeight: 1.35,
+          }}>
+            {agent.description}
+          </p>
+          <span className="text-terminal" style={{
+            fontSize: "16px",
+            color: "var(--text-muted)",
+            marginTop: "4px",
+            display: "inline-block",
+          }}>
+            {expanded ? "▲ show less" : "▼ read more"}
+          </span>
         </div>
 
-        {/* Action buttons — distinct colors with clear labels */}
+        {/* Skill tags */}
+        <div className="flex flex-wrap gap-2">
+          {tags.map((tag) => (
+            <span key={tag} className="skill-tag" style={{ borderColor: `${color}44`, color }}>
+              #{tag}
+            </span>
+          ))}
+        </div>
+
+        {/* Action buttons */}
         <div className="flex gap-3 mt-auto pt-2">
           <button
             onClick={() => downloadAgentConfig(agent)}

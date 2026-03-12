@@ -15,50 +15,42 @@ function pick<T>(arr: T[], seed: number): T {
 }
 
 // ═══════════════════════════════════════════
-// STATS: Creativity ⚡, Reliability 🛡, Expertise ⚔
+// SKILL TAGS — derived from category
 // ═══════════════════════════════════════════
 
-interface Stats {
-  creativity: number;   // 1-10
-  reliability: number;  // 1-10
-  expertise: number;    // 1-10
-}
-
-const CATEGORY_STAT_PROFILES: Record<string, [number, number, number]> = {
-  Design:              [9, 6, 8],
-  Engineering:         [7, 9, 9],
-  "Game Development":  [9, 7, 8],
-  Marketing:           [8, 6, 7],
-  "Paid Media":        [6, 8, 8],
-  Product:             [8, 8, 7],
-  "Project Management":[5, 9, 7],
-  Sales:               [7, 7, 8],
-  "Spatial Computing": [9, 7, 9],
-  Specialized:         [7, 8, 9],
-  Support:             [5, 9, 7],
-  Testing:             [4, 10, 8],
+const CATEGORY_TAGS: Record<string, string[]> = {
+  Design:              ["visual", "brand", "ux", "layout", "color", "typography"],
+  Engineering:         ["code", "systems", "debug", "architecture", "devops", "api"],
+  "Game Development":  ["gameplay", "engine", "level-design", "physics", "animation", "assets"],
+  Marketing:           ["growth", "content", "seo", "analytics", "campaigns", "social"],
+  "Paid Media":        ["ads", "bidding", "roas", "targeting", "budget", "conversion"],
+  Product:             ["roadmap", "features", "users", "metrics", "mvp", "strategy"],
+  "Project Management":["planning", "sprints", "delivery", "risk", "timeline", "stakeholders"],
+  Sales:               ["pipeline", "deals", "leads", "crm", "outreach", "negotiation"],
+  "Spatial Computing": ["3d", "xr", "voxel", "rendering", "spatial", "immersive"],
+  Specialized:         ["domain", "research", "analysis", "niche", "expert", "precision"],
+  Support:             ["tickets", "empathy", "resolution", "docs", "onboarding", "feedback"],
+  Testing:             ["qa", "coverage", "regression", "automation", "edge-cases", "ci"],
 };
 
-export function getStats(agent: Agent): Stats {
-  const base = CATEGORY_STAT_PROFILES[agent.category] || [7, 7, 7];
-  const h = hash(agent.id);
-  // Add -1 to +1 variation based on agent name hash
-  const vary = (val: number, seed: number) => Math.max(1, Math.min(10, val + ((seed % 3) - 1)));
-  return {
-    creativity: vary(base[0], h),
-    reliability: vary(base[1], h >> 4),
-    expertise: vary(base[2], h >> 8),
-  };
-}
-
-// ═══════════════════════════════════════════
-// LEVEL
-// ═══════════════════════════════════════════
-
-export function getLevel(agent: Agent): number {
-  const h = hash(agent.id + agent.category);
-  // Range 12-99, weighted toward higher levels for more "epic" feel
-  return 12 + (h % 88);
+export function getTags(agent: Agent): string[] {
+  const tags = CATEGORY_TAGS[agent.category] || ["agent", "ai", "specialist"];
+  const h = hash(agent.id + "tags");
+  // Pick 3 tags deterministically
+  const count = tags.length;
+  const i1 = h % count;
+  const i2 = (h >> 4) % count;
+  const i3 = (h >> 8) % count;
+  // Deduplicate while preserving order
+  const result: string[] = [tags[i1]];
+  if (!result.includes(tags[i2])) result.push(tags[i2]);
+  if (!result.includes(tags[i3])) result.push(tags[i3]);
+  // Ensure at least 2 tags
+  if (result.length < 2) {
+    const fallback = tags.find(t => !result.includes(t));
+    if (fallback) result.push(fallback);
+  }
+  return result;
 }
 
 // ═══════════════════════════════════════════
