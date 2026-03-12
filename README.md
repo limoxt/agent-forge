@@ -40,7 +40,7 @@ npm run build
 
 ## Deployment
 
-Automatically deployed to Vercel: https://agent-forge-chi.vercel.app
+Automatically deployed to Vercel: https://agentforge.sh
 
 ## License
 

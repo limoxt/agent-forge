@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 A pixel RPG-styled AI agent marketplace built with Next.js 14. Displays 120+ specialist AI agents across 12 categories, sourced from [agency-agents](https://github.com/msitarzewski/agency-agents). Users can browse, filter, search, and download agents as either standalone agent configs or skills (ZIP exports generated client-side with JSZip).
 
-Deployed on Vercel: https://agent-forge-chi.vercel.app
+Deployed on Vercel: https://agentforge.sh
 
 ## Commands
 
