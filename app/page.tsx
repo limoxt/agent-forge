@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <div className="min-h-screen" style={{ backgroundColor: "var(--bg-deep)" }}>
       {/* Hero */}
-      <header className="relative overflow-hidden" style={{ borderBottom: "3px solid var(--border)", background: "linear-gradient(180deg, #12122a 0%, var(--bg-deep) 100%)" }}>
+      <header className="relative overflow-hidden" style={{ borderBottom: "3px solid var(--border)", background: "linear-gradient(180deg, #141e18 0%, var(--bg-deep) 100%)" }}>
         {/* Scanlines overlay */}
         <div className="scanlines absolute inset-0" />
         {/* Pixel grid */}
@@ -24,7 +24,7 @@ export default function Home() {
           <h1 className="text-pixel text-center mb-3" style={{
             fontSize: "clamp(20px, 5vw, 40px)",
             color: "var(--accent)",
-            textShadow: "0 0 24px var(--accent-glow), 4px 4px 0px #1e1b4b",
+            textShadow: "0 0 24px var(--accent-glow), 4px 4px 0px #3a2a00",
             letterSpacing: "4px",
             lineHeight: 1.4,
           }}>
@@ -61,7 +61,7 @@ export default function Home() {
             </div>
             <div className="hud-panel px-5 py-3 text-center">
               <div className="hud-label mb-1">STATUS</div>
-              <div className="hud-value" style={{ color: "#4ade80" }}>
+              <div className="hud-value" style={{ color: "#50c878" }}>
                 ● ONLINE
               </div>
             </div>

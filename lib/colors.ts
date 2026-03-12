@@ -1,18 +1,18 @@
 const CATEGORY_COLORS: Record<string, string> = {
-  Design: "#ec4899",           // Pink
-  Engineering: "#22d3ee",      // Cyan
-  "Game Development": "#fb923c", // Orange
-  Marketing: "#f87171",        // Red
-  "Paid Media": "#fbbf24",     // Amber
-  Product: "#4ade80",          // Green
-  "Project Management": "#818cf8", // Indigo
-  Sales: "#facc15",            // Yellow
-  "Spatial Computing": "#a78bfa", // Purple
-  Specialized: "#fb7185",      // Rose
-  Support: "#2dd4bf",          // Teal
-  Testing: "#c084fc",          // Violet
+  Design: "#e86cbe",           // Hot pink
+  Engineering: "#40c8e0",      // Bright cyan
+  "Game Development": "#f0a030", // Warm orange
+  Marketing: "#e85454",        // Vivid red
+  "Paid Media": "#e8c840",     // Gold
+  Product: "#50c878",          // Emerald
+  "Project Management": "#8888f0", // Periwinkle
+  Sales: "#f0d040",            // Bright yellow
+  "Spatial Computing": "#b060e8", // Vivid purple
+  Specialized: "#e87088",      // Rose
+  Support: "#40d8b0",          // Turquoise
+  Testing: "#c070f0",          // Lavender
 };
 
 export function getCategoryColor(category: string): string {
-  return CATEGORY_COLORS[category] ?? "#6366f1";
+  return CATEGORY_COLORS[category] ?? "#f0c040";
 }
