@@ -93,6 +93,15 @@ export default function Home() {
             </a>
             {" "}(MIT License) — adapted for OpenClaw
           </div>
+          <a
+            href="https://buymeacoffee.com/limoxt"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="pixel-btn pixel-btn-secondary inline-block mt-5"
+            style={{ fontSize: "9px", padding: "10px 20px", textDecoration: "none" }}
+          >
+            ☕ BUY ME A COFFEE
+          </a>
         </div>
       </footer>
     </div>
