@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Agent } from "@/types/agent";
-import { getCategoryColor } from "@/lib/colors";
+import { getCategoryColor, getCategoryBgColor } from "@/lib/colors";
 import AgentCard from "./AgentCard";
 
 interface AgentGridProps {
@@ -12,49 +12,47 @@ interface AgentGridProps {
 
 export default function AgentGrid({ agents, categories }: AgentGridProps) {
   const [activeCategory, setActiveCategory] = useState<string>("All");
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
-  const filtered =
-    activeCategory === "All"
-      ? agents
-      : agents.filter((a) => a.category === activeCategory);
+  const filtered = agents.filter((a) => {
+    const matchesCategory = activeCategory === "All" || a.category === activeCategory;
+    const matchesSearch = searchQuery === "" || 
+      a.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      a.description.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
 
   const allCategories = ["All", ...categories];
 
   return (
     <>
-      {/* Category filter tabs */}
-      <div
-        className="no-scrollbar"
-        style={{
-          display: "flex",
-          gap: "8px",
-          overflowX: "auto",
-          paddingBottom: "4px",
-          marginBottom: "32px",
-          flexWrap: "nowrap",
-        }}
-      >
+      {/* Search */}
+      <div className="mb-8">
+        <input
+          type="text"
+          placeholder="Search agents..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="search-input w-full max-w-md"
+        />
+      </div>
+
+      {/* Category filter */}
+      <div className="flex flex-wrap gap-2 mb-8">
         {allCategories.map((cat) => {
           const isActive = cat === activeCategory;
-          const color = cat === "All" ? "#00ff88" : getCategoryColor(cat);
+          const color = cat === "All" ? "#818cf8" : getCategoryColor(cat);
+          const bgColor = cat === "All" ? "rgba(129, 140, 248, 0.1)" : getCategoryBgColor(cat);
+          
           return (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
+              className="px-4 py-2 rounded-full text-sm font-medium transition-all"
               style={{
-                fontFamily: "'Press Start 2P', monospace",
-                fontSize: "7px",
-                whiteSpace: "nowrap",
-                padding: "8px 12px",
-                border: `3px solid ${isActive ? color : "#30363d"}`,
-                backgroundColor: isActive ? color : "#0d1117",
-                color: isActive ? "#000" : "#8b949e",
-                boxShadow: isActive ? `3px 3px 0px #000` : "none",
-                cursor: "pointer",
-                textTransform: "uppercase",
-                letterSpacing: "1px",
-                transition: "all 0.1s ease",
-                flexShrink: 0,
+                backgroundColor: isActive ? bgColor : "transparent",
+                color: isActive ? color : "#71717a",
+                border: `1px solid ${isActive ? color : "#27272a"}`,
               }}
             >
               {cat}
@@ -64,25 +62,12 @@ export default function AgentGrid({ agents, categories }: AgentGridProps) {
       </div>
 
       {/* Results count */}
-      <p
-        style={{
-          fontFamily: "'VT323', monospace",
-          fontSize: "20px",
-          color: "#8b949e",
-          marginBottom: "24px",
-        }}
-      >
-        {filtered.length} AGENT{filtered.length !== 1 ? "S" : ""} FOUND
+      <p className="text-sm text-zinc-500 mb-6">
+        {filtered.length} agent{filtered.length !== 1 ? "s" : ""} found
       </p>
 
       {/* Grid */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
-          gap: "20px",
-        }}
-      >
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {filtered.map((agent) => (
           <AgentCard key={agent.id} agent={agent} />
         ))}

@@ -1,7 +1,7 @@
 "use client";
 
 import { Agent } from "@/types/agent";
-import { getCategoryColor } from "@/lib/colors";
+import { getCategoryColor, getCategoryBgColor } from "@/lib/colors";
 import { downloadAgentConfig, downloadSkillConfig } from "@/lib/download";
 
 interface AgentCardProps {
@@ -10,158 +10,47 @@ interface AgentCardProps {
 
 export default function AgentCard({ agent }: AgentCardProps) {
   const color = getCategoryColor(agent.category);
+  const bgColor = getCategoryBgColor(agent.category);
 
   return (
-    <div
-      style={{
-        border: `4px solid ${color}`,
-        boxShadow: `4px 4px 0px #000`,
-        backgroundColor: "#0d1117",
-        padding: "16px",
-        display: "flex",
-        flexDirection: "column",
-        gap: "12px",
-        transition: "transform 0.1s ease, box-shadow 0.1s ease",
-      }}
-      onMouseEnter={(e) => {
-        (e.currentTarget as HTMLDivElement).style.transform = "translateY(-2px)";
-        (e.currentTarget as HTMLDivElement).style.boxShadow = `6px 6px 0px #000`;
-      }}
-      onMouseLeave={(e) => {
-        (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)";
-        (e.currentTarget as HTMLDivElement).style.boxShadow = `4px 4px 0px #000`;
-      }}
-      onMouseDown={(e) => {
-        (e.currentTarget as HTMLDivElement).style.transform = "translateY(2px)";
-        (e.currentTarget as HTMLDivElement).style.boxShadow = `2px 2px 0px #000`;
-      }}
-      onMouseUp={(e) => {
-        (e.currentTarget as HTMLDivElement).style.transform = "translateY(-2px)";
-        (e.currentTarget as HTMLDivElement).style.boxShadow = `6px 6px 0px #000`;
-      }}
-    >
-      {/* Category badge */}
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <span
-          style={{
-            fontFamily: "'Press Start 2P', monospace",
-            fontSize: "8px",
-            color: color,
-            textTransform: "uppercase",
-            letterSpacing: "1px",
+    <div className="agent-card p-5 flex flex-col gap-3">
+      {/* Header */}
+      <div className="flex items-start justify-between gap-2">
+        <span 
+          className="category-badge"
+          style={{ 
+            color: color, 
+            backgroundColor: bgColor,
           }}
         >
           {agent.category}
         </span>
-        <span style={{ fontSize: "28px", lineHeight: 1 }}>{agent.emoji}</span>
+        <span className="text-2xl">{agent.emoji}</span>
       </div>
 
-      {/* Agent name */}
-      <h3
-        style={{
-          fontFamily: "'Press Start 2P', monospace",
-          fontSize: "10px",
-          color: "#ffffff",
-          lineHeight: "1.6",
-          margin: 0,
-        }}
-      >
+      {/* Name */}
+      <h3 className="text-base font-semibold text-white leading-tight">
         {agent.name}
       </h3>
 
       {/* Description */}
-      <p
-        style={{
-          fontFamily: "'VT323', monospace",
-          fontSize: "18px",
-          color: "#8b949e",
-          margin: 0,
-          lineHeight: "1.4",
-          display: "-webkit-box",
-          WebkitLineClamp: 3,
-          WebkitBoxOrient: "vertical",
-          overflow: "hidden",
-          flex: 1,
-        }}
-      >
+      <p className="text-sm text-zinc-400 leading-relaxed line-clamp-3 flex-1">
         {agent.description}
       </p>
 
-      {/* Dual download buttons */}
-      <div style={{ display: "flex", gap: "8px", marginTop: "auto" }}>
+      {/* Actions */}
+      <div className="flex gap-2 mt-2">
         <button
-          onClick={(e) => {
-            e.stopPropagation();
-            downloadAgentConfig(agent);
-          }}
-          title="Run as standalone agent in OpenClaw"
-          style={{
-            fontFamily: "'Press Start 2P', monospace",
-            fontSize: "7px",
-            backgroundColor: "#00ff88",
-            color: "#000000",
-            border: "3px solid #000",
-            boxShadow: "3px 3px 0px #000",
-            padding: "8px 6px",
-            cursor: "pointer",
-            textTransform: "uppercase",
-            letterSpacing: "0.5px",
-            flex: 1,
-            transition: "transform 0.1s ease, box-shadow 0.1s ease, background-color 0.1s ease",
-          }}
-          onMouseEnter={(e) => {
-            (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#00cc6a";
-          }}
-          onMouseLeave={(e) => {
-            (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#00ff88";
-          }}
-          onMouseDown={(e) => {
-            (e.currentTarget as HTMLButtonElement).style.transform = "translateY(2px)";
-            (e.currentTarget as HTMLButtonElement).style.boxShadow = "1px 1px 0px #000";
-          }}
-          onMouseUp={(e) => {
-            (e.currentTarget as HTMLButtonElement).style.transform = "translateY(0)";
-            (e.currentTarget as HTMLButtonElement).style.boxShadow = "3px 3px 0px #000";
-          }}
+          onClick={() => downloadAgentConfig(agent)}
+          className="flex-1 px-3 py-2 rounded-lg text-xs font-medium bg-indigo-500/10 text-indigo-400 border border-indigo-500/30 hover:bg-indigo-500/20 transition-colors"
         >
-          ⬇ AGENT
+          ⬇ Agent
         </button>
         <button
-          onClick={(e) => {
-            e.stopPropagation();
-            downloadSkillConfig(agent);
-          }}
-          title="Add as skill to existing agent"
-          style={{
-            fontFamily: "'Press Start 2P', monospace",
-            fontSize: "7px",
-            backgroundColor: "#a55eea",
-            color: "#000000",
-            border: "3px solid #000",
-            boxShadow: "3px 3px 0px #000",
-            padding: "8px 6px",
-            cursor: "pointer",
-            textTransform: "uppercase",
-            letterSpacing: "0.5px",
-            flex: 1,
-            transition: "transform 0.1s ease, box-shadow 0.1s ease, background-color 0.1s ease",
-          }}
-          onMouseEnter={(e) => {
-            (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#8e44ad";
-          }}
-          onMouseLeave={(e) => {
-            (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#a55eea";
-          }}
-          onMouseDown={(e) => {
-            (e.currentTarget as HTMLButtonElement).style.transform = "translateY(2px)";
-            (e.currentTarget as HTMLButtonElement).style.boxShadow = "1px 1px 0px #000";
-          }}
-          onMouseUp={(e) => {
-            (e.currentTarget as HTMLButtonElement).style.transform = "translateY(0)";
-            (e.currentTarget as HTMLButtonElement).style.boxShadow = "3px 3px 0px #000";
-          }}
+          onClick={() => downloadSkillConfig(agent)}
+          className="flex-1 px-3 py-2 rounded-lg text-xs font-medium bg-purple-500/10 text-purple-400 border border-purple-500/30 hover:bg-purple-500/20 transition-colors"
         >
-          ⬇ SKILL
+          ⬇ Skill
         </button>
       </div>
     </div>

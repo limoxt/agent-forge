@@ -3,7 +3,8 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "AgentForge — Your AI team, on-demand.",
-  description: "Pixel RPG style AI Agent marketplace. Browse and download AI agents for your team.",
+  description: "Browse and download AI agents for your team. 120+ pre-configured agents across 12 categories.",
+  keywords: ["AI agents", "automation", "OpenClaw", "AI team", "agent marketplace"],
 };
 
 export default function RootLayout({
@@ -12,8 +13,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="en" className="dark">
+      <body className="bg-[#0c0c0f] text-zinc-200 antialiased">{children}</body>
     </html>
   );
 }

@@ -6,132 +6,48 @@ export default function Home() {
   const categories = getCategories();
 
   return (
-    <div style={{ minHeight: "100vh", backgroundColor: "#0a0a0a" }}>
+    <div className="min-h-screen bg-[#0c0c0f]">
       {/* Hero */}
-      <header
-        style={{
-          position: "relative",
-          borderBottom: "4px solid #30363d",
-          padding: "48px 24px 40px",
-          textAlign: "center",
-          overflow: "hidden",
-          background: "linear-gradient(180deg, #0d1117 0%, #0a0a0a 100%)",
-        }}
-      >
-        {/* Scanlines overlay */}
-        <div
-          className="scanlines"
-          style={{
-            position: "absolute",
-            inset: 0,
-          }}
-        />
-
-        {/* Pixel grid decoration */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            backgroundImage:
-              "radial-gradient(circle, #00ff8820 1px, transparent 1px)",
-            backgroundSize: "32px 32px",
-            opacity: 0.4,
-          }}
-        />
-
-        <div style={{ position: "relative", zIndex: 1 }}>
+      <header className="relative border-b border-zinc-800 py-16 px-6 text-center overflow-hidden">
+        {/* Gradient orbs */}
+        <div className="gradient-orb w-64 h-64 bg-indigo-500 top-0 left-1/4 -translate-x-1/2" />
+        <div className="gradient-orb w-48 h-48 bg-purple-500 top-10 right-1/4" />
+        
+        {/* Grid background */}
+        <div className="absolute inset-0 grid-bg opacity-30" />
+        
+        <div className="relative z-10">
           {/* Title */}
-          <h1
-            style={{
-              fontFamily: "'Press Start 2P', monospace",
-              fontSize: "clamp(20px, 5vw, 48px)",
-              color: "#00ff88",
-              textShadow:
-                "0 0 20px #00ff8880, 4px 4px 0px #006633",
-              margin: "0 0 16px",
-              letterSpacing: "4px",
-              lineHeight: 1.4,
-            }}
-          >
-            AGENT FORGE
+          <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4 tracking-tight">
+            Agent Forge
           </h1>
 
           {/* Tagline */}
-          <p
-            style={{
-              fontFamily: "'VT323', monospace",
-              fontSize: "28px",
-              color: "#8b949e",
-              margin: "0 0 24px",
-              letterSpacing: "2px",
-            }}
-          >
+          <p className="text-lg text-zinc-400 mb-8">
             Your AI team, on-demand.
           </p>
 
-          {/* Stats bar */}
-          <div
-            style={{
-              display: "inline-flex",
-              gap: "32px",
-              border: "2px solid #30363d",
-              backgroundColor: "#0d1117",
-              padding: "12px 24px",
-              boxShadow: "4px 4px 0px #000",
-            }}
-          >
-            <span
-              style={{
-                fontFamily: "'Press Start 2P', monospace",
-                fontSize: "8px",
-                color: "#00ff88",
-              }}
-            >
-              ⚔ {agents.length} AGENTS
+          {/* Stats */}
+          <div className="inline-flex gap-6 bg-zinc-900/50 border border-zinc-800 rounded-full px-6 py-3">
+            <span className="text-sm text-zinc-300">
+              <span className="text-indigo-400 font-semibold">{agents.length}</span> agents
             </span>
-            <span
-              style={{
-                fontFamily: "'Press Start 2P', monospace",
-                fontSize: "8px",
-                color: "#70a1ff",
-              }}
-            >
-              🏰 {categories.length} CLASSES
+            <span className="text-sm text-zinc-300">
+              <span className="text-purple-400 font-semibold">{categories.length}</span> categories
             </span>
           </div>
         </div>
       </header>
 
       {/* Main content */}
-      <main
-        style={{
-          maxWidth: "1400px",
-          margin: "0 auto",
-          padding: "40px 24px",
-        }}
-      >
+      <main className="max-w-7xl mx-auto px-6 py-12">
         <AgentGrid agents={agents} categories={categories} />
       </main>
 
       {/* Footer */}
-      <footer
-        style={{
-          borderTop: "4px solid #30363d",
-          padding: "24px",
-          textAlign: "center",
-          backgroundColor: "#0d1117",
-        }}
-      >
-        <p
-          style={{
-            fontFamily: "'Press Start 2P', monospace",
-            fontSize: "8px",
-            color: "#30363d",
-            margin: 0,
-            letterSpacing: "2px",
-          }}
-        >
-          AGENT FORGE &copy; 2026 — POWERED BY AI
+      <footer className="border-t border-zinc-800 py-8 text-center">
+        <p className="text-sm text-zinc-600">
+          Agent Forge © 2026 — Powered by AI
         </p>
       </footer>
     </div>
