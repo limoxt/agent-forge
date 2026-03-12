@@ -1,5 +1,6 @@
 import { getAgents, getCategories } from "@/lib/agents";
 import AgentGrid from "@/components/AgentGrid";
+import ThemeToggle from "@/components/ThemeToggle";
 
 export default function Home() {
   const agents = getAgents();
@@ -7,8 +8,9 @@ export default function Home() {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: "var(--bg-deep)" }}>
+      <ThemeToggle />
       {/* Hero */}
-      <header className="relative overflow-hidden" style={{ borderBottom: "3px solid var(--border)", background: "linear-gradient(180deg, #141e18 0%, var(--bg-deep) 100%)" }}>
+      <header className="relative overflow-hidden" style={{ borderBottom: "3px solid var(--border)", background: "linear-gradient(180deg, var(--bg-base) 0%, var(--bg-deep) 100%)" }}>
         {/* Scanlines overlay */}
         <div className="scanlines absolute inset-0" />
         {/* Pixel grid */}

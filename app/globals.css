@@ -29,6 +29,55 @@
   --font-terminal: 'VT323', monospace;
 }
 
+/* ═══════════════════════════════════════════
+   LIGHT MODE — parchment RPG palette
+   ═══════════════════════════════════════════ */
+:root.light {
+  --bg-deep: #f0e8d8;
+  --bg-base: #e8dfcc;
+  --bg-surface: #faf6ee;
+  --bg-elevated: #fff9f0;
+  --border: #c8b890;
+  --border-bright: #a89870;
+  --text-primary: #2a2218;
+  --text-secondary: #5a4e3a;
+  --text-muted: #8a7e6a;
+  --accent: #c8900a;
+  --accent-glow: rgba(200, 144, 10, 0.25);
+  --accent-dim: #9a7008;
+  --accent-secondary: #1a8a40;
+  --accent-secondary-glow: rgba(26, 138, 64, 0.2);
+  --danger: #c04030;
+  --pixel-shadow: #c8b89088;
+}
+
+.light .pixel-btn-primary {
+  background-color: #d0f0dc;
+  border-color: #1a8a40;
+  color: #1a6a30;
+}
+
+.light .pixel-btn-secondary {
+  background-color: #f0e0b0;
+  border-color: #c8900a;
+  color: #8a6a08;
+}
+
+.light .scanlines {
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.02) 2px,
+    rgba(0, 0, 0, 0.02) 4px
+  );
+}
+
+.light .pixel-grid {
+  background-image:
+    radial-gradient(circle, rgba(200, 144, 10, 0.06) 1px, transparent 1px);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -401,4 +450,33 @@ body {
 .card-emoji {
   font-size: 22px;
   line-height: 1;
+}
+
+/* ═══════════════════════════════════════════
+   THEME TOGGLE
+   ═══════════════════════════════════════════ */
+.theme-toggle {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 50;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  line-height: 1;
+  background: var(--bg-surface);
+  border: 3px solid var(--border);
+  box-shadow: 3px 3px 0px var(--pixel-shadow);
+  color: var(--accent);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+  box-shadow: 4px 4px 0px var(--pixel-shadow);
+  transform: translateY(-1px);
 }
