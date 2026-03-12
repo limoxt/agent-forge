@@ -38,12 +38,11 @@ export default function AgentCard({ agent }: AgentCardProps) {
 
       {/* Card content */}
       <div className="relative p-5 flex flex-col gap-3 flex-1">
-        {/* Header: avatar + info */}
+        {/* Header: avatar left + info center + emoji right */}
         <div className="flex items-start gap-4">
-          {/* Pixel avatar + emoji */}
-          <div className="flex flex-col items-center gap-2 pt-1">
+          {/* Pixel avatar */}
+          <div className="pt-1">
             <PixelAvatar type={avatarType} color={color} size={4} />
-            <span className="card-emoji">{agent.emoji}</span>
           </div>
 
           {/* Name + category + title */}
@@ -67,6 +66,9 @@ export default function AgentCard({ agent }: AgentCardProps) {
               {title}
             </div>
           </div>
+
+          {/* Emoji badge — top right */}
+          <span className="card-emoji flex-shrink-0">{agent.emoji}</span>
         </div>
 
         {/* Description */}

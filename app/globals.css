@@ -253,10 +253,10 @@ body {
    ═══════════════════════════════════════════ */
 .pixel-btn {
   font-family: var(--font-pixel);
-  font-size: 8px;
+  font-size: 10px;
   border: 3px solid;
   box-shadow: 4px 4px 0px var(--pixel-shadow);
-  padding: 10px 14px;
+  padding: 12px 16px;
   cursor: pointer;
   text-transform: uppercase;
   letter-spacing: 1px;
