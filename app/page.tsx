@@ -14,54 +14,54 @@ export default function Home() {
         {/* Pixel grid */}
         <div className="pixel-grid absolute inset-0 opacity-40" />
 
-        <div className="relative z-10 px-6 py-12 md:py-16 max-w-5xl mx-auto">
-          {/* ASCII-style top border */}
-          <div className="text-pixel text-center mb-6" style={{ fontSize: "7px", color: "var(--border-bright)", letterSpacing: "4px" }}>
+        <div className="relative z-10 px-6 py-14 md:py-20 max-w-5xl mx-auto">
+          {/* ASCII border */}
+          <div className="text-pixel text-center mb-8" style={{ fontSize: "8px", color: "var(--border-bright)", letterSpacing: "4px" }}>
             ╔══════════════════════════════╗
           </div>
 
           {/* Title */}
-          <h1 className="text-pixel text-center mb-3" style={{
-            fontSize: "clamp(20px, 5vw, 40px)",
+          <h1 className="text-pixel text-center mb-4" style={{
+            fontSize: "clamp(22px, 5vw, 44px)",
             color: "var(--accent)",
-            textShadow: "0 0 24px var(--accent-glow), 4px 4px 0px #3a2a00",
-            letterSpacing: "4px",
+            textShadow: "0 0 28px var(--accent-glow), 4px 4px 0px #3a2a00",
+            letterSpacing: "5px",
             lineHeight: 1.4,
           }}>
             AGENT FORGE
           </h1>
 
           {/* Tagline */}
-          <p className="text-terminal text-center mb-8 cursor-blink" style={{
-            fontSize: "28px",
+          <p className="text-terminal text-center mb-10 cursor-blink" style={{
+            fontSize: "32px",
             color: "var(--text-secondary)",
             letterSpacing: "2px",
           }}>
             Your AI team, on-demand
           </p>
 
-          {/* ASCII-style bottom border */}
-          <div className="text-pixel text-center mb-8" style={{ fontSize: "7px", color: "var(--border-bright)", letterSpacing: "4px" }}>
+          {/* ASCII border */}
+          <div className="text-pixel text-center mb-10" style={{ fontSize: "8px", color: "var(--border-bright)", letterSpacing: "4px" }}>
             ╚══════════════════════════════╝
           </div>
 
           {/* HUD Stats */}
-          <div className="flex justify-center gap-4 md:gap-6">
-            <div className="hud-panel px-5 py-3 text-center">
-              <div className="hud-label mb-1">AGENTS</div>
+          <div className="flex justify-center gap-5 md:gap-8">
+            <div className="hud-panel px-6 py-4 text-center">
+              <div className="hud-label mb-2">AGENTS</div>
               <div className="hud-value" style={{ color: "var(--accent)" }}>
                 ⚔ {agents.length}
               </div>
             </div>
-            <div className="hud-panel px-5 py-3 text-center">
-              <div className="hud-label mb-1">CLASSES</div>
+            <div className="hud-panel px-6 py-4 text-center">
+              <div className="hud-label mb-2">CLASSES</div>
               <div className="hud-value" style={{ color: "var(--accent-secondary)" }}>
                 🏰 {categories.length}
               </div>
             </div>
-            <div className="hud-panel px-5 py-3 text-center">
-              <div className="hud-label mb-1">STATUS</div>
-              <div className="hud-value" style={{ color: "#50c878" }}>
+            <div className="hud-panel px-6 py-4 text-center">
+              <div className="hud-label mb-2">STATUS</div>
+              <div className="hud-value" style={{ color: "#44e878" }}>
                 ● ONLINE
               </div>
             </div>
@@ -69,16 +69,16 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Main content */}
-      <main className="max-w-6xl mx-auto px-4 md:px-6 py-8 md:py-10">
+      {/* Main content — generous padding */}
+      <main className="max-w-7xl mx-auto px-5 md:px-8 py-10 md:py-14">
         <AgentGrid agents={agents} categories={categories} />
       </main>
 
       {/* Footer */}
       <footer style={{ background: "var(--bg-surface)" }}>
         <div className="pixel-divider" />
-        <div className="px-6 py-6 text-center">
-          <div className="text-pixel" style={{ fontSize: "7px", color: "var(--text-muted)", letterSpacing: "2px" }}>
+        <div className="px-6 py-8 text-center">
+          <div className="text-pixel" style={{ fontSize: "8px", color: "var(--text-muted)", letterSpacing: "2px" }}>
             ░░ AGENT FORGE © 2026 — POWERED BY AI ░░
           </div>
         </div>

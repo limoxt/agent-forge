@@ -27,9 +27,9 @@ export default function AgentGrid({ agents, categories }: AgentGridProps) {
 
   return (
     <>
-      {/* Search bar with pixel icon */}
-      <div className="relative mb-6" style={{ maxWidth: "480px" }}>
-        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-terminal" style={{ fontSize: "22px", color: "var(--text-muted)" }}>
+      {/* Search bar */}
+      <div className="relative mb-8" style={{ maxWidth: "520px" }}>
+        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-terminal" style={{ fontSize: "26px", color: "var(--text-muted)" }}>
           ▸
         </span>
         <input
@@ -41,11 +41,11 @@ export default function AgentGrid({ agents, categories }: AgentGridProps) {
         />
       </div>
 
-      {/* Category filter tags - wrapping grid */}
-      <div className="flex flex-wrap gap-2 mb-6">
+      {/* Category filter tags — wrapping */}
+      <div className="flex flex-wrap gap-2.5 mb-8">
         {allCategories.map((cat) => {
           const isActive = cat === activeCategory;
-          const color = cat === "All" ? "#6366f1" : getCategoryColor(cat);
+          const color = cat === "All" ? "#ffd033" : getCategoryColor(cat);
           return (
             <button
               key={cat}
@@ -54,6 +54,7 @@ export default function AgentGrid({ agents, categories }: AgentGridProps) {
               style={isActive ? {
                 borderColor: color,
                 backgroundColor: color,
+                color: "#0e110f",
               } : undefined}
             >
               {cat}
@@ -63,16 +64,16 @@ export default function AgentGrid({ agents, categories }: AgentGridProps) {
       </div>
 
       {/* Results count */}
-      <div className="flex items-center gap-3 mb-5">
+      <div className="flex items-center gap-4 mb-7">
         <div className="pixel-divider flex-1" />
-        <span className="text-terminal" style={{ fontSize: "20px", color: "var(--text-muted)", letterSpacing: "1px" }}>
+        <span className="text-terminal" style={{ fontSize: "22px", color: "var(--text-muted)", letterSpacing: "1px" }}>
           {filtered.length} AGENT{filtered.length !== 1 ? "S" : ""} FOUND
         </span>
         <div className="pixel-divider flex-1" />
       </div>
 
-      {/* Grid */}
-      <div className="grid gap-4" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))" }}>
+      {/* Grid — wider cards, more spacing */}
+      <div className="grid gap-6" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))" }}>
         {filtered.map((agent) => (
           <AgentCard key={agent.id} agent={agent} />
         ))}
@@ -80,12 +81,12 @@ export default function AgentGrid({ agents, categories }: AgentGridProps) {
 
       {/* Empty state */}
       {filtered.length === 0 && (
-        <div className="text-center py-16">
-          <div style={{ fontSize: "48px", marginBottom: "16px" }}>🔍</div>
-          <p className="text-pixel" style={{ fontSize: "10px", color: "var(--text-muted)" }}>
+        <div className="text-center py-20">
+          <div style={{ fontSize: "56px", marginBottom: "20px" }}>🔍</div>
+          <p className="text-pixel" style={{ fontSize: "12px", color: "var(--text-muted)" }}>
             NO AGENTS FOUND
           </p>
-          <p className="text-terminal mt-2" style={{ fontSize: "20px", color: "var(--text-muted)" }}>
+          <p className="text-terminal mt-3" style={{ fontSize: "24px", color: "var(--text-muted)" }}>
             Try a different search or category
           </p>
         </div>

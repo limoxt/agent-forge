@@ -6,7 +6,7 @@
 @tailwind utilities;
 
 /* ═══════════════════════════════════════════
-   DESIGN TOKENS — Warm RPG Palette
+   DESIGN TOKENS — Warm RPG Palette (eBoy-inspired saturation)
    ═══════════════════════════════════════════ */
 :root {
   --bg-deep: #0e110f;
@@ -15,16 +15,16 @@
   --bg-elevated: #222e2a;
   --border: #2e3d36;
   --border-bright: #3e5548;
-  --text-primary: #e8e4d9;
-  --text-secondary: #a8a08e;
-  --text-muted: #6b6456;
-  --accent: #f0c040;
-  --accent-glow: rgba(240, 192, 64, 0.4);
-  --accent-dim: #a8862c;
-  --accent-secondary: #50c878;
-  --accent-secondary-glow: rgba(80, 200, 120, 0.3);
-  --danger: #e85454;
-  --pixel-shadow: #080a08;
+  --text-primary: #ede8d8;
+  --text-secondary: #b0a890;
+  --text-muted: #78705e;
+  --accent: #ffd033;
+  --accent-glow: rgba(255, 208, 51, 0.35);
+  --accent-dim: #b8922a;
+  --accent-secondary: #44e878;
+  --accent-secondary-glow: rgba(68, 232, 120, 0.3);
+  --danger: #f06050;
+  --pixel-shadow: #060806;
   --font-pixel: 'Press Start 2P', monospace;
   --font-terminal: 'VT323', monospace;
 }
@@ -49,15 +49,10 @@ body {
   50% { opacity: 0; }
 }
 
-@keyframes glow-pulse {
-  0%, 100% { filter: drop-shadow(0 0 4px var(--accent-glow)); }
-  50% { filter: drop-shadow(0 0 10px var(--accent-glow)); }
-}
-
 @keyframes float-in {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
@@ -75,19 +70,15 @@ body {
   50% { transform: translateY(-2px); }
 }
 
-@keyframes bubble-in {
+@keyframes bubble-pop {
   from {
     opacity: 0;
-    transform: translateY(4px) scale(0.9);
+    transform: translate(-50%, 6px) scale(0.92);
   }
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translate(-50%, 0) scale(1);
   }
-}
-
-@keyframes stat-fill {
-  from { width: 0; }
 }
 
 /* ═══════════════════════════════════════════
@@ -98,8 +89,8 @@ body {
     0deg,
     transparent,
     transparent 2px,
-    rgba(0, 0, 0, 0.06) 2px,
-    rgba(0, 0, 0, 0.06) 4px
+    rgba(0, 0, 0, 0.05) 2px,
+    rgba(0, 0, 0, 0.05) 4px
   );
   pointer-events: none;
   animation: scanline-move 0.5s linear infinite;
@@ -107,27 +98,27 @@ body {
 
 .pixel-grid {
   background-image:
-    radial-gradient(circle, rgba(240, 192, 64, 0.08) 1px, transparent 1px);
+    radial-gradient(circle, rgba(255, 208, 51, 0.06) 1px, transparent 1px);
   background-size: 20px 20px;
   pointer-events: none;
 }
 
 /* ═══════════════════════════════════════════
-   PIXEL CARD
+   PIXEL CARD — Content On Demand inspired borders
    ═══════════════════════════════════════════ */
 .pixel-card {
   background: var(--bg-surface);
-  border: 2px solid var(--border);
-  box-shadow: 4px 4px 0px var(--pixel-shadow);
+  border: 3px solid var(--border);
+  box-shadow: 5px 5px 0px var(--pixel-shadow);
   transition: all 0.15s ease;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   animation: float-in 0.3s ease-out backwards;
 }
 
 .pixel-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 6px 8px 0px var(--pixel-shadow);
+  transform: translateY(-4px);
+  box-shadow: 7px 9px 0px var(--pixel-shadow);
   border-color: var(--border-bright);
 }
 
@@ -137,7 +128,7 @@ body {
 
 .pixel-card:hover .speech-bubble {
   opacity: 1;
-  transform: translateY(0) scale(1);
+  transform: translate(-50%, 0) scale(1);
   pointer-events: auto;
 }
 
@@ -149,73 +140,77 @@ body {
   position: absolute;
   inset: 0;
   opacity: 0;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.25s ease;
   pointer-events: none;
+  z-index: 0;
 }
 
-/* Top color bar */
+/* Top color bar — thicker for visibility */
 .card-color-bar {
-  height: 4px;
+  height: 5px;
   width: 100%;
   image-rendering: pixelated;
 }
 
 /* ═══════════════════════════════════════════
-   SPEECH BUBBLE
+   SPEECH BUBBLE — floats above card
    ═══════════════════════════════════════════ */
 .speech-bubble {
   position: absolute;
-  top: 8px;
-  right: 8px;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translate(-50%, 6px) scale(0.92);
   background: var(--bg-elevated);
-  border: 2px solid var(--border-bright);
-  padding: 6px 10px;
+  border: 3px solid var(--accent-dim);
+  padding: 8px 14px;
   font-family: var(--font-terminal);
-  font-size: 14px;
+  font-size: 18px;
   color: var(--accent);
-  max-width: 180px;
-  z-index: 10;
+  white-space: nowrap;
+  z-index: 20;
   opacity: 0;
-  transform: translateY(4px) scale(0.9);
   transition: all 0.2s ease;
   pointer-events: none;
-  box-shadow: 3px 3px 0px var(--pixel-shadow);
+  box-shadow: 4px 4px 0px var(--pixel-shadow);
 }
 
 .speech-bubble::after {
   content: '';
   position: absolute;
-  bottom: -8px;
-  right: 16px;
+  top: 100%;
+  left: 50%;
+  margin-left: -6px;
   width: 0;
   height: 0;
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
-  border-top: 8px solid var(--border-bright);
+  border-top: 8px solid var(--accent-dim);
 }
 
 /* ═══════════════════════════════════════════
-   STAT BARS
+   STAT BARS — segmented pixel fill (snes.css inspired)
    ═══════════════════════════════════════════ */
 .stat-row {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-family: var(--font-terminal);
-  font-size: 14px;
+  gap: 8px;
 }
 
 .stat-label {
-  width: 14px;
-  text-align: center;
+  font-family: var(--font-pixel);
+  font-size: 7px;
+  width: 28px;
+  text-align: right;
   flex-shrink: 0;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
 }
 
 .stat-bar-bg {
   flex: 1;
-  height: 6px;
+  height: 8px;
   background: var(--bg-deep);
-  border: 1px solid var(--border);
+  border: 2px solid var(--border);
   position: relative;
   overflow: hidden;
   image-rendering: pixelated;
@@ -223,39 +218,24 @@ body {
 
 .stat-bar-fill {
   height: 100%;
-  transition: width 0.3s ease;
+  transition: width 0.4s ease;
   image-rendering: pixelated;
-  /* Pixel-stepped look */
+  /* Segmented pixel look — each "block" is visible */
   background-image: repeating-linear-gradient(
     90deg,
     transparent 0px,
-    transparent 1px,
-    rgba(0,0,0,0.2) 1px,
-    rgba(0,0,0,0.2) 2px
+    transparent 7px,
+    var(--bg-deep) 7px,
+    var(--bg-deep) 9px
   );
 }
 
 .stat-value {
-  width: 20px;
-  text-align: right;
-  font-size: 13px;
-  color: var(--text-muted);
-  flex-shrink: 0;
-}
-
-/* ═══════════════════════════════════════════
-   LEVEL BADGE
-   ═══════════════════════════════════════════ */
-.level-badge {
   font-family: var(--font-pixel);
-  font-size: 7px;
-  padding: 3px 6px;
-  border: 2px solid var(--accent-dim);
-  background: var(--bg-deep);
-  color: var(--accent);
-  letter-spacing: 1px;
-  white-space: nowrap;
-  box-shadow: 2px 2px 0px var(--pixel-shadow);
+  font-size: 8px;
+  width: 18px;
+  text-align: right;
+  flex-shrink: 0;
 }
 
 /* ═══════════════════════════════════════════
@@ -263,36 +243,48 @@ body {
    ═══════════════════════════════════════════ */
 .agent-title {
   font-family: var(--font-terminal);
-  font-size: 14px;
+  font-size: 18px;
   letter-spacing: 1px;
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
 /* ═══════════════════════════════════════════
-   PIXEL BUTTONS
+   PIXEL BUTTONS — snes.css inspired double border
    ═══════════════════════════════════════════ */
 .pixel-btn {
   font-family: var(--font-pixel);
-  font-size: 7px;
-  border: 2px solid;
-  box-shadow: 3px 3px 0px var(--pixel-shadow);
-  padding: 8px 10px;
+  font-size: 8px;
+  border: 3px solid;
+  box-shadow: 4px 4px 0px var(--pixel-shadow);
+  padding: 10px 14px;
   cursor: pointer;
   text-transform: uppercase;
   letter-spacing: 1px;
   transition: all 0.1s ease;
   position: relative;
-  overflow: hidden;
 }
 
 .pixel-btn:hover {
-  box-shadow: 4px 4px 0px var(--pixel-shadow);
-  filter: brightness(1.15);
+  box-shadow: 5px 5px 0px var(--pixel-shadow);
+  filter: brightness(1.2);
 }
 
 .pixel-btn:active {
-  transform: translateY(2px);
+  transform: translateY(3px);
   box-shadow: 1px 1px 0px var(--pixel-shadow);
+}
+
+/* Specific button variants */
+.pixel-btn-primary {
+  background-color: #2a6040;
+  border-color: #44e878;
+  color: #44e878;
+}
+
+.pixel-btn-secondary {
+  background-color: #5a4820;
+  border-color: #ffd033;
+  color: #ffd033;
 }
 
 /* ═══════════════════════════════════════════
@@ -300,9 +292,9 @@ body {
    ═══════════════════════════════════════════ */
 .category-tag {
   font-family: var(--font-pixel);
-  font-size: 7px;
-  padding: 7px 14px;
-  border: 2px solid var(--border);
+  font-size: 8px;
+  padding: 8px 16px;
+  border: 3px solid var(--border);
   background: var(--bg-surface);
   color: var(--text-muted);
   cursor: pointer;
@@ -319,7 +311,7 @@ body {
 }
 
 .category-tag.active {
-  box-shadow: 3px 3px 0px var(--pixel-shadow);
+  box-shadow: 4px 4px 0px var(--pixel-shadow);
   color: #fff;
 }
 
@@ -328,11 +320,11 @@ body {
    ═══════════════════════════════════════════ */
 .search-input {
   background: var(--bg-surface);
-  border: 2px solid var(--border);
-  box-shadow: 4px 4px 0px var(--pixel-shadow);
+  border: 3px solid var(--border);
+  box-shadow: 5px 5px 0px var(--pixel-shadow);
   font-family: var(--font-terminal);
-  font-size: 20px;
-  padding: 12px 16px 12px 44px;
+  font-size: 24px;
+  padding: 14px 18px 14px 48px;
   color: var(--text-primary);
   outline: none;
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
@@ -340,7 +332,7 @@ body {
 
 .search-input:focus {
   border-color: var(--accent);
-  box-shadow: 4px 4px 0px var(--pixel-shadow), 0 0 12px var(--accent-glow);
+  box-shadow: 5px 5px 0px var(--pixel-shadow), 0 0 16px var(--accent-glow);
 }
 
 .search-input::placeholder {
@@ -351,14 +343,14 @@ body {
    HUD ELEMENTS
    ═══════════════════════════════════════════ */
 .hud-panel {
-  border: 2px solid var(--border);
+  border: 3px solid var(--border);
   background: var(--bg-surface);
-  box-shadow: 4px 4px 0px var(--pixel-shadow);
+  box-shadow: 5px 5px 0px var(--pixel-shadow);
 }
 
 .hud-label {
   font-family: var(--font-pixel);
-  font-size: 7px;
+  font-size: 8px;
   color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -366,7 +358,7 @@ body {
 
 .hud-value {
   font-family: var(--font-pixel);
-  font-size: 14px;
+  font-size: 16px;
   letter-spacing: 1px;
 }
 
@@ -422,13 +414,13 @@ body {
 .pixel-card:nth-child(2) { animation-delay: 0.04s; }
 .pixel-card:nth-child(3) { animation-delay: 0.06s; }
 .pixel-card:nth-child(4) { animation-delay: 0.08s; }
-.pixel-card:nth-child(5) { animation-delay: 0.1s; }
+.pixel-card:nth-child(5) { animation-delay: 0.10s; }
 .pixel-card:nth-child(6) { animation-delay: 0.12s; }
 .pixel-card:nth-child(7) { animation-delay: 0.14s; }
 .pixel-card:nth-child(8) { animation-delay: 0.16s; }
 
-/* Emoji display alongside avatar */
+/* Emoji alongside avatar */
 .card-emoji {
-  font-size: 20px;
+  font-size: 22px;
   line-height: 1;
 }
