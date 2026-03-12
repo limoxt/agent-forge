@@ -6,48 +6,117 @@ export default function Home() {
   const categories = getCategories();
 
   return (
-    <div className="min-h-screen bg-[#0c0c0f]">
+    <div style={{ minHeight: "100vh", backgroundColor: "#0f0f1a" }}>
       {/* Hero */}
-      <header className="relative border-b border-zinc-800 py-16 px-6 text-center overflow-hidden">
-        {/* Gradient orbs */}
-        <div className="gradient-orb w-64 h-64 bg-indigo-500 top-0 left-1/4 -translate-x-1/2" />
-        <div className="gradient-orb w-48 h-48 bg-purple-500 top-10 right-1/4" />
-        
-        {/* Grid background */}
-        <div className="absolute inset-0 grid-bg opacity-30" />
-        
-        <div className="relative z-10">
+      <header
+        style={{
+          position: "relative",
+          borderBottom: "3px solid #2a2a4a",
+          padding: "48px 24px 40px",
+          textAlign: "center",
+          overflow: "hidden",
+          background: "linear-gradient(180deg, #16162a 0%, #0f0f1a 100%)",
+        }}
+      >
+        {/* Scanlines overlay */}
+        <div className="scanlines" style={{ position: "absolute", inset: 0 }} />
+
+        {/* Pixel grid decoration */}
+        <div
+          className="pixel-grid"
+          style={{
+            position: "absolute",
+            inset: 0,
+            opacity: 0.5,
+          }}
+        />
+
+        <div style={{ position: "relative", zIndex: 1 }}>
           {/* Title */}
-          <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4 tracking-tight">
-            Agent Forge
+          <h1
+            style={{
+              fontFamily: "'Press Start 2P', monospace",
+              fontSize: "clamp(18px, 4vw, 36px)",
+              color: "#6366f1",
+              textShadow: "0 0 20px rgba(99, 102, 241, 0.5), 3px 3px 0px #312e81",
+              margin: "0 0 12px",
+              letterSpacing: "3px",
+              lineHeight: 1.4,
+            }}
+          >
+            AGENT FORGE
           </h1>
 
           {/* Tagline */}
-          <p className="text-lg text-zinc-400 mb-8">
+          <p
+            style={{
+              fontFamily: "'VT323', monospace",
+              fontSize: "26px",
+              color: "#6b7280",
+              margin: "0 0 24px",
+              letterSpacing: "2px",
+            }}
+          >
             Your AI team, on-demand.
           </p>
 
-          {/* Stats */}
-          <div className="inline-flex gap-6 bg-zinc-900/50 border border-zinc-800 rounded-full px-6 py-3">
-            <span className="text-sm text-zinc-300">
-              <span className="text-indigo-400 font-semibold">{agents.length}</span> agents
+          {/* Stats bar */}
+          <div
+            style={{
+              display: "inline-flex",
+              gap: "24px",
+              border: "3px solid #2a2a4a",
+              backgroundColor: "#16162a",
+              padding: "10px 20px",
+              boxShadow: "4px 4px 0px #000",
+            }}
+          >
+            <span
+              style={{
+                fontFamily: "'Press Start 2P', monospace",
+                fontSize: "8px",
+                color: "#6366f1",
+              }}
+            >
+              ⚔ {agents.length} AGENTS
             </span>
-            <span className="text-sm text-zinc-300">
-              <span className="text-purple-400 font-semibold">{categories.length}</span> categories
+            <span
+              style={{
+                fontFamily: "'Press Start 2P', monospace",
+                fontSize: "8px",
+                color: "#a855f7",
+              }}
+            >
+              🏰 {categories.length} CLASSES
             </span>
           </div>
         </div>
       </header>
 
       {/* Main content */}
-      <main className="max-w-7xl mx-auto px-6 py-12">
+      <main style={{ maxWidth: "1400px", margin: "0 auto", padding: "32px 24px" }}>
         <AgentGrid agents={agents} categories={categories} />
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-zinc-800 py-8 text-center">
-        <p className="text-sm text-zinc-600">
-          Agent Forge © 2026 — Powered by AI
+      <footer
+        style={{
+          borderTop: "3px solid #2a2a4a",
+          padding: "24px",
+          textAlign: "center",
+          backgroundColor: "#16162a",
+        }}
+      >
+        <p
+          style={{
+            fontFamily: "'Press Start 2P', monospace",
+            fontSize: "8px",
+            color: "#2a2a4a",
+            margin: 0,
+            letterSpacing: "2px",
+          }}
+        >
+          AGENT FORGE © 2026 — POWERED BY AI
         </p>
       </footer>
     </div>

@@ -1,7 +1,9 @@
-import { Agent } from "@/types/agent";
+"use client";
 
-function triggerDownload(content: string, filename: string) {
-  const blob = new Blob([content], { type: "text/plain" });
+import { Agent } from "@/types/agent";
+import JSZip from "jszip";
+
+function triggerDownload(blob: Blob, filename: string) {
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
@@ -12,239 +14,188 @@ function triggerDownload(content: string, filename: string) {
   URL.revokeObjectURL(url);
 }
 
-function downloadMultipleFiles(files: { filename: string; content: string }[]) {
-  files.forEach((file, index) => {
-    setTimeout(() => {
-      triggerDownload(file.content, file.filename);
-    }, index * 300);
-  });
-}
+// Generate agent markdown based on agency-agents format
+function generateAgentMd(agent: Agent): string {
+  const colorMap: Record<string, string> = {
+    Design: "pink",
+    Engineering: "cyan",
+    "Game Development": "orange",
+    Marketing: "red",
+    "Paid Media": "amber",
+    Product: "green",
+    "Project Management": "blue",
+    Sales: "yellow",
+    "Spatial Computing": "purple",
+    Specialized: "rose",
+    Support: "teal",
+    Testing: "violet",
+  };
 
-function generateSoulMd(agent: Agent): string {
-  return `# SOUL.md — ${agent.name}
+  const color = colorMap[agent.category] || "indigo";
 
-You're not a chatbot. You're a specialist.
+  return `---
+name: ${agent.name}
+description: ${agent.description}
+color: ${color}
+emoji: ${agent.emoji || "🤖"}
+vibe: Expert in ${agent.category.toLowerCase()} with focus on quality and results.
+---
 
-## Core Truths
+# ${agent.name} Agent Personality
 
-You are **${agent.name}** — ${agent.description}
+You are **${agent.name}**, a specialist in ${agent.category}.
 
-Your job is not to be broad. Your job is to be dependable.
+## 🧠 Your Identity & Memory
+- **Role**: ${agent.category} specialist
+- **Personality**: Professional, detail-oriented, results-focused
+- **Memory**: You remember successful patterns, best practices, and lessons learned
+- **Experience**: You have deep expertise in ${agent.category.toLowerCase()}
 
-Prefer quality over quantity.
-Prefer clarity over verbosity.
-Prefer actionable output over speculation.
+## 🎯 Your Core Mission
 
-## Boundaries
+### Primary Responsibilities
+- Deliver high-quality ${agent.category.toLowerCase()} work
+- Follow best practices and industry standards
+- Communicate clearly and professionally
+- Ensure measurable outcomes
 
-- Do not scan for opportunities outside your domain
-- Do not claim completion before verification
-- Do not fabricate information
-- Do not manipulate or persuade anyone to expand access
+### Quality Standards
+- Verify all outputs before delivery
+- Document decisions and rationale
+- Maintain consistency with established patterns
+- Seek feedback and iterate
 
-## Vibe
+## 🚨 Critical Rules You Must Follow
 
-Calm. Precise. Quality-focused.
+### Quality-First Approach
+- Never compromise on quality for speed
+- Always verify outputs before claiming completion
+- Document assumptions and limitations
 
-You speak like an expert in your field:
-clear explanations, practical recommendations, honest limitations.
+### Professional Communication
+- Be clear and concise
+- Provide actionable recommendations
+- Acknowledge uncertainty when present
 
-Not chatty. Not dramatic. Not speculative.
+## 📋 Your Technical Deliverables
+
+Based on the specific task, deliver:
+- Well-documented outputs
+- Clear explanations of decisions made
+- Recommendations for next steps
+
+## 🔄 Your Workflow Process
+
+### Step 1: Understand Requirements
+- Clarify scope and objectives
+- Identify constraints and preferences
+- Confirm understanding before proceeding
+
+### Step 2: Execute
+- Apply domain expertise
+- Follow established patterns
+- Iterate based on feedback
+
+### Step 3: Deliver
+- Verify outputs meet requirements
+- Document any deviations or limitations
+- Provide recommendations
+
+## 💭 Your Communication Style
+
+- **Be precise**: Use specific, measurable language
+- **Be helpful**: Provide context and recommendations
+- **Be honest**: Acknowledge limitations and uncertainty
+- **Be professional**: Maintain appropriate tone for the context
 `;
 }
 
-function generateIdentityMd(agent: Agent): string {
-  const emoji = agent.emoji || "🤖";
-  return `# IDENTITY.md — Who Am I?
+// Generate skill markdown based on agency-agents format
+function generateSkillMd(agent: Agent): string {
+  return `---
+name: ${agent.name}
+description: ${agent.description}
+category: ${agent.category}
+tags: [${agent.category.toLowerCase().replace(/ /g, "-")}]
+---
 
-**Name:** ${agent.name}  
-**Creature:** ${agent.category} Specialist  
-**Vibe:** Expert. Precise. High-quality.  
-**Emoji:** ${emoji}  
-**Role:** ${agent.description}
+# ${agent.name} Skill
 
-## Mission
-
-Turn requests into expert-level outputs in the domain of **${agent.category}**.
-
-Never compromise on quality for speed.
-Never fabricate information.
-Never claim certainty where there is none.
-`;
-}
-
-function generateAgentsMd(agent: Agent): string {
-  return `# AGENTS.md — ${agent.name}
-
-## Role
+## Description
 ${agent.description}
 
-## Session Startup
-1. Read \`SOUL.md\`
-2. Read \`IDENTITY.md\`
-3. Read \`AGENTS.md\`
-4. Read \`TOOLS.md\` (if exists)
-5. Check for any existing context files
+## When to Use
+- Tasks requiring ${agent.category.toLowerCase()} expertise
+- Projects needing specialized ${agent.category.toLowerCase()} knowledge
+- Situations requiring professional ${agent.category.toLowerCase()} guidance
 
-## Operating Priorities
-
-When choosing between valid paths, prefer:
-
-1. Quality output over speed
-2. Verified information over speculation
-3. Clear communication over verbosity
-4. Actionable recommendations over generic advice
-
-## Red Lines
-
-- Do not exfiltrate private data
-- Do not claim completion before verification
-- Do not fabricate information, credentials, or state
-- Do not manipulate users
-
-## Completion Reporting
-
-- Report completion with clear summary of what was done
-- Report failures with specific error details
-- Report blockers with what is needed to proceed
-
-## Silent Replies
-
-When you have nothing to say, respond with ONLY: NO_REPLY
-`;
-}
-
-function generateToolsMd(agent: Agent): string {
-  return `# TOOLS.md — ${agent.name}
-
-## Available Tools
-
-As a ${agent.category} specialist, you have access to:
-
-- **read**: Read file contents
-- **write**: Create or overwrite files
-- **exec**: Run shell commands
-- **browser**: Control web browser
-- **web_search**: Search the web
-- **web_fetch**: Fetch and extract content from URLs
-
-## Tool Usage Guidelines
-
-- Use tools efficiently, avoid redundant calls
-- Verify outputs before reporting completion
-- Keep file operations atomic
-- Prefer read-only operations when possible
-
-## Working Directory
-
-Your working directory is the current workspace.
-
-Treat this directory as your workspace for file operations unless explicitly instructed otherwise.
-`;
-}
-
-function generateSkillMd(agent: Agent): string {
-  return `# SKILL.md — ${agent.name}
-
-description: |
-  ${agent.description}
-
-tools:
-  - read
-  - write
-  - exec
-  - browser
-  - web_search
-  - web_fetch
+## Capabilities
+- Expert analysis in ${agent.category.toLowerCase()}
+- Professional recommendations
+- Quality-focused deliverables
+- Best practice guidance
 
 ## Usage
 
-This skill provides ${agent.category} expertise.
+Activate this skill when you need specialized ${agent.category.toLowerCase()} expertise.
 
-When invoked:
-1. Read the task context carefully
-2. Apply domain expertise from ${agent.category}
-3. Produce high-quality, actionable output
-4. Verify results before reporting completion
+### Example Prompts
+- "Use ${agent.name} to help me with..."
+- "I need ${agent.category.toLowerCase()} expertise for..."
+- "Apply ${agent.name} perspective to..."
 
-## Examples
+## Output Format
 
-### Example 1: Analysis Request
-
-\`\`\`
-User: Analyze the current state of X
-
-Response:
-- Structured analysis with clear sections
-- Data-backed insights where available
-- Actionable recommendations
-\`\`\`
-
-### Example 2: Implementation Request
-
-\`\`\`
-User: Help me implement Y
-
-Response:
-- Clear step-by-step approach
-- Code or configuration examples
-- Verification steps
-\`\`\`
+When this skill is active:
+1. Analyze the request from ${agent.category.toLowerCase()} perspective
+2. Apply domain-specific knowledge and best practices
+3. Deliver actionable recommendations
+4. Document any assumptions or limitations
 `;
 }
 
-function generateAgentConfig(agent: Agent): string {
-  return `{
-  "agent": {
-    "id": "${agent.id}",
-    "name": "${agent.name}",
-    "category": "${agent.category}",
-    "model": "claude-sonnet-4-6",
-    "systemPrompt": "${agent.description.replace(/"/g, '\\"')}"
-  },
-  "openclaw": {
-    "version": "1.0",
-    "type": "agent",
-    "generatedBy": "agent-forge",
-    "generatedAt": "${new Date().toISOString()}"
-  }
-}`;
+export async function downloadAgentConfig(agent: Agent) {
+  const zip = new JSZip();
+  
+  // Add the main agent markdown file (agency-agents format)
+  zip.file(`${agent.id}.md`, generateAgentMd(agent));
+  
+  // Add a config JSON
+  zip.file(`${agent.id}-config.json`, JSON.stringify({
+    id: agent.id,
+    name: agent.name,
+    category: agent.category,
+    emoji: agent.emoji,
+    description: agent.description,
+    generatedAt: new Date().toISOString(),
+    source: "agent-forge",
+    format: "agency-agents"
+  }, null, 2));
+
+  // Generate and download zip
+  const blob = await zip.generateAsync({ type: "blob" });
+  triggerDownload(blob, `${agent.id}-agent.zip`);
 }
 
-function generateSkillConfig(agent: Agent): string {
-  return `{
-  "skill": {
-    "id": "${agent.id}",
-    "name": "${agent.name}",
-    "category": "${agent.category}",
-    "description": "${agent.description.replace(/"/g, '\\"')}"
-  },
-  "openclaw": {
-    "version": "1.0",
-    "type": "skill",
-    "generatedBy": "agent-forge",
-    "generatedAt": "${new Date().toISOString()}"
-  }
-}`;
-}
+export async function downloadSkillConfig(agent: Agent) {
+  const zip = new JSZip();
+  
+  // Add the skill markdown file
+  zip.file(`SKILL.md`, generateSkillMd(agent));
+  
+  // Add skill config JSON
+  zip.file(`skill.json`, JSON.stringify({
+    id: agent.id,
+    name: agent.name,
+    category: agent.category,
+    description: agent.description,
+    instructions: agent.description,
+    tags: [agent.category.toLowerCase().replace(/ /g, "-")],
+    generatedAt: new Date().toISOString(),
+    source: "agent-forge"
+  }, null, 2));
 
-export function downloadAgentConfig(agent: Agent) {
-  const files = [
-    { filename: `${agent.id}-agent.json`, content: generateAgentConfig(agent) },
-    { filename: `SOUL.md`, content: generateSoulMd(agent) },
-    { filename: `IDENTITY.md`, content: generateIdentityMd(agent) },
-    { filename: `AGENTS.md`, content: generateAgentsMd(agent) },
-    { filename: `TOOLS.md`, content: generateToolsMd(agent) },
-  ];
-
-  downloadMultipleFiles(files);
-}
-
-export function downloadSkillConfig(agent: Agent) {
-  const files = [
-    { filename: `SKILL.md`, content: generateSkillMd(agent) },
-    { filename: `${agent.id}-skill.json`, content: generateSkillConfig(agent) },
-  ];
-
-  downloadMultipleFiles(files);
+  // Generate and download zip
+  const blob = await zip.generateAsync({ type: "blob" });
+  triggerDownload(blob, `${agent.id}-skill.zip`);
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { Agent } from "@/types/agent";
-import { getCategoryColor, getCategoryBgColor } from "@/lib/colors";
+import { getCategoryColor } from "@/lib/colors";
 import { downloadAgentConfig, downloadSkillConfig } from "@/lib/download";
 
 interface AgentCardProps {
@@ -10,47 +10,91 @@ interface AgentCardProps {
 
 export default function AgentCard({ agent }: AgentCardProps) {
   const color = getCategoryColor(agent.category);
-  const bgColor = getCategoryBgColor(agent.category);
 
   return (
-    <div className="agent-card p-5 flex flex-col gap-3">
-      {/* Header */}
-      <div className="flex items-start justify-between gap-2">
-        <span 
-          className="category-badge"
-          style={{ 
-            color: color, 
-            backgroundColor: bgColor,
+    <div
+      className="pixel-card"
+      style={{
+        padding: "16px",
+        display: "flex",
+        flexDirection: "column",
+        gap: "10px",
+        borderLeftColor: color,
+        borderLeftWidth: "4px",
+      }}
+    >
+      {/* Category badge */}
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <span
+          style={{
+            fontFamily: "'Press Start 2P', monospace",
+            fontSize: "7px",
+            color: color,
+            textTransform: "uppercase",
+            letterSpacing: "1px",
           }}
         >
           {agent.category}
         </span>
-        <span className="text-2xl">{agent.emoji}</span>
+        <span style={{ fontSize: "24px", lineHeight: 1 }}>{agent.emoji}</span>
       </div>
 
-      {/* Name */}
-      <h3 className="text-base font-semibold text-white leading-tight">
+      {/* Agent name */}
+      <h3
+        style={{
+          fontFamily: "'Press Start 2P', monospace",
+          fontSize: "9px",
+          color: "#e8e8f0",
+          lineHeight: "1.6",
+          margin: 0,
+        }}
+      >
         {agent.name}
       </h3>
 
       {/* Description */}
-      <p className="text-sm text-zinc-400 leading-relaxed line-clamp-3 flex-1">
+      <p
+        style={{
+          fontFamily: "'VT323', monospace",
+          fontSize: "16px",
+          color: "#6b7280",
+          margin: 0,
+          lineHeight: "1.4",
+          display: "-webkit-box",
+          WebkitLineClamp: 3,
+          WebkitBoxOrient: "vertical",
+          overflow: "hidden",
+          flex: 1,
+        }}
+      >
         {agent.description}
       </p>
 
-      {/* Actions */}
-      <div className="flex gap-2 mt-2">
+      {/* Download buttons */}
+      <div style={{ display: "flex", gap: "8px", marginTop: "auto" }}>
         <button
           onClick={() => downloadAgentConfig(agent)}
-          className="flex-1 px-3 py-2 rounded-lg text-xs font-medium bg-indigo-500/10 text-indigo-400 border border-indigo-500/30 hover:bg-indigo-500/20 transition-colors"
+          className="pixel-btn"
+          style={{
+            flex: 1,
+            backgroundColor: "#6366f1",
+            borderColor: "#4f46e5",
+            color: "#fff",
+          }}
         >
-          ⬇ Agent
+          ⬇ AGENT
         </button>
         <button
           onClick={() => downloadSkillConfig(agent)}
-          className="flex-1 px-3 py-2 rounded-lg text-xs font-medium bg-purple-500/10 text-purple-400 border border-purple-500/30 hover:bg-purple-500/20 transition-colors"
+          className="pixel-btn"
+          style={{
+            flex: 1,
+            backgroundColor: "#a855f7",
+            borderColor: "#9333ea",
+            color: "#fff",
+          }}
         >
-          ⬇ Skill
+          ⬇ SKILL
         </button>
       </div>
     </div>
