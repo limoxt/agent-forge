@@ -81,6 +81,18 @@ export default function Home() {
           <div className="text-pixel" style={{ fontSize: "8px", color: "var(--text-muted)", letterSpacing: "2px" }}>
             ░░ AGENT FORGE © 2026 — POWERED BY AI ░░
           </div>
+          <div className="text-terminal mt-3" style={{ fontSize: "16px", color: "var(--text-muted)" }}>
+            Agents sourced from{" "}
+            <a
+              href="https://github.com/msitarzewski/agency-agents"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: "var(--accent-dim)", textDecoration: "underline" }}
+            >
+              agency-agents
+            </a>
+            {" "}(MIT License) — adapted for OpenClaw
+          </div>
         </div>
       </footer>
     </div>

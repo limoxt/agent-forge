@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { Agent } from "@/types/agent";
 import { getCategoryColor } from "@/lib/colors";
 import { downloadAgentConfig, downloadSkillConfig } from "@/lib/download";
@@ -13,11 +13,27 @@ interface AgentCardProps {
 
 export default function AgentCard({ agent }: AgentCardProps) {
   const [expanded, setExpanded] = useState(false);
+  const [downloading, setDownloading] = useState<string | null>(null);
   const color = getCategoryColor(agent.category);
   const title = getTitle(agent);
   const quote = getQuote(agent);
   const avatarType = getAvatarType(agent);
   const tags = getTags(agent);
+
+  const handleDownload = useCallback(async (type: "agent" | "skill") => {
+    setDownloading(type);
+    try {
+      if (type === "agent") {
+        await downloadAgentConfig(agent);
+      } else {
+        await downloadSkillConfig(agent);
+      }
+    } catch (err) {
+      alert(`Download failed for ${agent.name}. Please try again.`);
+    } finally {
+      setDownloading(null);
+    }
+  }, [agent]);
 
   return (
     <div className="pixel-card flex flex-col">
@@ -101,16 +117,18 @@ export default function AgentCard({ agent }: AgentCardProps) {
         {/* Action buttons */}
         <div className="flex gap-3 mt-auto pt-2">
           <button
-            onClick={() => downloadAgentConfig(agent)}
+            onClick={() => handleDownload("agent")}
+            disabled={downloading !== null}
             className="pixel-btn pixel-btn-primary flex-1"
           >
-            ⬇ AGENT
+            {downloading === "agent" ? "⏳ ..." : "⬇ AGENT"}
           </button>
           <button
-            onClick={() => downloadSkillConfig(agent)}
+            onClick={() => handleDownload("skill")}
+            disabled={downloading !== null}
             className="pixel-btn pixel-btn-secondary flex-1"
           >
-            ⬇ SKILL
+            {downloading === "skill" ? "⏳ ..." : "⬇ SKILL"}
           </button>
         </div>
       </div>

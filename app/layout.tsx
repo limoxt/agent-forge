@@ -1,10 +1,27 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
+const title = "AgentForge — Your AI team, on-demand.";
+const description = "Browse and download 142 pre-configured AI agents across 12 categories. Free, open-source, OpenClaw-compatible.";
+const url = "https://agent-forge-chi.vercel.app";
+
 export const metadata: Metadata = {
-  title: "AgentForge — Your AI team, on-demand.",
-  description: "Browse and download AI agents for your team. 120+ pre-configured agents across 12 categories.",
+  title,
+  description,
   keywords: ["AI agents", "automation", "OpenClaw", "AI team", "agent marketplace"],
+  metadataBase: new URL(url),
+  openGraph: {
+    title,
+    description,
+    url,
+    siteName: "AgentForge",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+  },
 };
 
 export default function RootLayout({
