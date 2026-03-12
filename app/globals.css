@@ -480,3 +480,57 @@ body {
   box-shadow: 4px 4px 0px var(--pixel-shadow);
   transform: translateY(-1px);
 }
+
+/* ═══════════════════════════════════════════
+   MOBILE RESPONSIVE
+   ═══════════════════════════════════════════ */
+@media (max-width: 640px) {
+  /* Hide speech bubble on touch devices (no hover) */
+  .speech-bubble {
+    display: none;
+  }
+
+  /* Smaller HUD panels */
+  .hud-panel {
+    box-shadow: 3px 3px 0px var(--pixel-shadow);
+  }
+
+  .hud-label {
+    font-size: 6px;
+    letter-spacing: 1px;
+  }
+
+  .hud-value {
+    font-size: 12px;
+  }
+
+  /* Compact category tags */
+  .category-tag {
+    font-size: 7px;
+    padding: 6px 10px;
+    border-width: 2px;
+  }
+
+  /* Smaller card shadows */
+  .pixel-card {
+    box-shadow: 3px 3px 0px var(--pixel-shadow);
+  }
+
+  .pixel-card:hover {
+    box-shadow: 4px 6px 0px var(--pixel-shadow);
+  }
+
+  /* Compact buttons */
+  .pixel-btn {
+    font-size: 9px;
+    padding: 10px 12px;
+    box-shadow: 3px 3px 0px var(--pixel-shadow);
+  }
+
+  /* Search input */
+  .search-input {
+    font-size: 20px;
+    padding: 12px 14px 12px 40px;
+    box-shadow: 3px 3px 0px var(--pixel-shadow);
+  }
+}

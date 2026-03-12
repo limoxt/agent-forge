@@ -49,7 +49,7 @@ export default function AgentCard({ agent }: AgentCardProps) {
       </div>
 
       {/* Card content */}
-      <div className="relative p-5 flex flex-col gap-3 flex-1">
+      <div className="relative p-4 sm:p-5 flex flex-col gap-3 flex-1">
         {/* Header: avatar left + info center + emoji right */}
         <div className="flex items-start gap-4">
           {/* Pixel avatar */}

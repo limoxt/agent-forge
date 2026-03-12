@@ -75,7 +75,7 @@ export default function AgentGrid({ agents, categories }: AgentGridProps) {
       </div>
 
       {/* Grid — wider cards, more spacing */}
-      <div className="grid gap-6" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))" }}>
+      <div className="grid gap-4 sm:gap-6" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 320px), 1fr))" }}>
         {(showAll ? filtered : filtered.slice(0, INITIAL_COUNT)).map((agent) => (
           <AgentCard key={agent.id} agent={agent} />
         ))}
