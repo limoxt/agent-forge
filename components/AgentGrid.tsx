@@ -13,6 +13,8 @@ interface AgentGridProps {
 export default function AgentGrid({ agents, categories }: AgentGridProps) {
   const [activeCategory, setActiveCategory] = useState<string>("All");
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [showAll, setShowAll] = useState(false);
+  const INITIAL_COUNT = 12;
 
   const filtered = agents.filter((a) => {
     const matchesCategory = activeCategory === "All" || a.category === activeCategory;
@@ -36,7 +38,7 @@ export default function AgentGrid({ agents, categories }: AgentGridProps) {
           type="text"
           placeholder="SEARCH AGENTS..."
           value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          onChange={(e) => { setSearchQuery(e.target.value); setShowAll(false); }}
           className="search-input w-full"
         />
       </div>
@@ -49,7 +51,7 @@ export default function AgentGrid({ agents, categories }: AgentGridProps) {
           return (
             <button
               key={cat}
-              onClick={() => setActiveCategory(cat)}
+              onClick={() => { setActiveCategory(cat); setShowAll(false); }}
               className={`category-tag ${isActive ? "active" : ""}`}
               style={isActive ? {
                 borderColor: color,
@@ -74,10 +76,36 @@ export default function AgentGrid({ agents, categories }: AgentGridProps) {
 
       {/* Grid — wider cards, more spacing */}
       <div className="grid gap-6" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))" }}>
-        {filtered.map((agent) => (
+        {(showAll ? filtered : filtered.slice(0, INITIAL_COUNT)).map((agent) => (
           <AgentCard key={agent.id} agent={agent} />
         ))}
       </div>
+
+      {/* Show more button */}
+      {!showAll && filtered.length > INITIAL_COUNT && (
+        <div className="text-center mt-10">
+          <button
+            onClick={() => setShowAll(true)}
+            className="pixel-btn pixel-btn-primary"
+            style={{ padding: "14px 32px" }}
+          >
+            ▼ SHOW ALL {filtered.length} AGENTS
+          </button>
+        </div>
+      )}
+
+      {/* Collapse button */}
+      {showAll && filtered.length > INITIAL_COUNT && (
+        <div className="text-center mt-10">
+          <button
+            onClick={() => { setShowAll(false); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+            className="pixel-btn pixel-btn-secondary"
+            style={{ padding: "14px 32px" }}
+          >
+            ▲ SHOW LESS
+          </button>
+        </div>
+      )}
 
       {/* Empty state */}
       {filtered.length === 0 && (
