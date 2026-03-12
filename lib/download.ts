@@ -1,7 +1,6 @@
 "use client";
 
 import { Agent } from "@/types/agent";
-import JSZip from "jszip";
 
 function triggerDownload(blob: Blob, filename: string) {
   const url = URL.createObjectURL(blob);
@@ -155,6 +154,8 @@ When this skill is active:
 }
 
 export async function downloadAgentConfig(agent: Agent) {
+  // Dynamic import for client-side only
+  const JSZip = (await import("jszip")).default;
   const zip = new JSZip();
   
   // Add the main agent markdown file (agency-agents format)
@@ -178,6 +179,8 @@ export async function downloadAgentConfig(agent: Agent) {
 }
 
 export async function downloadSkillConfig(agent: Agent) {
+  // Dynamic import for client-side only
+  const JSZip = (await import("jszip")).default;
   const zip = new JSZip();
   
   // Add the skill markdown file
