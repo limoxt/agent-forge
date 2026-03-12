@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "sync": "node scripts/sync.mjs",
+    "convert": "node scripts/convert.mjs",
+    "sync:all": "node scripts/sync.mjs && node scripts/convert.mjs"
   },
   "dependencies": {
     "@fontsource/press-start-2p": "^5.2.7",

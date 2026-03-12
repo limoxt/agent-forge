@@ -4,5 +4,7 @@ export interface Agent {
   category: string;
   emoji: string;
   description: string;
+  vibe: string;
+  color: string;
   source_url: string;
 }
