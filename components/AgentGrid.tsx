@@ -27,30 +27,22 @@ export default function AgentGrid({ agents, categories }: AgentGridProps) {
 
   return (
     <>
-      {/* Search */}
-      <div style={{ marginBottom: "24px" }}>
+      {/* Search bar with pixel icon */}
+      <div className="relative mb-6" style={{ maxWidth: "480px" }}>
+        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-terminal" style={{ fontSize: "22px", color: "var(--text-muted)" }}>
+          ▸
+        </span>
         <input
           type="text"
           placeholder="SEARCH AGENTS..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="search-input"
-          style={{ width: "100%", maxWidth: "400px" }}
+          className="search-input w-full"
         />
       </div>
 
-      {/* Category filter tabs */}
-      <div
-        className="no-scrollbar"
-        style={{
-          display: "flex",
-          gap: "8px",
-          overflowX: "auto",
-          paddingBottom: "4px",
-          marginBottom: "24px",
-          flexWrap: "nowrap",
-        }}
-      >
+      {/* Category filter tags - wrapping grid */}
+      <div className="flex flex-wrap gap-2 mb-6">
         {allCategories.map((cat) => {
           const isActive = cat === activeCategory;
           const color = cat === "All" ? "#6366f1" : getCategoryColor(cat);
@@ -58,21 +50,11 @@ export default function AgentGrid({ agents, categories }: AgentGridProps) {
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              style={{
-                fontFamily: "'Press Start 2P', monospace",
-                fontSize: "7px",
-                whiteSpace: "nowrap",
-                padding: "8px 12px",
-                border: `3px solid ${isActive ? color : "#2a2a4a"}`,
-                backgroundColor: isActive ? color : "#16162a",
-                color: isActive ? "#fff" : "#6b7280",
-                boxShadow: isActive ? `3px 3px 0px #000` : "none",
-                cursor: "pointer",
-                textTransform: "uppercase",
-                letterSpacing: "1px",
-                transition: "all 0.1s ease",
-                flexShrink: 0,
-              }}
+              className={`category-tag ${isActive ? "active" : ""}`}
+              style={isActive ? {
+                borderColor: color,
+                backgroundColor: color,
+              } : undefined}
             >
               {cat}
             </button>
@@ -81,29 +63,33 @@ export default function AgentGrid({ agents, categories }: AgentGridProps) {
       </div>
 
       {/* Results count */}
-      <p
-        style={{
-          fontFamily: "'VT323', monospace",
-          fontSize: "18px",
-          color: "#6b7280",
-          marginBottom: "20px",
-        }}
-      >
-        {filtered.length} AGENT{filtered.length !== 1 ? "S" : ""} FOUND
-      </p>
+      <div className="flex items-center gap-3 mb-5">
+        <div className="pixel-divider flex-1" />
+        <span className="text-terminal" style={{ fontSize: "20px", color: "var(--text-muted)", letterSpacing: "1px" }}>
+          {filtered.length} AGENT{filtered.length !== 1 ? "S" : ""} FOUND
+        </span>
+        <div className="pixel-divider flex-1" />
+      </div>
 
       {/* Grid */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
-          gap: "16px",
-        }}
-      >
+      <div className="grid gap-4" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))" }}>
         {filtered.map((agent) => (
           <AgentCard key={agent.id} agent={agent} />
         ))}
       </div>
+
+      {/* Empty state */}
+      {filtered.length === 0 && (
+        <div className="text-center py-16">
+          <div style={{ fontSize: "48px", marginBottom: "16px" }}>🔍</div>
+          <p className="text-pixel" style={{ fontSize: "10px", color: "var(--text-muted)" }}>
+            NO AGENTS FOUND
+          </p>
+          <p className="text-terminal mt-2" style={{ fontSize: "20px", color: "var(--text-muted)" }}>
+            Try a different search or category
+          </p>
+        </div>
+      )}
     </>
   );
 }

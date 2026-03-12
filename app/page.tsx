@@ -6,118 +6,82 @@ export default function Home() {
   const categories = getCategories();
 
   return (
-    <div style={{ minHeight: "100vh", backgroundColor: "#0f0f1a" }}>
+    <div className="min-h-screen" style={{ backgroundColor: "var(--bg-deep)" }}>
       {/* Hero */}
-      <header
-        style={{
-          position: "relative",
-          borderBottom: "3px solid #2a2a4a",
-          padding: "48px 24px 40px",
-          textAlign: "center",
-          overflow: "hidden",
-          background: "linear-gradient(180deg, #16162a 0%, #0f0f1a 100%)",
-        }}
-      >
+      <header className="relative overflow-hidden" style={{ borderBottom: "3px solid var(--border)", background: "linear-gradient(180deg, #12122a 0%, var(--bg-deep) 100%)" }}>
         {/* Scanlines overlay */}
-        <div className="scanlines" style={{ position: "absolute", inset: 0 }} />
+        <div className="scanlines absolute inset-0" />
+        {/* Pixel grid */}
+        <div className="pixel-grid absolute inset-0 opacity-40" />
 
-        {/* Pixel grid decoration */}
-        <div
-          className="pixel-grid"
-          style={{
-            position: "absolute",
-            inset: 0,
-            opacity: 0.5,
-          }}
-        />
+        <div className="relative z-10 px-6 py-12 md:py-16 max-w-5xl mx-auto">
+          {/* ASCII-style top border */}
+          <div className="text-pixel text-center mb-6" style={{ fontSize: "7px", color: "var(--border-bright)", letterSpacing: "4px" }}>
+            ╔══════════════════════════════╗
+          </div>
 
-        <div style={{ position: "relative", zIndex: 1 }}>
           {/* Title */}
-          <h1
-            style={{
-              fontFamily: "'Press Start 2P', monospace",
-              fontSize: "clamp(18px, 4vw, 36px)",
-              color: "#6366f1",
-              textShadow: "0 0 20px rgba(99, 102, 241, 0.5), 3px 3px 0px #312e81",
-              margin: "0 0 12px",
-              letterSpacing: "3px",
-              lineHeight: 1.4,
-            }}
-          >
+          <h1 className="text-pixel text-center mb-3" style={{
+            fontSize: "clamp(20px, 5vw, 40px)",
+            color: "var(--accent)",
+            textShadow: "0 0 24px var(--accent-glow), 4px 4px 0px #1e1b4b",
+            letterSpacing: "4px",
+            lineHeight: 1.4,
+          }}>
             AGENT FORGE
           </h1>
 
           {/* Tagline */}
-          <p
-            style={{
-              fontFamily: "'VT323', monospace",
-              fontSize: "26px",
-              color: "#6b7280",
-              margin: "0 0 24px",
-              letterSpacing: "2px",
-            }}
-          >
-            Your AI team, on-demand.
+          <p className="text-terminal text-center mb-8 cursor-blink" style={{
+            fontSize: "28px",
+            color: "var(--text-secondary)",
+            letterSpacing: "2px",
+          }}>
+            Your AI team, on-demand
           </p>
 
-          {/* Stats bar */}
-          <div
-            style={{
-              display: "inline-flex",
-              gap: "24px",
-              border: "3px solid #2a2a4a",
-              backgroundColor: "#16162a",
-              padding: "10px 20px",
-              boxShadow: "4px 4px 0px #000",
-            }}
-          >
-            <span
-              style={{
-                fontFamily: "'Press Start 2P', monospace",
-                fontSize: "8px",
-                color: "#6366f1",
-              }}
-            >
-              ⚔ {agents.length} AGENTS
-            </span>
-            <span
-              style={{
-                fontFamily: "'Press Start 2P', monospace",
-                fontSize: "8px",
-                color: "#a855f7",
-              }}
-            >
-              🏰 {categories.length} CLASSES
-            </span>
+          {/* ASCII-style bottom border */}
+          <div className="text-pixel text-center mb-8" style={{ fontSize: "7px", color: "var(--border-bright)", letterSpacing: "4px" }}>
+            ╚══════════════════════════════╝
+          </div>
+
+          {/* HUD Stats */}
+          <div className="flex justify-center gap-4 md:gap-6">
+            <div className="hud-panel px-5 py-3 text-center">
+              <div className="hud-label mb-1">AGENTS</div>
+              <div className="hud-value" style={{ color: "var(--accent)" }}>
+                ⚔ {agents.length}
+              </div>
+            </div>
+            <div className="hud-panel px-5 py-3 text-center">
+              <div className="hud-label mb-1">CLASSES</div>
+              <div className="hud-value" style={{ color: "var(--accent-secondary)" }}>
+                🏰 {categories.length}
+              </div>
+            </div>
+            <div className="hud-panel px-5 py-3 text-center">
+              <div className="hud-label mb-1">STATUS</div>
+              <div className="hud-value" style={{ color: "#4ade80" }}>
+                ● ONLINE
+              </div>
+            </div>
           </div>
         </div>
       </header>
 
       {/* Main content */}
-      <main style={{ maxWidth: "1400px", margin: "0 auto", padding: "32px 24px" }}>
+      <main className="max-w-6xl mx-auto px-4 md:px-6 py-8 md:py-10">
         <AgentGrid agents={agents} categories={categories} />
       </main>
 
       {/* Footer */}
-      <footer
-        style={{
-          borderTop: "3px solid #2a2a4a",
-          padding: "24px",
-          textAlign: "center",
-          backgroundColor: "#16162a",
-        }}
-      >
-        <p
-          style={{
-            fontFamily: "'Press Start 2P', monospace",
-            fontSize: "8px",
-            color: "#2a2a4a",
-            margin: 0,
-            letterSpacing: "2px",
-          }}
-        >
-          AGENT FORGE © 2026 — POWERED BY AI
-        </p>
+      <footer style={{ background: "var(--bg-surface)" }}>
+        <div className="pixel-divider" />
+        <div className="px-6 py-6 text-center">
+          <div className="text-pixel" style={{ fontSize: "7px", color: "var(--text-muted)", letterSpacing: "2px" }}>
+            ░░ AGENT FORGE © 2026 — POWERED BY AI ░░
+          </div>
+        </div>
       </footer>
     </div>
   );

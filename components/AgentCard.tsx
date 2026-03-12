@@ -12,90 +12,71 @@ export default function AgentCard({ agent }: AgentCardProps) {
   const color = getCategoryColor(agent.category);
 
   return (
-    <div
-      className="pixel-card"
-      style={{
-        padding: "16px",
-        display: "flex",
-        flexDirection: "column",
-        gap: "10px",
-        borderLeftColor: color,
-        borderLeftWidth: "4px",
-      }}
-    >
-      {/* Category badge */}
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <span
-          style={{
-            fontFamily: "'Press Start 2P', monospace",
-            fontSize: "7px",
-            color: color,
-            textTransform: "uppercase",
-            letterSpacing: "1px",
-          }}
-        >
-          {agent.category}
-        </span>
-        <span style={{ fontSize: "24px", lineHeight: 1 }}>{agent.emoji}</span>
-      </div>
+    <div className="pixel-card flex flex-col">
+      {/* Top color bar */}
+      <div className="card-color-bar" style={{ background: `linear-gradient(90deg, ${color}, ${color}88)` }} />
 
-      {/* Agent name */}
-      <h3
-        style={{
-          fontFamily: "'Press Start 2P', monospace",
-          fontSize: "9px",
-          color: "#e8e8f0",
-          lineHeight: "1.6",
-          margin: 0,
-        }}
-      >
-        {agent.name}
-      </h3>
+      {/* Hover glow overlay */}
+      <div className="card-glow" style={{ background: `linear-gradient(135deg, ${color}08, ${color}15)` }} />
 
-      {/* Description */}
-      <p
-        style={{
-          fontFamily: "'VT323', monospace",
-          fontSize: "16px",
-          color: "#6b7280",
-          margin: 0,
-          lineHeight: "1.4",
-          display: "-webkit-box",
-          WebkitLineClamp: 3,
-          WebkitBoxOrient: "vertical",
-          overflow: "hidden",
-          flex: 1,
-        }}
-      >
-        {agent.description}
-      </p>
+      {/* Card content */}
+      <div className="relative p-4 flex flex-col gap-3 flex-1">
+        {/* Header: category + emoji */}
+        <div className="flex items-start justify-between">
+          <div className="flex flex-col gap-1">
+            <span className="text-pixel" style={{
+              fontSize: "7px",
+              color: color,
+              textTransform: "uppercase",
+              letterSpacing: "1px",
+            }}>
+              {agent.category}
+            </span>
+            <h3 className="text-pixel m-0" style={{
+              fontSize: "9px",
+              color: "var(--text-primary)",
+              lineHeight: 1.8,
+            }}>
+              {agent.name}
+            </h3>
+          </div>
+          <span className="card-emoji">{agent.emoji}</span>
+        </div>
 
-      {/* Download buttons */}
-      <div style={{ display: "flex", gap: "8px", marginTop: "auto" }}>
-        <button
-          onClick={() => downloadAgentConfig(agent)}
-          className="pixel-btn"
-          style={{
-            flex: 1,
-            backgroundColor: "#6366f1",
-            borderColor: "#4f46e5",
-            color: "#fff",
-          }}
-        >
-          ⬇ AGENT
-        </button>
-        <button
-          onClick={() => downloadSkillConfig(agent)}
-          className="pixel-btn"
-          style={{
-            flex: 1,
-            backgroundColor: "#a855f7",
-            borderColor: "#9333ea",
-            color: "#fff",
-          }}
-        >
-          ⬇ SKILL
-        </button>
+        {/* Description */}
+        <p className="text-terminal m-0 line-clamp-3 flex-1" style={{
+          fontSize: "17px",
+          color: "var(--text-secondary)",
+          lineHeight: 1.4,
+        }}>
+          {agent.description}
+        </p>
+
+        {/* Action buttons */}
+        <div className="flex gap-2 mt-auto pt-1">
+          <button
+            onClick={() => downloadAgentConfig(agent)}
+            className="pixel-btn flex-1"
+            style={{
+              backgroundColor: "var(--accent)",
+              borderColor: "#4f46e5",
+              color: "#fff",
+            }}
+          >
+            ⬇ AGENT
+          </button>
+          <button
+            onClick={() => downloadSkillConfig(agent)}
+            className="pixel-btn flex-1"
+            style={{
+              backgroundColor: "var(--accent-secondary)",
+              borderColor: "#9333ea",
+              color: "#fff",
+            }}
+          >
+            ⬇ SKILL
+          </button>
+        </div>
       </div>
     </div>
   );
