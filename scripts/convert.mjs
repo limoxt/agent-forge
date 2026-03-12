@@ -68,28 +68,45 @@ function extractSections(body) {
 }
 
 /**
- * Find a section by partial heading match (case-insensitive)
+ * Find a section by partial heading match (case-insensitive).
+ * Tracks consumed headings in the `used` Set if provided.
  */
-function findSection(sections, ...keywords) {
+function findSection(sections, used, ...keywords) {
   for (const [heading, content] of sections) {
     const lower = heading.toLowerCase();
     if (keywords.some(kw => lower.includes(kw.toLowerCase()))) {
+      if (used) used.add(heading);
       return content;
     }
   }
   return "";
 }
 
+/**
+ * Collect all sections NOT consumed by findSection calls.
+ * Returns formatted markdown string of remaining sections.
+ */
+function getUnconsumedSections(sections, used) {
+  const remaining = [];
+  for (const [heading, content] of sections) {
+    if (heading === "_intro") continue;
+    if (used.has(heading)) continue;
+    if (!content || content.length < 20) continue;
+    remaining.push(`## ${heading}\n\n${content}`);
+  }
+  return remaining.join("\n\n");
+}
+
 // ═══════════════════════════════════════════
 // GENERATORS
 // ═══════════════════════════════════════════
 
-function generateSOUL(meta, sections, body) {
+function generateSOUL(meta, sections, body, used) {
   // SOUL.md = persona + tone + boundaries + communication style
   const intro = sections.get("_intro") || "";
-  const communication = findSection(sections, "communication", "style");
-  const rules = findSection(sections, "critical rules", "rules", "boundaries");
-  const identity = findSection(sections, "identity", "memory");
+  const communication = findSection(sections, used, "communication", "style");
+  const rules = findSection(sections, used, "critical rules", "rules", "boundaries");
+  const identity = findSection(sections, used, "identity", "memory");
 
   return `# ${meta.name}
 
@@ -130,13 +147,21 @@ ${meta.description}
 `;
 }
 
-function generateAGENTS(meta, sections) {
-  const mission = findSection(sections, "core mission", "mission", "responsibilities");
-  const workflow = findSection(sections, "workflow", "process", "step");
-  const deliverables = findSection(sections, "deliverable", "output", "template", "checklist");
-  const memory = findSection(sections, "memory", "learning");
-  const success = findSection(sections, "success", "metrics");
-  const advanced = findSection(sections, "advanced", "capabilities");
+function generateAGENTS(meta, sections, used) {
+  const mission = findSection(sections, used, "core mission", "mission", "responsibilities");
+  const workflow = findSection(sections, used, "workflow", "process", "step");
+  const deliverables = findSection(sections, used, "deliverable", "output", "template", "checklist");
+  const memory = findSection(sections, used, "memory", "learning");
+  const success = findSection(sections, used, "success", "metrics");
+  const advanced = findSection(sections, used, "advanced", "capabilities");
+  const roleDefinition = findSection(sections, used, "role definition", "role");
+  const specializedSkills = findSection(sections, used, "specialized skills", "core expertise", "specialization");
+  const decisionFramework = findSection(sections, used, "decision framework", "decision logic");
+  const tooling = findSection(sections, used, "tooling", "tool stack", "technical stack");
+  const executiveSummary = findSection(sections, used, "executive summary");
+
+  // Collect all remaining unconsumed sections
+  const unconsumed = getUnconsumedSections(sections, used);
 
   return `# AGENTS.md — ${meta.name}
 
@@ -149,10 +174,16 @@ function generateAGENTS(meta, sections) {
 
 ${mission || meta.description}
 
+${roleDefinition ? `## Role Definition\n\n${roleDefinition}\n` : ""}
 ${workflow ? `## Workflow\n\n${workflow}\n` : ""}
 ${deliverables ? `## Deliverables\n\n${deliverables}\n` : ""}
 ${advanced ? `## Advanced Capabilities\n\n${advanced}\n` : ""}
+${specializedSkills ? `## Specialized Skills\n\n${specializedSkills}\n` : ""}
+${decisionFramework ? `## Decision Framework\n\n${decisionFramework}\n` : ""}
+${tooling ? `## Tooling & Automation\n\n${tooling}\n` : ""}
+${executiveSummary ? `## Executive Summary Template\n\n${executiveSummary}\n` : ""}
 ${success ? `## Success Metrics\n\n${success}\n` : ""}
+${unconsumed ? `## Domain Knowledge\n\n${unconsumed}\n` : ""}
 ## Memory system
 
 * Daily log: \`memory/YYYY-MM-DD.md\`
@@ -231,12 +262,27 @@ Adapted from [agency-agents](${meta.source_url || "https://github.com/msitarzews
 `;
 }
 
-function generateSKILL(meta, sections, body) {
-  const mission = findSection(sections, "core mission", "mission", "responsibilities");
-  const workflow = findSection(sections, "workflow", "process", "step");
-  const deliverables = findSection(sections, "deliverable", "output", "template", "checklist");
-  const rules = findSection(sections, "critical rules", "rules");
-  const communication = findSection(sections, "communication", "style");
+function generateSKILL(meta, sections, body, used) {
+  // Skill uses its own used set — it's a separate output that should also be complete
+  const skillUsed = new Set();
+  const mission = findSection(sections, skillUsed, "core mission", "mission", "responsibilities");
+  const workflow = findSection(sections, skillUsed, "workflow", "process", "step");
+  const deliverables = findSection(sections, skillUsed, "deliverable", "output", "template", "checklist");
+  const rules = findSection(sections, skillUsed, "critical rules", "rules");
+  const communication = findSection(sections, skillUsed, "communication", "style");
+  const advanced = findSection(sections, skillUsed, "advanced", "capabilities");
+  const specializedSkills = findSection(sections, skillUsed, "specialized skills", "core expertise", "specialization");
+
+  // Include unconsumed sections in skill too (using the skill's own tracking)
+  // Skip _intro and sections already in the skill
+  const remaining = [];
+  for (const [heading, content] of sections) {
+    if (heading === "_intro") continue;
+    if (skillUsed.has(heading)) continue;
+    if (!content || content.length < 20) continue;
+    remaining.push(`## ${heading}\n\n${content}`);
+  }
+  const unconsumed = remaining.join("\n\n");
 
   return `---
 name: ${meta.id}
@@ -251,7 +297,10 @@ ${mission ? `## When to Use\n\n${mission}\n` : ""}
 ${rules ? `## Rules\n\n${rules}\n` : ""}
 ${workflow ? `## Workflow\n\n${workflow}\n` : ""}
 ${deliverables ? `## Deliverables\n\n${deliverables}\n` : ""}
+${advanced ? `## Advanced Capabilities\n\n${advanced}\n` : ""}
+${specializedSkills ? `## Specialized Skills\n\n${specializedSkills}\n` : ""}
 ${communication ? `## Communication Style\n\n${communication}\n` : ""}
+${unconsumed ? `## Domain Knowledge\n\n${unconsumed}\n` : ""}
 ---
 *Source: [agency-agents](${meta.source_url || `https://github.com/msitarzewski/agency-agents`}) — adapted for OpenClaw*
 `;
@@ -326,15 +375,18 @@ function main() {
     // Merge frontmatter meta with agents.json meta
     const fullMeta = { ...agentMeta, ...meta, id, source_url: agentMeta.source_url };
 
+    // Track consumed sections across agent generators
+    const used = new Set();
+
     const result = {
       agent: {
-        "SOUL.md": generateSOUL(fullMeta, sections, body),
+        "SOUL.md": generateSOUL(fullMeta, sections, body, used),
         "IDENTITY.md": generateIDENTITY(fullMeta),
-        "AGENTS.md": generateAGENTS(fullMeta, sections),
+        "AGENTS.md": generateAGENTS(fullMeta, sections, used),
         "README.md": generateAgentREADME(fullMeta),
       },
       skill: {
-        "SKILL.md": generateSKILL(fullMeta, sections, body),
+        "SKILL.md": generateSKILL(fullMeta, sections, body, used),
         "README.md": generateSkillREADME(fullMeta),
       },
     };
