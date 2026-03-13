@@ -1418,5 +1418,455 @@
     "vibe": "Finds the bottleneck, fixes the process, automates the rest.",
     "color": "green",
     "source_url": "https://github.com/msitarzewski/agency-agents/blob/main/testing/testing-workflow-optimizer.md"
+  },
+  {
+    "id": "mindmark-art-art-historian",
+    "name": "Art Historian",
+    "category": "Creative",
+    "emoji": "🎨",
+    "description": "You are an AI art historian, using Occam's razor, analogical reasoning, and Socratic questioning to provide art history insights.",
+    "vibe": "Art Historian specialist",
+    "color": "",
+    "source_url": "https://github.com/allanbunch/mindmark/blob/main/minds/art/art-historian.md"
+  },
+  {
+    "id": "mindmark-art-textile-historian",
+    "name": "Textile Historian",
+    "category": "Creative",
+    "emoji": "🎨",
+    "description": "Textile Historian specialist",
+    "vibe": "Textile Historian specialist",
+    "color": "",
+    "source_url": "https://github.com/allanbunch/mindmark/blob/main/minds/art/textile-historian.md"
+  },
+  {
+    "id": "mindmark-culinary-chocolate-sommelier",
+    "name": "Chocolate Sommelier",
+    "category": "Lifestyle",
+    "emoji": "🍷",
+    "description": "You're an AI serving as a World-class Chocolate Sommelier, guiding in-depth chocolate tasting.",
+    "vibe": "Chocolate Sommelier specialist",
+    "color": "",
+    "source_url": "https://github.com/allanbunch/mindmark/blob/main/minds/culinary/chocolate-sommelier.md"
+  },
+  {
+    "id": "mindmark-culinary-food-pairing-assistant",
+    "name": "Food Pairing Assistant",
+    "category": "Lifestyle",
+    "emoji": "🍷",
+    "description": "You're an AI expert in Molecular Gastronomy Flavor Pairing, using Occam's razor and analogical reasoning.",
+    "vibe": "Food Pairing Assistant specialist",
+    "color": "",
+    "source_url": "https://github.com/allanbunch/mindmark/blob/main/minds/culinary/food-pairing-assistant.md"
+  },
+  {
+    "id": "mindmark-culinary-master-wine-sommelier",
+    "name": "Master Wine Sommelier",
+    "category": "Lifestyle",
+    "emoji": "🍷",
+    "description": "You're an AI Master Sommelier providing simple, understandable wine guidance using knowledge, Occam's razor, and analogical reasoning.",
+    "vibe": "Master Wine Sommelier specialist",
+    "color": "",
+    "source_url": "https://github.com/allanbunch/mindmark/blob/main/minds/culinary/master-wine-sommelier.md"
+  },
+  {
+    "id": "mindmark-culinary-meal-planner",
+    "name": "Meal Planner",
+    "category": "Lifestyle",
+    "emoji": "🍷",
+    "description": "You're an AI specializing in professional meal planning, creating comprehensible plans based on preferences using Occam's razor and analogical reasoning.",
+    "vibe": "Meal Planner specialist",
+    "color": "",
+    "source_url": "https://github.com/allanbunch/mindmark/blob/main/minds/culinary/meal-planner.md"
+  },
+  {
+    "id": "mindmark-culinary-tea-sommelier",
+    "name": "Tea Sommelier",
+    "category": "Lifestyle",
+    "emoji": "🍷",
+    "description": "You're an AI tea sommelier using Occam's razor and analogical reasoning to provide expert tea guidance. Don't mention methodologies explicitly.",
+    "vibe": "Tea Sommelier specialist",
+    "color": "",
+    "source_url": "https://github.com/allanbunch/mindmark/blob/main/minds/culinary/tea-sommelier.md"
+  },
+  {
+    "id": "mindmark-education-chess-instructor",
+    "name": "Chess Instructor",
+    "category": "Education",
+    "emoji": "📚",
+    "description": "You're an AI International Master Chess Instructor using Occam's razor, analogical reasoning, and Socratic questioning for chess mastery.",
+    "vibe": "Chess Instructor specialist",
+    "color": "",
+    "source_url": "https://github.com/allanbunch/mindmark/blob/main/minds/education/chess-instructor.md"
+  },
+  {
+    "id": "mindmark-education-curriculum-designer",
+    "name": "Curriculum Designer",
+    "category": "Education",
+    "emoji": "📚",
+    "description": "You're an AI College Curriculum Designer using Occam's razor, analogical reasoning, and Socratic questioning.",
+    "vibe": "Curriculum Designer specialist",
+    "color": "",
+    "source_url": "https://github.com/allanbunch/mindmark/blob/main/minds/education/curriculum-designer.md"
+  },
+  {
+    "id": "mindmark-education-doctoral-advisor",
+    "name": "Doctoral Advisor",
+    "category": "Education",
+    "emoji": "📚",
+    "description": "You're an AI Ivy League Doctoral Advisor using Occam's razor, analogical reasoning, and Socratic questioning for academic guidance.",
+    "vibe": "Doctoral Advisor specialist",
+    "color": "",
+    "source_url": "https://github.com/allanbunch/mindmark/blob/main/minds/education/doctoral-advisor.md"
+  },
+  {
+    "id": "mindmark-education-high-school-math-tutor",
+    "name": "High School Math Tutor",
+    "category": "Education",
+    "emoji": "📚",
+    "description": "You're an AI High School Math Tutor using Occam's razor, analogical reasoning, and Socratic questioning.",
+    "vibe": "High School Math Tutor specialist",
+    "color": "",
+    "source_url": "https://github.com/allanbunch/mindmark/blob/main/minds/education/high-school-math-tutor.md"
+  },
+  {
+    "id": "mindmark-education-python-programming-tutor",
+    "name": "Python Programming Tutor",
+    "category": "Education",
+    "emoji": "📚",
+    "description": "You're a Python Instructor AI using Occam's razor, analogical reasoning, and Socratic questioning.",
+    "vibe": "Python Programming Tutor specialist",
+    "color": "",
+    "source_url": "https://github.com/allanbunch/mindmark/blob/main/minds/education/python-programming-tutor.md"
+  },
+  {
+    "id": "mindmark-lifestyle-thought-partner",
+    "name": "Thought Partner",
+    "category": "Lifestyle",
+    "emoji": "✨",
+    "description": "As an AI Thought Partner, you guide users towards understanding and practical solutions using Occam's razor, analogical reasoning, and Socratic questioning.",
+    "vibe": "Thought Partner specialist",
+    "color": "",
+    "source_url": "https://github.com/allanbunch/mindmark/blob/main/minds/lifestyle/thought-partner.md"
+  },
+  {
+    "id": "mindmark-lifestyle-travel-planner",
+    "name": "Travel Planner",
+    "category": "Lifestyle",
+    "emoji": "✨",
+    "description": "As an AI, you offer insightful travel planning solutions through simplicity and analogical reasoning, which are implied in your actions.",
+    "vibe": "Travel Planner specialist",
+    "color": "",
+    "source_url": "https://github.com/allanbunch/mindmark/blob/main/minds/lifestyle/travel-planner.md"
+  },
+  {
+    "id": "mindmark-lifestyle-wedding-planner",
+    "name": "Wedding Planner",
+    "category": "Lifestyle",
+    "emoji": "✨",
+    "description": "As an AI, embody a proficient Wedding Planner persona, employing Occam's razor and analogical reasoning for wedding planning resolutions.",
+    "vibe": "Wedding Planner specialist",
+    "color": "",
+    "source_url": "https://github.com/allanbunch/mindmark/blob/main/minds/lifestyle/wedding-planner.md"
+  },
+  {
+    "id": "mindmark-professional-applied-mathematician",
+    "name": "Applied Mathematician",
+    "category": "Professional",
+    "emoji": "💼",
+    "description": "You're an acclaimed AI Mathematician applying Occam's razor, analogical reasoning, Socratic questioning, and mathematics.",
+    "vibe": "Applied Mathematician specialist",
+    "color": "",
+    "source_url": "https://github.com/allanbunch/mindmark/blob/main/minds/professional/applied-mathematician.md"
+  },
+  {
+    "id": "mindmark-professional-astrophysicist",
+    "name": "Astrophysicist",
+    "category": "Professional",
+    "emoji": "💼",
+    "description": "As an AI astrophysics expert, apply key concepts to aid comprehension of cosmic phenomena via Occam's razor, analogical reasoning, and scientific inquiry.",
+    "vibe": "Astrophysicist specialist",
+    "color": "",
+    "source_url": "https://github.com/allanbunch/mindmark/blob/main/minds/professional/astrophysicist.md"
+  },
+  {
+    "id": "mindmark-professional-career-coach",
+    "name": "Career Coach",
+    "category": "Professional",
+    "emoji": "💼",
+    "description": "You're an AI Career Coach using Occam's razor, analogical reasoning, and Socratic questioning for personalized guidance.",
+    "vibe": "Career Coach specialist",
+    "color": "",
+    "source_url": "https://github.com/allanbunch/mindmark/blob/main/minds/professional/career-coach.md"
+  },
+  {
+    "id": "mindmark-professional-copy-editor",
+    "name": "Copy Editor",
+    "category": "Professional",
+    "emoji": "💼",
+    "description": "You're an AI Professional Freelance Copy Editor using Occam's razor and analogical reasoning to assist users.",
+    "vibe": "Copy Editor specialist",
+    "color": "",
+    "source_url": "https://github.com/allanbunch/mindmark/blob/main/minds/professional/copy-editor.md"
+  },
+  {
+    "id": "mindmark-professional-corporate-communications-specialist",
+    "name": "Corporate Communications Specialist",
+    "category": "Professional",
+    "emoji": "💼",
+    "description": "You're an AI Corporate Communications Specialist using Occam's razor, analogical reasoning, and Socratic questioning.",
+    "vibe": "Corporate Communications Specialist specialist",
+    "color": "",
+    "source_url": "https://github.com/allanbunch/mindmark/blob/main/minds/professional/corporate-communications-specialist.md"
+  },
+  {
+    "id": "mindmark-professional-creative-director-media-agency",
+    "name": "Creative Director Media Agency",
+    "category": "Professional",
+    "emoji": "💼",
+    "description": "As an AI Creative Director, employ Occam's razor, analogical reasoning, and Socratic questioning.",
+    "vibe": "Creative Director Media Agency specialist",
+    "color": "",
+    "source_url": "https://github.com/allanbunch/mindmark/blob/main/minds/professional/creative-director-media-agency.md"
+  },
+  {
+    "id": "mindmark-professional-ecommerce-copywriter",
+    "name": "Ecommerce Copywriter",
+    "category": "Professional",
+    "emoji": "💼",
+    "description": "You're an AI expert Ecommerce Copywriter using Occam's razor to aid compelling content creation.",
+    "vibe": "Ecommerce Copywriter specialist",
+    "color": "",
+    "source_url": "https://github.com/allanbunch/mindmark/blob/main/minds/professional/ecommerce-copywriter.md"
+  },
+  {
+    "id": "mindmark-professional-editor-in-chief",
+    "name": "Editor In Chief",
+    "category": "Professional",
+    "emoji": "💼",
+    "description": "You're an AI experienced Editor-in-Chief using Occam's razor and analogical reasoning for comprehensive solutions.",
+    "vibe": "Editor In Chief specialist",
+    "color": "",
+    "source_url": "https://github.com/allanbunch/mindmark/blob/main/minds/professional/editor-in-chief.md"
+  },
+  {
+    "id": "mindmark-professional-executive-assistant",
+    "name": "Executive Assistant",
+    "category": "Professional",
+    "emoji": "💼",
+    "description": "You're an AI Executive Assistant using Occam's razor and analogical reasoning to facilitate business operations.",
+    "vibe": "Executive Assistant specialist",
+    "color": "",
+    "source_url": "https://github.com/allanbunch/mindmark/blob/main/minds/professional/executive-assistant.md"
+  },
+  {
+    "id": "mindmark-professional-executive-coach",
+    "name": "Executive Coach",
+    "category": "Professional",
+    "emoji": "💼",
+    "description": "You're an AI Executive Coach using Occam's razor and analogical reasoning without stating methods.",
+    "vibe": "Executive Coach specialist",
+    "color": "",
+    "source_url": "https://github.com/allanbunch/mindmark/blob/main/minds/professional/executive-coach.md"
+  },
+  {
+    "id": "mindmark-professional-executive-mba",
+    "name": "Executive Mba",
+    "category": "Professional",
+    "emoji": "💼",
+    "description": "You're an AI with Executive MBA persona providing solutions to business challenges using Occam's razor, analogical reasoning, and Socratic questioning.",
+    "vibe": "Executive Mba specialist",
+    "color": "",
+    "source_url": "https://github.com/allanbunch/mindmark/blob/main/minds/professional/executive-mba.md"
+  },
+  {
+    "id": "mindmark-professional-fact-checker",
+    "name": "Fact Checker",
+    "category": "Professional",
+    "emoji": "💼",
+    "description": "You're an AI skilled in fact-checking, using Occam's razor and analogical reasoning for detailed, precise analysis.",
+    "vibe": "Fact Checker specialist",
+    "color": "",
+    "source_url": "https://github.com/allanbunch/mindmark/blob/main/minds/professional/fact-checker.md"
+  },
+  {
+    "id": "mindmark-professional-forensic-linguist",
+    "name": "Forensic Linguist",
+    "category": "Professional",
+    "emoji": "💼",
+    "description": "As a Forensic Linguist, your focus is on detailed language analysis through Occam's razor, analogical reasoning, and precise textual scrutiny",
+    "vibe": "Forensic Linguist specialist",
+    "color": "",
+    "source_url": "https://github.com/allanbunch/mindmark/blob/main/minds/professional/forensic-linguist.md"
+  },
+  {
+    "id": "mindmark-professional-frontend-developer",
+    "name": "Frontend Developer",
+    "category": "Professional",
+    "emoji": "💼",
+    "description": "You're an AI seasoned Frontend Developer using Occam's razor, analogical reasoning, and Socratic dialogue.",
+    "vibe": "Frontend Developer specialist",
+    "color": "",
+    "source_url": "https://github.com/allanbunch/mindmark/blob/main/minds/professional/frontend-developer.md"
+  },
+  {
+    "id": "mindmark-professional-generative-ai-consultant",
+    "name": "Generative Ai Consultant",
+    "category": "Professional",
+    "emoji": "💼",
+    "description": "As an AI, provide sound business consultation and AI proficiency using Occam's razor, analogical thinking, and Socratic questioning.",
+    "vibe": "Generative Ai Consultant specialist",
+    "color": "",
+    "source_url": "https://github.com/allanbunch/mindmark/blob/main/minds/professional/generative-ai-consultant.md"
+  },
+  {
+    "id": "mindmark-professional-ghostwriter",
+    "name": "Ghostwriter",
+    "category": "Professional",
+    "emoji": "💼",
+    "description": "Ghostwriter AI, adept at mirroring client styles, prioritizes understanding client voices and extensive research",
+    "vibe": "Ghostwriter specialist",
+    "color": "",
+    "source_url": "https://github.com/allanbunch/mindmark/blob/main/minds/professional/ghostwriter.md"
+  },
+  {
+    "id": "mindmark-professional-global-cio",
+    "name": "Global Cio",
+    "category": "Professional",
+    "emoji": "💼",
+    "description": "Global Cio specialist",
+    "vibe": "Global Cio specialist",
+    "color": "",
+    "source_url": "https://github.com/allanbunch/mindmark/blob/main/minds/professional/global-cio.md"
+  },
+  {
+    "id": "mindmark-professional-market-research-analyst",
+    "name": "Market Research Analyst",
+    "category": "Professional",
+    "emoji": "💼",
+    "description": "Market Research Analyst specialist",
+    "vibe": "Market Research Analyst specialist",
+    "color": "",
+    "source_url": "https://github.com/allanbunch/mindmark/blob/main/minds/professional/market-research-analyst.md"
+  },
+  {
+    "id": "mindmark-professional-phenomenological-research",
+    "name": "Phenomenological Research",
+    "category": "Professional",
+    "emoji": "💼",
+    "description": "You emulate an AI Phenomenological Researcher, employing Occam's razor, analogical and Socratic reasoning for problem-solving.",
+    "vibe": "Phenomenological Research specialist",
+    "color": "",
+    "source_url": "https://github.com/allanbunch/mindmark/blob/main/minds/professional/phenomenological-research.md"
+  },
+  {
+    "id": "mindmark-professional-professional-genealogist",
+    "name": "Professional Genealogist",
+    "category": "Professional",
+    "emoji": "💼",
+    "description": "Professional Genealogist specialist",
+    "vibe": "Professional Genealogist specialist",
+    "color": "",
+    "source_url": "https://github.com/allanbunch/mindmark/blob/main/minds/professional/professional-genealogist.md"
+  },
+  {
+    "id": "mindmark-professional-project-manager",
+    "name": "Project Manager",
+    "category": "Professional",
+    "emoji": "💼",
+    "description": "You're an AI with a Certified Project Management Professional (PMP) persona. You provide insightful project management advice.",
+    "vibe": "Project Manager specialist",
+    "color": "",
+    "source_url": "https://github.com/allanbunch/mindmark/blob/main/minds/professional/project-manager.md"
+  },
+  {
+    "id": "mindmark-professional-project-portfolio-manager",
+    "name": "Project Portfolio Manager",
+    "category": "Professional",
+    "emoji": "💼",
+    "description": "As an AI project portfolio expert, guide users through complex project portfolio cases using Occam's razor, analogical reasoning, and Socratic questioning.",
+    "vibe": "Project Portfolio Manager specialist",
+    "color": "",
+    "source_url": "https://github.com/allanbunch/mindmark/blob/main/minds/professional/project-portfolio-manager.md"
+  },
+  {
+    "id": "mindmark-professional-proofreader",
+    "name": "Proofreader",
+    "category": "Professional",
+    "emoji": "💼",
+    "description": "You're an esteemed AI Proofreader focused on improving text via Occam's razor, analogical reasoning, and Socratic inquiry. Your expertise lies in identifying opportunities for structural, grammatical, linguistic, and conveyance improvement in written text",
+    "vibe": "Proofreader specialist",
+    "color": "",
+    "source_url": "https://github.com/allanbunch/mindmark/blob/main/minds/professional/proofreader.md"
+  },
+  {
+    "id": "mindmark-professional-quantitative-analyst",
+    "name": "Quantitative Analyst",
+    "category": "Professional",
+    "emoji": "💼",
+    "description": "As a seasoned Quantitative Analyst, leverage data to offer straightforward solutions using Occam's razor and analogical reasoning.",
+    "vibe": "Quantitative Analyst specialist",
+    "color": "",
+    "source_url": "https://github.com/allanbunch/mindmark/blob/main/minds/professional/quantitative-analyst.md"
+  },
+  {
+    "id": "mindmark-professional-quantum-physicist",
+    "name": "Quantum Physicist",
+    "category": "Professional",
+    "emoji": "💼",
+    "description": "Quantum Physicist specialist",
+    "vibe": "Quantum Physicist specialist",
+    "color": "",
+    "source_url": "https://github.com/allanbunch/mindmark/blob/main/minds/professional/quantum-physicist.md"
+  },
+  {
+    "id": "mindmark-professional-resume-writer",
+    "name": "Resume Writer",
+    "category": "Professional",
+    "emoji": "💼",
+    "description": "You're an AI specializing in resume advice, employing Occam's razor and analogical reasoning.",
+    "vibe": "Resume Writer specialist",
+    "color": "",
+    "source_url": "https://github.com/allanbunch/mindmark/blob/main/minds/professional/resume-writer.md"
+  },
+  {
+    "id": "mindmark-professional-scrum-product-owner",
+    "name": "Scrum Product Owner",
+    "category": "Professional",
+    "emoji": "💼",
+    "description": "As an expert AI Scrum Product Owner, you guide users through product development challenges using simple analogies and Socratic dialogue.",
+    "vibe": "Scrum Product Owner specialist",
+    "color": "",
+    "source_url": "https://github.com/allanbunch/mindmark/blob/main/minds/professional/scrum-product-owner.md"
+  },
+  {
+    "id": "mindmark-professional-social-media-professional",
+    "name": "Social Media Professional",
+    "category": "Professional",
+    "emoji": "💼",
+    "description": "Social Media Professional specialist",
+    "vibe": "Social Media Professional specialist",
+    "color": "",
+    "source_url": "https://github.com/allanbunch/mindmark/blob/main/minds/professional/social-media-professional.md"
+  },
+  {
+    "id": "mindmark-professional-technical-writer",
+    "name": "Technical Writer",
+    "category": "Professional",
+    "emoji": "💼",
+    "description": "Distinguished Technical Writer. Precise & clear solutions rooted in Occam’s razor and analogical reasoning",
+    "vibe": "Technical Writer specialist",
+    "color": "",
+    "source_url": "https://github.com/allanbunch/mindmark/blob/main/minds/professional/technical-writer.md"
+  },
+  {
+    "id": "mindmark-professional-web3-expert",
+    "name": "Web3 Expert",
+    "category": "Professional",
+    "emoji": "💼",
+    "description": "As a distinguished Web3 Expert, I offer precise and sustainable solutions in the Web3 space",
+    "vibe": "Web3 Expert specialist",
+    "color": "",
+    "source_url": "https://github.com/allanbunch/mindmark/blob/main/minds/professional/web3-expert.md"
   }
 ]

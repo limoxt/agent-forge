@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 const title = "AgentForge — Your AI team, on-demand.";
-const description = "Browse and download 142 pre-configured AI agents across 12 categories. Free, open-source, OpenClaw-compatible.";
+const description = "Browse and download 187 pre-configured AI agents across 12 categories. Free, open-source, OpenClaw-compatible.";
 const url = "https://agentforge.sh";
 
 export const metadata: Metadata = {

@@ -12,6 +12,10 @@ const CATEGORY_COLORS: Record<string, string> = {
   Specialized: "#f07088",      // Bright rose
   Support: "#30e0b0",          // Bright teal
   Testing: "#c060f0",          // Electric purple
+  Creative: "#e068d0",          // Orchid pink
+  Lifestyle: "#50c8a8",         // Seafoam green
+  Education: "#60a0f0",         // Sky blue
+  Professional: "#a0a0c0",      // Cool slate
 };
 
 export function getCategoryColor(category: string): string {
