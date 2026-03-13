@@ -79,6 +79,53 @@ function parseMindMarkFile(content, filePath) {
   };
 }
 
+/**
+ * Convert MindMark's ## Heading / ### Content format
+ * into agency-agents-compatible ## Heading\n\nContent format.
+ * Also maps MindMark section names to agency-agents equivalents.
+ */
+function convertMindMarkSections(content, name) {
+  const SECTION_MAP = {
+    "Role": "Core Mission",
+    "Behavior": "Critical Rules",
+    "Persona": "Communication Style",
+    "Interaction": "Communication Style",
+    "Attributes": "Identity & Memory",
+    "Use Cases": "Advanced Capabilities",
+    "Goal": "Success Metrics",
+    "Constraints": "Critical Rules You Must Follow",
+    "Ethics": "Boundaries",
+    "Validate": "Deliverables",
+    "Validation": "Deliverables",
+  };
+
+  const lines = content.split("\n");
+  const result = [];
+  let currentHeading = null;
+
+  for (const line of lines) {
+    const h2Match = line.match(/^## (.+)$/);
+    const h3Match = line.match(/^### (.+)$/);
+
+    if (h2Match) {
+      const rawHeading = h2Match[1].trim();
+      currentHeading = SECTION_MAP[rawHeading] || rawHeading;
+      result.push(`## ${currentHeading}`);
+      result.push("");
+    } else if (h3Match) {
+      // H3 content becomes body text under the H2
+      result.push(h3Match[1].trim());
+      result.push("");
+    } else if (line.trim()) {
+      // Standalone lines (like closing mission statement)
+      result.push(line);
+      result.push("");
+    }
+  }
+
+  return result.join("\n").trim();
+}
+
 function toTitleCase(str) {
   return str.replace(/\b\w/g, (c) => c.toUpperCase());
 }
@@ -116,10 +163,20 @@ async function main() {
       continue;
     }
 
-    const content = await fetchFile(filePath);
-    const parsed = parseMindMarkFile(content, filePath);
+    const rawContent = await fetchFile(filePath);
+    // Strip markdown code block wrapper and # System Message heading
+    const content = rawContent
+      .replace(/^```markdown\s*\n?/m, "")
+      .replace(/\n?```\s*$/m, "")
+      .replace(/^# System Message\s*\n?/m, "")
+      .trim();
 
-    // Convert to agency-agents-like format with frontmatter
+    const parsed = parseMindMarkFile(rawContent, filePath);
+
+    // Convert MindMark ## / ### format to agency-agents-like ## format
+    // MindMark uses ### for content under ## headings — flatten to ## with body
+    const convertedContent = convertMindMarkSections(content, parsed.name);
+
     const agentForgeContent = `---
 name: "${parsed.name}"
 category: "${CATEGORY_MAP[parsed.category] || "Specialized"}"
@@ -129,7 +186,7 @@ vibe: "${parsed.name} specialist"
 source: mindmark
 ---
 
-${content}
+${convertedContent}
 `;
 
     // Save raw file
