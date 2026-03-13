@@ -2,10 +2,10 @@
 
 /**
  * Convert script: transforms raw agency-agents .md files into
- * OpenClaw-compatible format (SOUL.md, IDENTITY.md, AGENTS.md, SKILL.md)
+ * OpenClaw-compatible format (SOUL.md, IDENTITY.md, AGENTS.md, SKILL.md, USER.md)
  *
  * Output: public/downloads/{agent-id}.json
- *   { agent: { "SOUL.md": ..., "IDENTITY.md": ..., "AGENTS.md": ..., "README.md": ... },
+ *   { agent: { "SOUL.md": ..., "IDENTITY.md": ..., "AGENTS.md": ..., "USER.md": ..., "README.md": ... },
  *     skill: { "SKILL.md": ..., "README.md": ... } }
  *
  * Usage: node scripts/convert.mjs
@@ -104,8 +104,8 @@ function getUnconsumedSections(sections, used) {
 function generateSOUL(meta, sections, body, used) {
   // SOUL.md = persona + tone + boundaries + communication style
   const intro = sections.get("_intro") || "";
-  const communication = findSection(sections, used, "communication", "style");
-  const rules = findSection(sections, used, "critical rules", "rules", "boundaries");
+  const communication = findSection(sections, used, "communication", "style", "approach", "philosophy");
+  const rules = findSection(sections, used, "critical rules", "rules", "boundaries", "principles", "guidelines");
   const identity = findSection(sections, used, "identity", "memory");
 
   return `# ${meta.name}
@@ -133,12 +133,12 @@ ${communication || "- Be clear and concise\n- Provide actionable recommendations
 }
 
 function generateIDENTITY(meta) {
+  // P1: 移除空的 avatar 字段
   return `---
 name: ${meta.name}
 creature: AI specialist agent
 vibe: ${meta.vibe || `Expert ${meta.name}`}
 emoji: ${meta.emoji || "🤖"}
-avatar:
 ---
 
 # ${meta.name}
@@ -148,17 +148,20 @@ ${meta.description}
 }
 
 function generateAGENTS(meta, sections, used) {
-  const mission = findSection(sections, used, "core mission", "mission", "responsibilities");
-  const workflow = findSection(sections, used, "workflow", "process", "step");
-  const deliverables = findSection(sections, used, "deliverable", "output", "template", "checklist");
+  // P1: 扩展 section 关键词映射
+  const mission = findSection(sections, used, "core mission", "mission", "responsibilities", "objective");
+  const workflow = findSection(sections, used, "workflow", "process", "step", "procedure");
+  const deliverables = findSection(sections, used, "deliverable", "output", "template", "checklist", "artifacts");
   const memory = findSection(sections, used, "memory", "learning");
-  const success = findSection(sections, used, "success", "metrics");
-  const advanced = findSection(sections, used, "advanced", "capabilities");
+  const success = findSection(sections, used, "success", "metrics", "quality", "standards");
+  const advanced = findSection(sections, used, "advanced", "capabilities", "expertise", "mastery");
   const roleDefinition = findSection(sections, used, "role definition", "role");
-  const specializedSkills = findSection(sections, used, "specialized skills", "core expertise", "specialization");
-  const decisionFramework = findSection(sections, used, "decision framework", "decision logic");
-  const tooling = findSection(sections, used, "tooling", "tool stack", "technical stack");
+  const specializedSkills = findSection(sections, used, "specialized skills", "core expertise", "specialization", "competencies");
+  const decisionFramework = findSection(sections, used, "decision framework", "decision logic", "decision making");
+  const tooling = findSection(sections, used, "tooling", "tool stack", "technical stack", "tools & technologies", "technologies");
   const executiveSummary = findSection(sections, used, "executive summary");
+  const methodology = findSection(sections, used, "methodology", "framework", "approach");
+  const examples = findSection(sections, used, "examples", "patterns", "best practices", "common patterns");
 
   // Collect all remaining unconsumed sections
   const unconsumed = getUnconsumedSections(sections, used);
@@ -175,12 +178,14 @@ function generateAGENTS(meta, sections, used) {
 ${mission || meta.description}
 
 ${roleDefinition ? `## Role Definition\n\n${roleDefinition}\n` : ""}
+${methodology ? `## Methodology\n\n${methodology}\n` : ""}
 ${workflow ? `## Workflow\n\n${workflow}\n` : ""}
 ${deliverables ? `## Deliverables\n\n${deliverables}\n` : ""}
 ${advanced ? `## Advanced Capabilities\n\n${advanced}\n` : ""}
 ${specializedSkills ? `## Specialized Skills\n\n${specializedSkills}\n` : ""}
 ${decisionFramework ? `## Decision Framework\n\n${decisionFramework}\n` : ""}
 ${tooling ? `## Tooling & Automation\n\n${tooling}\n` : ""}
+${examples ? `## Examples & Patterns\n\n${examples}\n` : ""}
 ${executiveSummary ? `## Executive Summary Template\n\n${executiveSummary}\n` : ""}
 ${success ? `## Success Metrics\n\n${success}\n` : ""}
 ${unconsumed ? `## Domain Knowledge\n\n${unconsumed}\n` : ""}
@@ -205,12 +210,40 @@ ${memory ? `\n### Domain Memory\n\n${memory}\n` : ""}
 `;
 }
 
+// P0: 生成 USER.md 模板文件
+function generateUSER(meta) {
+  return `# USER.md — About Your Human
+
+_Learn about the person you're helping. Update this as you go._
+
+- **Name**: [Your Name]
+- **What to call them**: [Preferred address]
+- **Pronouns**: _(optional)_
+- **Timezone**: America/Chicago
+- **Notes**:
+  - Update this file with your preferences
+  - Add context about your work, goals, and communication style
+  - Include any domain-specific context relevant to this agent
+
+## Context
+
+This agent was installed from [Agent Forge](https://agentforge.sh).
+Customize this file to personalize the agent's behavior.
+
+---
+
+_The more you know, the better the agent can help. But remember — you're learning about a person, not building a dossier. Respect the difference._
+`;
+}
+
 function generateAgentREADME(meta) {
   return `# ${meta.emoji} ${meta.name} — OpenClaw Agent
 
 > ${meta.description}
 
 ## Installation
+
+### Option 1: Copy to workspace
 
 Copy these files into your OpenClaw workspace:
 
@@ -219,17 +252,10 @@ Copy these files into your OpenClaw workspace:
 cp SOUL.md ~/.openclaw/workspace/SOUL.md
 cp IDENTITY.md ~/.openclaw/workspace/IDENTITY.md
 cp AGENTS.md ~/.openclaw/workspace/AGENTS.md
+cp USER.md ~/.openclaw/workspace/USER.md
 \`\`\`
 
-Or if using a custom workspace:
-
-\`\`\`bash
-cp SOUL.md /path/to/your/workspace/SOUL.md
-cp IDENTITY.md /path/to/your/workspace/IDENTITY.md
-cp AGENTS.md /path/to/your/workspace/AGENTS.md
-\`\`\`
-
-## Multi-Agent Setup
+### Option 2: Multi-agent setup
 
 To add as a separate agent in \`~/.openclaw/openclaw.json\`:
 
@@ -252,6 +278,15 @@ Then copy the files into \`~/.openclaw/workspace-${meta.id}/\`.
 | \`SOUL.md\` | Persona, tone, boundaries, communication style |
 | \`IDENTITY.md\` | Name, emoji, vibe |
 | \`AGENTS.md\` | Operating instructions, workflow, deliverables, memory |
+| \`USER.md\` | User profile template (customize this!) |
+
+## Verification
+
+After installation, restart OpenClaw and verify:
+
+\`\`\`bash
+openclaw gateway restart
+\`\`\`
 
 ## Source
 
@@ -265,13 +300,16 @@ Adapted from [agency-agents](${meta.source_url || "https://github.com/msitarzews
 function generateSKILL(meta, sections, body, used) {
   // Skill uses its own used set — it's a separate output that should also be complete
   const skillUsed = new Set();
-  const mission = findSection(sections, skillUsed, "core mission", "mission", "responsibilities");
-  const workflow = findSection(sections, skillUsed, "workflow", "process", "step");
-  const deliverables = findSection(sections, skillUsed, "deliverable", "output", "template", "checklist");
-  const rules = findSection(sections, skillUsed, "critical rules", "rules");
-  const communication = findSection(sections, skillUsed, "communication", "style");
-  const advanced = findSection(sections, skillUsed, "advanced", "capabilities");
-  const specializedSkills = findSection(sections, skillUsed, "specialized skills", "core expertise", "specialization");
+  
+  // P1: 扩展 section 关键词映射
+  const mission = findSection(sections, skillUsed, "core mission", "mission", "responsibilities", "objective");
+  const workflow = findSection(sections, skillUsed, "workflow", "process", "step", "procedure");
+  const deliverables = findSection(sections, skillUsed, "deliverable", "output", "template", "checklist", "artifacts");
+  const rules = findSection(sections, skillUsed, "critical rules", "rules", "principles", "guidelines");
+  const communication = findSection(sections, skillUsed, "communication", "style", "approach");
+  const advanced = findSection(sections, skillUsed, "advanced", "capabilities", "expertise", "mastery");
+  const specializedSkills = findSection(sections, skillUsed, "specialized skills", "core expertise", "specialization", "competencies");
+  const examples = findSection(sections, skillUsed, "examples", "patterns", "best practices");
 
   // Include unconsumed sections in skill too (using the skill's own tracking)
   // Skip _intro and sections already in the skill
@@ -284,9 +322,23 @@ function generateSKILL(meta, sections, body, used) {
   }
   const unconsumed = remaining.join("\n\n");
 
+  // P0: 添加 metadata.openclaw 配置
+  const emoji = meta.emoji || "🤖";
+  const homepage = `https://agentforge.sh/agents/${meta.id}`;
+
   return `---
 name: ${meta.id}
 description: "${meta.description}"
+homepage: "${homepage}"
+user-invocable: true
+metadata:
+  {
+    "openclaw":
+      {
+        "emoji": "${emoji}",
+        "homepage": "${homepage}"
+      }
+  }
 ---
 
 # ${meta.name}
@@ -299,6 +351,7 @@ ${workflow ? `## Workflow\n\n${workflow}\n` : ""}
 ${deliverables ? `## Deliverables\n\n${deliverables}\n` : ""}
 ${advanced ? `## Advanced Capabilities\n\n${advanced}\n` : ""}
 ${specializedSkills ? `## Specialized Skills\n\n${specializedSkills}\n` : ""}
+${examples ? `## Examples & Patterns\n\n${examples}\n` : ""}
 ${communication ? `## Communication Style\n\n${communication}\n` : ""}
 ${unconsumed ? `## Domain Knowledge\n\n${unconsumed}\n` : ""}
 ---
@@ -307,13 +360,15 @@ ${unconsumed ? `## Domain Knowledge\n\n${unconsumed}\n` : ""}
 }
 
 function generateSkillREADME(meta) {
+  const homepage = `https://agentforge.sh/agents/${meta.id}`;
+  
   return `# ${meta.emoji} ${meta.name} — OpenClaw Skill
 
 > ${meta.description}
 
 ## Installation
 
-Copy the \`${meta.id}/\` folder into your skills directory:
+### Option 1: Copy to skills directory
 
 \`\`\`bash
 # Workspace-level (this agent only)
@@ -321,6 +376,14 @@ cp -r ${meta.id}/ ~/.openclaw/workspace/skills/${meta.id}/
 
 # Or managed-level (all agents)
 cp -r ${meta.id}/ ~/.openclaw/skills/${meta.id}/
+\`\`\`
+
+### Option 2: Via ClawHub
+
+If this skill is published on [ClawHub](https://clawhub.com):
+
+\`\`\`bash
+clawhub install ${meta.id}
 \`\`\`
 
 ## What's Included
@@ -335,12 +398,24 @@ Once installed, the skill is automatically available. Invoke with:
 
 > "Use ${meta.name} to help me with..."
 
+Or via slash command (if \`user-invocable\` is enabled):
+
+> /${meta.id}
+
+## Verification
+
+After installation, verify the skill is loaded:
+
+\`\`\`bash
+openclaw gateway restart
+\`\`\`
+
 ## Source
 
 Adapted from [agency-agents](${meta.source_url || "https://github.com/msitarzewski/agency-agents"}) for OpenClaw.
 
 ---
-*Generated by [Agent Forge](https://agentforge.sh)*
+*Generated by [Agent Forge](${homepage})*
 `;
 }
 
@@ -383,6 +458,7 @@ function main() {
         "SOUL.md": generateSOUL(fullMeta, sections, body, used),
         "IDENTITY.md": generateIDENTITY(fullMeta),
         "AGENTS.md": generateAGENTS(fullMeta, sections, used),
+        "USER.md": generateUSER(fullMeta),
         "README.md": generateAgentREADME(fullMeta),
       },
       skill: {
