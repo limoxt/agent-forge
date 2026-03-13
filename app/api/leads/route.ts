@@ -5,7 +5,8 @@ import { NextRequest, NextResponse } from "next/server";
 export const runtime = "nodejs";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const LEADS_DIR = path.join(process.cwd(), "data", "leads");
+// Use /tmp for Vercel serverless functions (writable)
+const LEADS_DIR = path.join("/tmp", "leads");
 const LEADS_FILE = path.join(LEADS_DIR, "leads.jsonl");
 const RESEND_ENDPOINT = "https://api.resend.com/emails";
 const FROM_EMAIL = "noreply@agentforge.sh";
@@ -90,16 +91,18 @@ export async function POST(request: NextRequest) {
       ip: getClientIp(request),
     };
 
-    await fs.mkdir(LEADS_DIR, { recursive: true });
-    await fs.appendFile(LEADS_FILE, `${JSON.stringify(lead)}\n`, "utf8");
+    // Try to save to /tmp (optional, may not persist)
+    try {
+      await fs.mkdir(LEADS_DIR, { recursive: true });
+      await fs.appendFile(LEADS_FILE, `${JSON.stringify(lead)}\n`, "utf8");
+    } catch {
+      // Ignore file write errors - email is the primary delivery
+    }
 
+    // Send email notification (primary delivery)
     const resendApiKey = process.env.RESEND_API_KEY;
     if (resendApiKey) {
-      try {
-        await sendLeadNotification(resendApiKey, lead);
-      } catch (error) {
-        console.error("Lead notification error:", error);
-      }
+      await sendLeadNotification(resendApiKey, lead);
     }
 
     return NextResponse.json({ success: true });
