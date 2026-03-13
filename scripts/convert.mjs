@@ -73,6 +73,7 @@ function extractSections(body) {
  */
 function findSection(sections, used, ...keywords) {
   for (const [heading, content] of sections) {
+    if (used?.has(heading)) continue;
     const lower = heading.toLowerCase();
     if (keywords.some(kw => lower.includes(kw.toLowerCase()))) {
       if (used) used.add(heading);
@@ -301,15 +302,24 @@ function generateSKILL(meta, sections, body, used) {
   // Skill uses its own used set — it's a separate output that should also be complete
   const skillUsed = new Set();
   
-  // P1: 扩展 section 关键词映射
-  const mission = findSection(sections, skillUsed, "core mission", "mission", "responsibilities", "objective");
+  // P0: 扩展 section 关键词映射，兼容 agency-agents / MindMark
+  const mission = findSection(sections, skillUsed,
+    "core mission", "mission", "responsibilities",
+    "role definition", "decision framework", "objective");
+  const roleDefinition = findSection(sections, skillUsed, "role definition", "role");
   const workflow = findSection(sections, skillUsed, "workflow", "process", "step", "procedure");
   const deliverables = findSection(sections, skillUsed, "deliverable", "output", "template", "checklist", "artifacts");
   const rules = findSection(sections, skillUsed, "critical rules", "rules", "principles", "guidelines");
   const communication = findSection(sections, skillUsed, "communication", "style", "approach");
   const advanced = findSection(sections, skillUsed, "advanced", "capabilities", "expertise", "mastery");
   const specializedSkills = findSection(sections, skillUsed, "specialized skills", "core expertise", "specialization", "competencies");
+  const decisionFramework = findSection(sections, skillUsed, "decision framework", "decision logic", "decision making");
   const examples = findSection(sections, skillUsed, "examples", "patterns", "best practices");
+  const identity = findSection(sections, skillUsed, "identity & memory", "identity", "memory");
+  const success = findSection(sections, skillUsed, "success metrics", "success", "goal");
+  const bounds = findSection(sections, skillUsed, "boundaries", "ethics");
+  const critRules = findSection(sections, skillUsed,
+    "critical rules you must follow", "critical rules", "rules", "constraints");
 
   // Include unconsumed sections in skill too (using the skill's own tracking)
   // Skip _intro and sections already in the skill
@@ -345,15 +355,66 @@ metadata:
 
 ${meta.description}
 
-${mission ? `## When to Use\n\n${mission}\n` : ""}
-${rules ? `## Rules\n\n${rules}\n` : ""}
-${workflow ? `## Workflow\n\n${workflow}\n` : ""}
-${deliverables ? `## Deliverables\n\n${deliverables}\n` : ""}
-${advanced ? `## Advanced Capabilities\n\n${advanced}\n` : ""}
-${specializedSkills ? `## Specialized Skills\n\n${specializedSkills}\n` : ""}
-${examples ? `## Examples & Patterns\n\n${examples}\n` : ""}
-${communication ? `## Communication Style\n\n${communication}\n` : ""}
-${unconsumed ? `## Domain Knowledge\n\n${unconsumed}\n` : ""}
+${mission ? `## When to Use
+
+${mission}
+` : ""}
+${roleDefinition ? `## Role Definition
+
+${roleDefinition}
+` : ""}
+${identity ? `## Identity & Memory
+
+${identity}
+` : ""}
+${rules ? `## Rules
+
+${rules}
+` : ""}
+${critRules ? `## Critical Rules
+
+${critRules}
+` : ""}
+${bounds ? `## Boundaries
+
+${bounds}
+` : ""}
+${workflow ? `## Workflow
+
+${workflow}
+` : ""}
+${deliverables ? `## Deliverables
+
+${deliverables}
+` : ""}
+${advanced ? `## Advanced Capabilities
+
+${advanced}
+` : ""}
+${specializedSkills ? `## Specialized Skills
+
+${specializedSkills}
+` : ""}
+${decisionFramework ? `## Decision Framework
+
+${decisionFramework}
+` : ""}
+${examples ? `## Examples & Patterns
+
+${examples}
+` : ""}
+${communication ? `## Communication Style
+
+${communication}
+` : ""}
+${success ? `## Success Metrics
+
+${success}
+` : ""}
+${unconsumed ? `## Domain Knowledge
+
+${unconsumed}
+` : ""}
 ---
 *Source: [agency-agents](${meta.source_url || `https://github.com/msitarzewski/agency-agents`}) — adapted for OpenClaw*
 `;
