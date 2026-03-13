@@ -2,6 +2,7 @@ import { getAgents, getCategories } from "@/lib/agents";
 import AgentGrid from "@/components/AgentGrid";
 import ThemeToggle from "@/components/ThemeToggle";
 import MeetRex from "@/components/MeetRex";
+import Link from "next/link";
 
 export default function Home() {
   const agents = getAgents();
@@ -68,6 +69,17 @@ export default function Home() {
                 ● ONLINE
               </div>
             </div>
+          </div>
+
+          {/* Browse Teams CTA */}
+          <div className="text-center mt-8">
+            <Link
+              href="/teams"
+              className="pixel-btn pixel-btn-primary inline-block"
+              style={{ fontSize: "10px", padding: "12px 28px", textDecoration: "none" }}
+            >
+              🛡️ BROWSE TEAM BUNDLES
+            </Link>
           </div>
         </div>
       </header>
