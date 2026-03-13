@@ -1,6 +1,7 @@
 import { getAgents, getCategories } from "@/lib/agents";
 import AgentGrid from "@/components/AgentGrid";
 import ThemeToggle from "@/components/ThemeToggle";
+import MeetRex from "@/components/MeetRex";
 
 export default function Home() {
   const agents = getAgents();
@@ -70,6 +71,9 @@ export default function Home() {
           </div>
         </div>
       </header>
+
+      {/* Meet Rex Section */}
+      <MeetRex />
 
       {/* Main content — generous padding */}
       <main className="max-w-7xl mx-auto px-3 sm:px-5 md:px-8 py-8 sm:py-10 md:py-14">
