@@ -132,7 +132,7 @@ export default function EmailModal({
               className="text-terminal"
               style={{ fontSize: "16px", color: "var(--text-secondary)" }}
             >
-              同意接收更新
+              I agree to receive updates about new agents
             </span>
           </label>
 
