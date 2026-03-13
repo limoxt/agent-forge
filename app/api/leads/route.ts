@@ -10,7 +10,7 @@ const LEADS_DIR = path.join("/tmp", "leads");
 const LEADS_FILE = path.join(LEADS_DIR, "leads.jsonl");
 const RESEND_ENDPOINT = "https://api.resend.com/emails";
 const FROM_EMAIL = "noreply@agentforge.sh";
-const TO_EMAIL = "limoxt@gmail.com";
+const TO_EMAIL = "rexbuildsai@gmail.com";
 
 interface LeadPayload {
   email?: string;
