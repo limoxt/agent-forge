@@ -308,18 +308,17 @@ function generateSKILL(meta, sections, body, used) {
     "role definition", "decision framework", "objective");
   const roleDefinition = findSection(sections, skillUsed, "role definition", "role");
   const workflow = findSection(sections, skillUsed, "workflow", "process", "step", "procedure");
-  const deliverables = findSection(sections, skillUsed, "deliverable", "output", "template", "checklist", "artifacts");
-  const rules = findSection(sections, skillUsed, "critical rules", "rules", "principles", "guidelines");
+  const deliverables = findSection(sections, skillUsed, "deliverable", "output", "template", "checklist", "artifacts", "validate", "validation");
+  const criticalRulesFollow = findSection(sections, skillUsed, "critical rules you must follow");
+  const identityMemory = findSection(sections, skillUsed, "identity & memory", "identity", "memory", "attributes");
+  const successMetrics = findSection(sections, skillUsed, "success metrics", "success", "goal", "metrics");
+  const boundaries = findSection(sections, skillUsed, "boundaries", "ethics");
+  const rules = findSection(sections, skillUsed, "critical rules", "rules", "principles", "guidelines", "constraints", "behavior");
   const communication = findSection(sections, skillUsed, "communication", "style", "approach");
   const advanced = findSection(sections, skillUsed, "advanced", "capabilities", "expertise", "mastery");
   const specializedSkills = findSection(sections, skillUsed, "specialized skills", "core expertise", "specialization", "competencies");
   const decisionFramework = findSection(sections, skillUsed, "decision framework", "decision logic", "decision making");
   const examples = findSection(sections, skillUsed, "examples", "patterns", "best practices");
-  const identity = findSection(sections, skillUsed, "identity & memory", "identity", "memory");
-  const success = findSection(sections, skillUsed, "success metrics", "success", "goal");
-  const bounds = findSection(sections, skillUsed, "boundaries", "ethics");
-  const critRules = findSection(sections, skillUsed,
-    "critical rules you must follow", "critical rules", "rules", "constraints");
 
   // Include unconsumed sections in skill too (using the skill's own tracking)
   // Skip _intro and sections already in the skill
@@ -363,21 +362,9 @@ ${roleDefinition ? `## Role Definition
 
 ${roleDefinition}
 ` : ""}
-${identity ? `## Identity & Memory
-
-${identity}
-` : ""}
 ${rules ? `## Rules
 
 ${rules}
-` : ""}
-${critRules ? `## Critical Rules
-
-${critRules}
-` : ""}
-${bounds ? `## Boundaries
-
-${bounds}
 ` : ""}
 ${workflow ? `## Workflow
 
@@ -407,9 +394,21 @@ ${communication ? `## Communication Style
 
 ${communication}
 ` : ""}
-${success ? `## Success Metrics
+${identityMemory ? `## Identity & Memory
 
-${success}
+${identityMemory}
+` : ""}
+${successMetrics ? `## Success Metrics
+
+${successMetrics}
+` : ""}
+${criticalRulesFollow ? `## Critical Rules You Must Follow
+
+${criticalRulesFollow}
+` : ""}
+${boundaries ? `## Boundaries
+
+${boundaries}
 ` : ""}
 ${unconsumed ? `## Domain Knowledge
 
