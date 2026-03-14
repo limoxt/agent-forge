@@ -70,19 +70,44 @@ export default function Home() {
               </div>
             </div>
           </div>
+        </div>
+      </header>
 
-          {/* Browse Teams CTA */}
-          <div className="text-center mt-8">
+      {/* Team Bundles Banner */}
+      <section
+        className="relative overflow-hidden"
+        style={{
+          background: "linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-base) 50%, var(--bg-deep) 100%)",
+          borderBottom: "3px solid var(--border)",
+        }}
+      >
+        <div className="scanlines absolute inset-0 opacity-30" />
+        <div className="relative z-10 max-w-4xl mx-auto px-6 py-10 md:py-14">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="text-center md:text-left">
+              <h2
+                className="text-pixel mb-2"
+                style={{ fontSize: "18px", color: "var(--accent)", letterSpacing: "2px" }}
+              >
+                🛡️ NEW: TEAM BUNDLES
+              </h2>
+              <p
+                className="text-terminal"
+                style={{ fontSize: "18px", color: "var(--text-secondary)" }}
+              >
+                Pre-built teams of 5 specialist agents for your workflow. Just $9/team.
+              </p>
+            </div>
             <Link
               href="/teams"
-              className="pixel-btn pixel-btn-primary inline-block"
-              style={{ fontSize: "10px", padding: "12px 28px", textDecoration: "none" }}
+              className="pixel-btn pixel-btn-primary whitespace-nowrap"
+              style={{ fontSize: "12px", padding: "14px 28px", textDecoration: "none" }}
             >
-              🛡️ BROWSE TEAM BUNDLES
+              BROWSE TEAMS →
             </Link>
           </div>
         </div>
-      </header>
+      </section>
 
       {/* Meet Rex Section */}
       <MeetRex />

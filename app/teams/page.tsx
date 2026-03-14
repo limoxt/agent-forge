@@ -3,87 +3,141 @@ import Link from "next/link";
 const bundles = [
   {
     id: "startup-launch",
-    name: "🚀 Startup Launch Team",
-    price: 19,
+    name: "Startup Launch Team",
+    icon: "🚀",
+    price: 9,
     agents: [
-      "Frontend Developer",
-      "Backend Architect",
-      "Growth Hacker",
-      "Rapid Prototyper",
-      "Reality Checker",
+      { name: "Frontend Developer", icon: "⚔️" },
+      { name: "Backend Architect", icon: "🏰" },
+      { name: "Growth Hacker", icon: "📈" },
+      { name: "Rapid Prototyper", icon: "⚡" },
+      { name: "Reality Checker", icon: "🎯" },
     ],
     value: "From idea to launch — ship your first version in one week",
     target: "Indie hackers, founders",
+    description: "Everything you need to go from concept to shipped product. This team handles frontend, backend, growth strategy, rapid iteration, and sanity checks.",
+    deliverables: [
+      "Working MVP in 7 days",
+      "Landing page with conversion optimization",
+      "Backend API architecture",
+      "Growth strategy roadmap",
+      "Product validation report",
+    ],
   },
   {
     id: "social-media-growth",
-    name: "📱 Social Media Growth Team",
-    price: 19,
+    name: "Social Media Growth Team",
+    icon: "📱",
+    price: 9,
     agents: [
-      "Content Creator",
-      "Twitter Engager",
-      "Instagram Curator",
-      "Reddit Community Builder",
-      "Analytics Reporter",
+      { name: "Content Creator", icon: "✍️" },
+      { name: "Twitter Engager", icon: "🐦" },
+      { name: "Instagram Curator", icon: "📸" },
+      { name: "Reddit Community Builder", icon: "🤝" },
+      { name: "Analytics Reporter", icon: "📊" },
     ],
     value: "Multi-platform marketing with automated weekly content",
     target: "Content creators, brand managers",
+    description: "Dominate social media across platforms. Create content, engage communities, and track performance automatically.",
+    deliverables: [
+      "Weekly content calendar",
+      "Platform-optimized posts",
+      "Community engagement strategy",
+      "Performance analytics dashboard",
+      "Growth recommendations",
+    ],
   },
   {
     id: "content-engine",
-    name: "✍️ Content Engine Team",
-    price: 19,
+    name: "Content Engine Team",
+    icon: "✍️",
+    price: 9,
     agents: [
-      "Content Creator",
-      "SEO Specialist",
-      "Technical Writer",
-      "Book Co-Author",
-      "Podcast Strategist",
+      { name: "Content Creator", icon: "✍️" },
+      { name: "SEO Specialist", icon: "🔍" },
+      { name: "Technical Writer", icon: "📝" },
+      { name: "Book Co-Author", icon: "📚" },
+      { name: "Podcast Strategist", icon: "🎙️" },
     ],
     value: "Research, write, and publish high-quality content at scale",
     target: "Bloggers, newsletter authors",
+    description: "Turn your ideas into polished content across all formats. Articles, SEO, podcasts, and even book chapters.",
+    deliverables: [
+      "SEO-optimized blog posts",
+      "Newsletter content",
+      "Podcast episode outlines",
+      "Content repurposing strategy",
+      "Editorial calendar",
+    ],
   },
   {
     id: "dev-tools",
-    name: "🛠️ Dev Tools Team",
-    price: 19,
+    name: "Dev Tools Team",
+    icon: "🛠️",
+    price: 9,
     agents: [
-      "Code Reviewer",
-      "Security Engineer",
-      "DevOps Automator",
-      "Git Workflow Master",
-      "Technical Writer",
+      { name: "Code Reviewer", icon: "👁️" },
+      { name: "Security Engineer", icon: "🔒" },
+      { name: "DevOps Automator", icon: "⚙️" },
+      { name: "Git Workflow Master", icon: "🌿" },
+      { name: "Technical Writer", icon: "📝" },
     ],
     value: "Automate code review, security scans, and documentation",
     target: "Engineering teams, startups",
+    description: "Ship better code faster. Automated reviews, security checks, CI/CD pipelines, and documentation.",
+    deliverables: [
+      "Automated code review reports",
+      "Security vulnerability scans",
+      "CI/CD pipeline setup",
+      "API documentation",
+      "Team workflow guidelines",
+    ],
   },
   {
     id: "data-pipeline",
-    name: "📊 Data Pipeline Team",
-    price: 19,
+    name: "Data Pipeline Team",
+    icon: "📊",
+    price: 9,
     agents: [
-      "Data Engineer",
-      "Backend Architect",
-      "Analytics Reporter",
-      "AI Engineer",
-      "Database Optimizer",
+      { name: "Data Engineer", icon: "🔧" },
+      { name: "Backend Architect", icon: "🏰" },
+      { name: "Analytics Reporter", icon: "📊" },
+      { name: "AI Engineer", icon: "🤖" },
+      { name: "Database Optimizer", icon: "⚡" },
     ],
     value: "Build and maintain robust data infrastructure",
     target: "Data teams, analysts",
+    description: "From raw data to actionable insights. Build ETL pipelines, optimize databases, and create AI-powered analytics.",
+    deliverables: [
+      "Data pipeline architecture",
+      "ETL automation scripts",
+      "Database optimization report",
+      "Analytics dashboard",
+      "AI model integration plan",
+    ],
   },
   {
     id: "research-squad",
-    name: "🔬 Research Squad",
-    price: 19,
+    name: "Research Squad",
+    icon: "🔬",
+    price: 9,
     agents: [
-      "Research Synthesizer",
-      "Trend Researcher",
-      "Competitor Monitor",
-      "Technical Writer",
-      "Proposal Strategist",
+      { name: "Research Synthesizer", icon: "📚" },
+      { name: "Trend Researcher", icon: "📈" },
+      { name: "Competitor Monitor", icon: "🕵️" },
+      { name: "Technical Writer", icon: "📝" },
+      { name: "Proposal Strategist", icon: "💡" },
     ],
     value: "Deep research and competitive intelligence on autopilot",
     target: "Strategists, consultants",
+    description: "Know your market inside and out. Track competitors, spot trends, and synthesize research into actionable insights.",
+    deliverables: [
+      "Competitor analysis report",
+      "Market trend analysis",
+      "Research synthesis documents",
+      "Strategic recommendations",
+      "Proposal templates",
+    ],
   },
 ];
 
@@ -93,120 +147,130 @@ function BundleCard({
   bundle: (typeof bundles)[0];
 }) {
   return (
-    <div
-      className="relative overflow-hidden rounded-lg p-6"
-      style={{
-        backgroundColor: "var(--bg-surface)",
-        border: "3px solid var(--border)",
-        boxShadow: "0 0 20px var(--accent-glow)",
-      }}
+    <Link
+      href={`/teams/${bundle.id}`}
+      className="block group"
     >
-      {/* Corner decorations */}
       <div
-        className="absolute left-0 top-0 h-4 w-4"
-        style={{ background: "var(--accent)" }}
-      />
-      <div
-        className="absolute right-0 top-0 h-4 w-4"
-        style={{ background: "var(--accent)" }}
-      />
-      <div
-        className="absolute bottom-0 left-0 h-4 w-4"
-        style={{ background: "var(--accent)" }}
-      />
-      <div
-        className="absolute bottom-0 right-0 h-4 w-4"
-        style={{ background: "var(--accent)" }}
-      />
-
-      {/* Team name */}
-      <h3
-        className="text-pixel mb-3"
+        className="relative overflow-hidden rounded-lg p-6 h-full transition-all duration-200 group-hover:scale-[1.02]"
         style={{
-          fontSize: "16px",
-          color: "var(--accent)",
-          letterSpacing: "2px",
+          backgroundColor: "var(--bg-surface)",
+          border: "3px solid var(--border)",
+          boxShadow: "0 0 20px var(--accent-glow)",
         }}
       >
-        {bundle.name}
-      </h3>
-
-      {/* Target badge */}
-      <div
-        className="mb-4 inline-block rounded px-3 py-1 text-pixel"
-        style={{
-          backgroundColor: "var(--bg-deep)",
-          border: "1px solid var(--border)",
-          fontSize: "9px",
-          color: "var(--text-muted)",
-        }}
-      >
-        For: {bundle.target}
-      </div>
-
-      {/* Agents list */}
-      <div className="mb-4">
+        {/* Corner decorations */}
         <div
-          className="text-terminal mb-2"
-          style={{ fontSize: "12px", color: "var(--text-secondary)" }}
+          className="absolute left-0 top-0 h-4 w-4"
+          style={{ background: "var(--accent)" }}
+        />
+        <div
+          className="absolute right-0 top-0 h-4 w-4"
+          style={{ background: "var(--accent)" }}
+        />
+        <div
+          className="absolute bottom-0 left-0 h-4 w-4"
+          style={{ background: "var(--accent)" }}
+        />
+        <div
+          className="absolute bottom-0 right-0 h-4 w-4"
+          style={{ background: "var(--accent)" }}
+        />
+
+        {/* Icon */}
+        <div
+          className="text-center mb-4"
+          style={{
+            fontSize: "48px",
+            filter: "drop-shadow(0 0 10px var(--accent-glow))",
+            imageRendering: "pixelated",
+          }}
         >
-          Includes {bundle.agents.length} agents:
+          {bundle.icon}
         </div>
-        <div className="flex flex-wrap gap-2">
-          {bundle.agents.map((agent) => (
-            <span
-              key={agent}
-              className="rounded px-2 py-1 text-terminal"
-              style={{
-                backgroundColor: "var(--bg-deep)",
-                border: "1px solid var(--border)",
-                fontSize: "11px",
-                color: "var(--text-primary)",
-              }}
-            >
-              {agent}
-            </span>
-          ))}
+
+        {/* Team name */}
+        <h3
+          className="text-pixel text-center mb-3"
+          style={{
+            fontSize: "18px",
+            color: "var(--accent)",
+            letterSpacing: "2px",
+          }}
+        >
+          {bundle.name}
+        </h3>
+
+        {/* Target badge */}
+        <div
+          className="text-center mb-4"
+        >
+          <span
+            className="inline-block rounded px-3 py-1 text-terminal"
+            style={{
+              backgroundColor: "var(--bg-deep)",
+              border: "1px solid var(--border)",
+              fontSize: "14px",
+              color: "var(--text-muted)",
+            }}
+          >
+            For: {bundle.target}
+          </span>
         </div>
-      </div>
 
-      {/* Value proposition */}
-      <p
-        className="text-terminal mb-6"
-        style={{
-          fontSize: "14px",
-          color: "var(--text-secondary)",
-          lineHeight: 1.5,
-          fontStyle: "italic",
-        }}
-      >
-        &quot;{bundle.value}&quot;
-      </p>
+        {/* Agents count */}
+        <div
+          className="text-center mb-4"
+        >
+          <span
+            className="text-terminal"
+            style={{ fontSize: "16px", color: "var(--text-secondary)" }}
+          >
+            {bundle.agents.length} specialist agents
+          </span>
+        </div>
 
-      {/* Price and CTA */}
-      <div className="flex items-center justify-between">
-        <div>
+        {/* Value proposition */}
+        <p
+          className="text-terminal text-center mb-6"
+          style={{
+            fontSize: "16px",
+            color: "var(--text-secondary)",
+            lineHeight: 1.5,
+          }}
+        >
+          {bundle.value}
+        </p>
+
+        {/* Price and CTA */}
+        <div className="text-center">
           <span
             className="text-pixel"
-            style={{ fontSize: "20px", color: "var(--accent)" }}
+            style={{ fontSize: "28px", color: "var(--accent)" }}
           >
             ${bundle.price}
           </span>
           <span
             className="text-terminal ml-1"
-            style={{ fontSize: "12px", color: "var(--text-muted)" }}
+            style={{ fontSize: "14px", color: "var(--text-muted)" }}
           >
             /team
           </span>
         </div>
-        <button
-          className="pixel-btn pixel-btn-primary"
-          style={{ fontSize: "9px", padding: "10px 20px" }}
+
+        {/* Click hint */}
+        <div
+          className="text-center mt-4 opacity-0 group-hover:opacity-100 transition-opacity"
         >
-          BUY NOW
-        </button>
+          <span
+            className="text-terminal"
+            style={{ fontSize: "12px", color: "var(--accent)" }}
+          >
+            Click to view details →
+          </span>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 }
 
@@ -273,7 +337,7 @@ export default function TeamsPage() {
 
           {/* Tagline */}
           <p
-            className="text-terminal text-center"
+            className="text-terminal text-center mb-4"
             style={{
               fontSize: "clamp(18px, 2.5vw, 26px)",
               color: "var(--text-secondary)",
@@ -281,6 +345,17 @@ export default function TeamsPage() {
             }}
           >
             One-click teams for your most important workflows
+          </p>
+
+          {/* Value prop */}
+          <p
+            className="text-terminal text-center"
+            style={{
+              fontSize: "18px",
+              color: "var(--accent)",
+            }}
+          >
+            Each team = 5 specialist agents working together for just $9
           </p>
 
           {/* ASCII border */}
@@ -307,26 +382,65 @@ export default function TeamsPage() {
 
         {/* Info section */}
         <div
-          className="mt-12 rounded-lg p-6 text-center"
+          className="mt-12 rounded-lg p-8"
           style={{
             backgroundColor: "var(--bg-surface)",
-            border: "2px solid var(--border)",
+            border: "3px solid var(--border)",
           }}
         >
           <h3
-            className="text-pixel mb-3"
-            style={{ fontSize: "14px", color: "var(--accent)" }}
+            className="text-pixel text-center mb-6"
+            style={{ fontSize: "20px", color: "var(--accent)", letterSpacing: "2px" }}
           >
             HOW IT WORKS
           </h3>
-          <p
-            className="text-terminal mx-auto max-w-2xl"
-            style={{ fontSize: "16px", color: "var(--text-secondary)", lineHeight: 1.6 }}
-          >
-            Purchase a team bundle to get instant access to a curated set of specialist
-            agents. Each team is designed to work together on a specific workflow —
-            from product launches to content creation.
-          </p>
+          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            <div className="text-center">
+              <div className="text-3xl mb-2">1️⃣</div>
+              <h4
+                className="text-pixel mb-2"
+                style={{ fontSize: "14px", color: "var(--text-primary)" }}
+              >
+                CHOOSE A TEAM
+              </h4>
+              <p
+                className="text-terminal"
+                style={{ fontSize: "16px", color: "var(--text-secondary)" }}
+              >
+                Pick a pre-built team for your workflow
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl mb-2">2️⃣</div>
+              <h4
+                className="text-pixel mb-2"
+                style={{ fontSize: "14px", color: "var(--text-primary)" }}
+              >
+                DEPLOY TO OPENCLAW
+              </h4>
+              <p
+                className="text-terminal"
+                style={{ fontSize: "16px", color: "var(--text-secondary)" }}
+              >
+                One-click install all agents
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl mb-2">3️⃣</div>
+              <h4
+                className="text-pixel mb-2"
+                style={{ fontSize: "14px", color: "var(--text-primary)" }}
+              >
+                GET WORK DONE
+              </h4>
+              <p
+                className="text-terminal"
+                style={{ fontSize: "16px", color: "var(--text-secondary)" }}
+              >
+                Your AI team is ready to execute
+              </p>
+            </div>
+          </div>
         </div>
       </main>
 
