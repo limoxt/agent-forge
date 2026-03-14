@@ -74,9 +74,6 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Email Signup */}
-      <EmailSignup />
-
       {/* Team Bundles Banner */}
       <section
         className="relative overflow-hidden"
