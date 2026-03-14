@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import BuyButton from "@/components/BuyButton";
 
 const bundles = [
   {
@@ -186,8 +187,10 @@ export async function generateStaticParams() {
 
 export default function TeamDetailPage({
   params,
+  searchParams,
 }: {
   params: { id: string };
+  searchParams: { success?: string; canceled?: string };
 }) {
   const bundle = bundles.find((b) => b.id === params.id);
   
@@ -217,7 +220,7 @@ export default function TeamDetailPage({
               href="/teams"
               className="text-terminal"
               style={{
-                fontSize: "14px",
+                fontSize: "16px",
                 color: "var(--text-muted)",
                 textDecoration: "underline",
               }}
@@ -273,7 +276,7 @@ export default function TeamDetailPage({
               style={{
                 backgroundColor: "var(--bg-surface)",
                 border: "2px solid var(--border)",
-                fontSize: "16px",
+                fontSize: "18px",
                 color: "var(--text-secondary)",
               }}
             >
@@ -285,9 +288,31 @@ export default function TeamDetailPage({
 
       {/* Main content */}
       <main className="max-w-4xl mx-auto px-6 py-10">
+        {/* Success/Canceled message */}
+        {searchParams.success && (
+          <div
+            className="rounded-lg p-6 mb-8 text-center"
+            style={{ backgroundColor: "#064e3b", border: "2px solid #10b981" }}
+          >
+            <p className="text-terminal" style={{ fontSize: "18px", color: "#6ee7b7" }}>
+              🎉 Payment successful! Your team bundle is being prepared...
+            </p>
+          </div>
+        )}
+        {searchParams.canceled && (
+          <div
+            className="rounded-lg p-6 mb-8 text-center"
+            style={{ backgroundColor: "#7f1d1d", border: "2px solid #ef4444" }}
+          >
+            <p className="text-terminal" style={{ fontSize: "18px", color: "#fca5a5" }}>
+              Payment canceled. Feel free to try again when you&apos;re ready.
+            </p>
+          </div>
+        )}
+
         {/* Description */}
         <div
-          className="rounded-lg p-6 mb-8"
+          className="rounded-lg p-8 mb-8"
           style={{
             backgroundColor: "var(--bg-surface)",
             border: "2px solid var(--border)",
@@ -296,9 +321,9 @@ export default function TeamDetailPage({
           <p
             className="text-terminal text-center"
             style={{
-              fontSize: "18px",
+              fontSize: "20px",
               color: "var(--text-secondary)",
-              lineHeight: 1.6,
+              lineHeight: 1.7,
             }}
           >
             {bundle.description}
@@ -309,7 +334,7 @@ export default function TeamDetailPage({
         <div className="mb-8">
           <h2
             className="text-pixel mb-6 text-center"
-            style={{ fontSize: "18px", color: "var(--accent)", letterSpacing: "2px" }}
+            style={{ fontSize: "20px", color: "var(--accent)", letterSpacing: "2px" }}
           >
             INCLUDED AGENTS ({bundle.agents.length})
           </h2>
@@ -317,23 +342,23 @@ export default function TeamDetailPage({
             {bundle.agents.map((agent) => (
               <div
                 key={agent.name}
-                className="rounded-lg p-4 flex items-center gap-4"
+                className="rounded-lg p-5 flex items-center gap-4"
                 style={{
                   backgroundColor: "var(--bg-surface)",
                   border: "2px solid var(--border)",
                 }}
               >
-                <span style={{ fontSize: "32px" }}>{agent.icon}</span>
+                <span style={{ fontSize: "36px" }}>{agent.icon}</span>
                 <div>
                   <h3
                     className="text-pixel"
-                    style={{ fontSize: "14px", color: "var(--text-primary)" }}
+                    style={{ fontSize: "16px", color: "var(--text-primary)" }}
                   >
                     {agent.name}
                   </h3>
                   <p
                     className="text-terminal"
-                    style={{ fontSize: "14px", color: "var(--text-secondary)" }}
+                    style={{ fontSize: "16px", color: "var(--text-secondary)" }}
                   >
                     {agent.desc}
                   </p>
@@ -347,25 +372,25 @@ export default function TeamDetailPage({
         <div className="mb-8">
           <h2
             className="text-pixel mb-6 text-center"
-            style={{ fontSize: "18px", color: "var(--accent)", letterSpacing: "2px" }}
+            style={{ fontSize: "20px", color: "var(--accent)", letterSpacing: "2px" }}
           >
             WHAT YOU&apos;LL GET
           </h2>
           <div
-            className="rounded-lg p-6"
+            className="rounded-lg p-8"
             style={{
               backgroundColor: "var(--bg-surface)",
               border: "2px solid var(--border)",
             }}
           >
-            <ul className="space-y-3">
+            <ul className="space-y-4">
               {bundle.deliverables.map((item, i) => (
                 <li
                   key={i}
-                  className="flex items-center gap-3 text-terminal"
-                  style={{ fontSize: "16px", color: "var(--text-primary)" }}
+                  className="flex items-center gap-4 text-terminal"
+                  style={{ fontSize: "18px", color: "var(--text-primary)" }}
                 >
-                  <span style={{ color: "var(--accent)" }}>✓</span>
+                  <span style={{ color: "var(--accent)", fontSize: "20px" }}>✓</span>
                   {item}
                 </li>
               ))}
@@ -377,7 +402,7 @@ export default function TeamDetailPage({
         <div className="mb-8">
           <h2
             className="text-pixel mb-6 text-center"
-            style={{ fontSize: "18px", color: "var(--accent)", letterSpacing: "2px" }}
+            style={{ fontSize: "20px", color: "var(--accent)", letterSpacing: "2px" }}
           >
             USE CASES
           </h2>
@@ -385,7 +410,7 @@ export default function TeamDetailPage({
             {bundle.useCases.map((useCase, i) => (
               <div
                 key={i}
-                className="rounded-lg p-4 text-center"
+                className="rounded-lg p-5 text-center"
                 style={{
                   backgroundColor: "var(--bg-surface)",
                   border: "2px solid var(--border)",
@@ -393,7 +418,7 @@ export default function TeamDetailPage({
               >
                 <span
                   className="text-terminal"
-                  style={{ fontSize: "16px", color: "var(--text-secondary)" }}
+                  style={{ fontSize: "18px", color: "var(--text-secondary)" }}
                 >
                   {useCase}
                 </span>
@@ -403,20 +428,7 @@ export default function TeamDetailPage({
         </div>
 
         {/* CTA */}
-        <div className="text-center py-8">
-          <button
-            className="pixel-btn pixel-btn-primary"
-            style={{ fontSize: "14px", padding: "16px 48px" }}
-          >
-            BUY NOW — ${bundle.price}
-          </button>
-          <p
-            className="text-terminal mt-4"
-            style={{ fontSize: "14px", color: "var(--text-muted)" }}
-          >
-            Instant delivery • One-time payment • Lifetime updates
-          </p>
-        </div>
+        <BuyButton teamId={bundle.id} price={bundle.price} />
       </main>
     </div>
   );

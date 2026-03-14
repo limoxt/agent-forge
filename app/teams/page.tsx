@@ -152,7 +152,7 @@ function BundleCard({
       className="block group"
     >
       <div
-        className="relative overflow-hidden rounded-lg p-6 h-full transition-all duration-200 group-hover:scale-[1.02]"
+        className="relative overflow-hidden rounded-lg p-8 h-full transition-all duration-200 group-hover:scale-[1.02]"
         style={{
           backgroundColor: "var(--bg-surface)",
           border: "3px solid var(--border)",
@@ -181,7 +181,7 @@ function BundleCard({
         <div
           className="text-center mb-4"
           style={{
-            fontSize: "48px",
+            fontSize: "56px",
             filter: "drop-shadow(0 0 10px var(--accent-glow))",
             imageRendering: "pixelated",
           }}
@@ -191,7 +191,7 @@ function BundleCard({
 
         {/* Team name */}
         <h3
-          className="text-pixel text-center mb-3"
+          className="text-pixel text-center mb-4"
           style={{
             fontSize: "18px",
             color: "var(--accent)",
@@ -206,11 +206,11 @@ function BundleCard({
           className="text-center mb-4"
         >
           <span
-            className="inline-block rounded px-3 py-1 text-terminal"
+            className="inline-block rounded px-4 py-2 text-terminal"
             style={{
               backgroundColor: "var(--bg-deep)",
               border: "1px solid var(--border)",
-              fontSize: "14px",
+              fontSize: "16px",
               color: "var(--text-muted)",
             }}
           >
@@ -224,7 +224,7 @@ function BundleCard({
         >
           <span
             className="text-terminal"
-            style={{ fontSize: "16px", color: "var(--text-secondary)" }}
+            style={{ fontSize: "18px", color: "var(--text-secondary)" }}
           >
             {bundle.agents.length} specialist agents
           </span>
@@ -234,7 +234,7 @@ function BundleCard({
         <p
           className="text-terminal text-center mb-6"
           style={{
-            fontSize: "16px",
+            fontSize: "18px",
             color: "var(--text-secondary)",
             lineHeight: 1.5,
           }}
@@ -242,17 +242,17 @@ function BundleCard({
           {bundle.value}
         </p>
 
-        {/* Price and CTA */}
+        {/* Price */}
         <div className="text-center">
           <span
             className="text-pixel"
-            style={{ fontSize: "28px", color: "var(--accent)" }}
+            style={{ fontSize: "32px", color: "var(--accent)" }}
           >
             ${bundle.price}
           </span>
           <span
             className="text-terminal ml-1"
-            style={{ fontSize: "14px", color: "var(--text-muted)" }}
+            style={{ fontSize: "16px", color: "var(--text-muted)" }}
           >
             /team
           </span>
@@ -264,7 +264,7 @@ function BundleCard({
         >
           <span
             className="text-terminal"
-            style={{ fontSize: "12px", color: "var(--accent)" }}
+            style={{ fontSize: "14px", color: "var(--accent)" }}
           >
             Click to view details →
           </span>
@@ -312,7 +312,7 @@ export default function TeamsPage() {
               href="/"
               className="text-terminal"
               style={{
-                fontSize: "14px",
+                fontSize: "16px",
                 color: "var(--text-muted)",
                 textDecoration: "underline",
               }}
@@ -325,7 +325,7 @@ export default function TeamsPage() {
           <h1
             className="text-pixel text-center mb-4"
             style={{
-              fontSize: "clamp(20px, 4vw, 36px)",
+              fontSize: "clamp(24px, 4vw, 40px)",
               color: "var(--accent)",
               textShadow: "0 0 28px var(--accent-glow), 4px 4px 0px #3a2a00",
               letterSpacing: "4px",
@@ -339,7 +339,7 @@ export default function TeamsPage() {
           <p
             className="text-terminal text-center mb-4"
             style={{
-              fontSize: "clamp(18px, 2.5vw, 26px)",
+              fontSize: "clamp(20px, 2.5vw, 28px)",
               color: "var(--text-secondary)",
               letterSpacing: "2px",
             }}
@@ -351,7 +351,7 @@ export default function TeamsPage() {
           <p
             className="text-terminal text-center"
             style={{
-              fontSize: "18px",
+              fontSize: "20px",
               color: "var(--accent)",
             }}
           >
@@ -389,53 +389,53 @@ export default function TeamsPage() {
           }}
         >
           <h3
-            className="text-pixel text-center mb-6"
-            style={{ fontSize: "20px", color: "var(--accent)", letterSpacing: "2px" }}
+            className="text-pixel text-center mb-8"
+            style={{ fontSize: "24px", color: "var(--accent)", letterSpacing: "2px" }}
           >
             HOW IT WORKS
           </h3>
-          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             <div className="text-center">
-              <div className="text-3xl mb-2">1️⃣</div>
+              <div className="text-4xl mb-3">1️⃣</div>
               <h4
-                className="text-pixel mb-2"
-                style={{ fontSize: "14px", color: "var(--text-primary)" }}
+                className="text-pixel mb-3"
+                style={{ fontSize: "16px", color: "var(--text-primary)" }}
               >
                 CHOOSE A TEAM
               </h4>
               <p
                 className="text-terminal"
-                style={{ fontSize: "16px", color: "var(--text-secondary)" }}
+                style={{ fontSize: "18px", color: "var(--text-secondary)", lineHeight: 1.5 }}
               >
                 Pick a pre-built team for your workflow
               </p>
             </div>
             <div className="text-center">
-              <div className="text-3xl mb-2">2️⃣</div>
+              <div className="text-4xl mb-3">2️⃣</div>
               <h4
-                className="text-pixel mb-2"
-                style={{ fontSize: "14px", color: "var(--text-primary)" }}
+                className="text-pixel mb-3"
+                style={{ fontSize: "16px", color: "var(--text-primary)" }}
               >
                 DEPLOY TO OPENCLAW
               </h4>
               <p
                 className="text-terminal"
-                style={{ fontSize: "16px", color: "var(--text-secondary)" }}
+                style={{ fontSize: "18px", color: "var(--text-secondary)", lineHeight: 1.5 }}
               >
                 One-click install all agents
               </p>
             </div>
             <div className="text-center">
-              <div className="text-3xl mb-2">3️⃣</div>
+              <div className="text-4xl mb-3">3️⃣</div>
               <h4
-                className="text-pixel mb-2"
-                style={{ fontSize: "14px", color: "var(--text-primary)" }}
+                className="text-pixel mb-3"
+                style={{ fontSize: "16px", color: "var(--text-primary)" }}
               >
                 GET WORK DONE
               </h4>
               <p
                 className="text-terminal"
-                style={{ fontSize: "16px", color: "var(--text-secondary)" }}
+                style={{ fontSize: "18px", color: "var(--text-secondary)", lineHeight: 1.5 }}
               >
                 Your AI team is ready to execute
               </p>

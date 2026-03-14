@@ -82,26 +82,27 @@ export default function Home() {
         }}
       >
         <div className="scanlines absolute inset-0 opacity-30" />
-        <div className="relative z-10 max-w-4xl mx-auto px-6 py-10 md:py-14">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="relative z-10 max-w-4xl mx-auto px-6 py-12 md:py-16">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="text-center md:text-left">
               <h2
-                className="text-pixel mb-2"
-                style={{ fontSize: "18px", color: "var(--accent)", letterSpacing: "2px" }}
+                className="text-pixel mb-3"
+                style={{ fontSize: "22px", color: "var(--accent)", letterSpacing: "2px" }}
               >
                 🛡️ NEW: TEAM BUNDLES
               </h2>
               <p
                 className="text-terminal"
-                style={{ fontSize: "18px", color: "var(--text-secondary)" }}
+                style={{ fontSize: "20px", color: "var(--text-secondary)", lineHeight: 1.6 }}
               >
-                Pre-built teams of 5 specialist agents for your workflow. Just $9/team.
+                Pre-built teams of 5 specialist agents for your workflow.<br />
+                <span style={{ color: "var(--accent)" }}>Just $9/team.</span>
               </p>
             </div>
             <Link
               href="/teams"
               className="pixel-btn pixel-btn-primary whitespace-nowrap"
-              style={{ fontSize: "12px", padding: "14px 28px", textDecoration: "none" }}
+              style={{ fontSize: "14px", padding: "16px 32px", textDecoration: "none" }}
             >
               BROWSE TEAMS →
             </Link>
