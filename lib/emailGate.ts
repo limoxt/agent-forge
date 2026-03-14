@@ -36,7 +36,17 @@ export async function submitLead(
       }),
     });
 
-    return response.ok;
+    if (response.ok) {
+      // GA4 事件追踪
+      if (typeof window !== "undefined" && (window as any).gtag) {
+        (window as any).gtag("event", "email_signup", {
+          method: "agentforge_download"
+        });
+      }
+      return true;
+    }
+
+    return false;
   } catch {
     return false;
   }
