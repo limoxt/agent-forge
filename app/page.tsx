@@ -1,11 +1,9 @@
-import ThemeToggle from "@/components/ThemeToggle";
 import AgentGrid from "@/components/AgentGrid";
 import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "var(--bg-deep)" }}>
-      <ThemeToggle />
+    <div style={{ backgroundColor: "var(--bg-deep)" }}>
       {/* Hero */}
       <header className="relative overflow-hidden" style={{ borderBottom: "3px solid var(--border)", background: "linear-gradient(180deg, var(--bg-base) 0%, var(--bg-deep) 100%)" }}>
         {/* Scanlines overlay */}
@@ -109,37 +107,6 @@ export default function Home() {
       <main className="max-w-7xl mx-auto px-3 sm:px-5 md:px-8 py-8 sm:py-10 md:py-14">
         <AgentGrid />
       </main>
-
-      {/* Footer */}
-      <footer style={{ background: "var(--bg-surface)" }}>
-        <div className="pixel-divider" />
-        <div className="px-6 py-8 text-center">
-          <div className="text-pixel" style={{ fontSize: "8px", color: "var(--text-muted)", letterSpacing: "2px" }}>
-            ░░ AGENT FORGE © 2026 — POWERED BY AI ░░
-          </div>
-          <div className="text-terminal mt-3" style={{ fontSize: "16px", color: "var(--text-muted)" }}>
-            Agents sourced from{" "}
-            <a
-              href="https://github.com/msitarzewski/agency-agents"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ color: "var(--accent-dim)", textDecoration: "underline" }}
-            >
-              agency-agents
-            </a>
-            {" "}(MIT License) — adapted for OpenClaw
-          </div>
-          <a
-            href="https://buymeacoffee.com/limoxt"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="pixel-btn pixel-btn-secondary inline-block mt-5"
-            style={{ fontSize: "9px", padding: "10px 20px", textDecoration: "none" }}
-          >
-            ☕ BUY ME A COFFEE
-          </a>
-        </div>
-      </footer>
     </div>
   );
 }

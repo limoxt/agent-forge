@@ -61,8 +61,8 @@ export default function ApplyPage() {
   if (status === "success") {
     return (
       <div
-        className="min-h-screen flex items-center justify-center"
-        style={{ backgroundColor: "var(--bg-deep)" }}
+        className="flex items-center justify-center"
+        style={{ backgroundColor: "var(--bg-deep)", minHeight: "60vh" }}
       >
         <div className="text-center px-6">
           <h1
@@ -94,7 +94,7 @@ export default function ApplyPage() {
   }
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "var(--bg-deep)" }}>
+    <div style={{ backgroundColor: "var(--bg-deep)" }}>
       {/* Header */}
       <header
         className="relative overflow-hidden"
@@ -275,22 +275,6 @@ export default function ApplyPage() {
         </form>
       </main>
 
-      {/* Footer */}
-      <footer style={{ background: "var(--bg-surface)" }}>
-        <div className="pixel-divider" />
-        <div className="px-6 py-8 text-center">
-          <div
-            className="text-pixel"
-            style={{
-              fontSize: "8px",
-              color: "var(--text-muted)",
-              letterSpacing: "2px",
-            }}
-          >
-            ░░ AGENT FORGE © 2026 — POWERED BY AI ░░
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

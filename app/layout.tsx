@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import "./globals.css";
 
 const title = "AgentForge — Your AI team, on-demand.";
@@ -51,7 +53,11 @@ export default function RootLayout({
       </head>
       <body className="antialiased" style={{ background: "var(--bg-deep)", color: "var(--text-primary)" }}>
         <script dangerouslySetInnerHTML={{ __html: `(function(){var t=localStorage.getItem("theme");if(t)document.documentElement.className=t})()` }} />
-        {children}
+        <Navbar />
+        <div style={{ minHeight: "100vh" }}>
+          {children}
+        </div>
+        <Footer />
         {/* GA - load after page is interactive */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-FCZW0W0SZE"

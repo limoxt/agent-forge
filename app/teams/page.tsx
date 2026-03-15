@@ -277,7 +277,6 @@ function BundleCard({
 export default function TeamsPage() {
   return (
     <div
-      className="min-h-screen"
       style={{ backgroundColor: "var(--bg-deep)" }}
     >
       {/* Hero */}
@@ -444,22 +443,6 @@ export default function TeamsPage() {
         </div>
       </main>
 
-      {/* Footer */}
-      <footer style={{ background: "var(--bg-surface)" }}>
-        <div className="pixel-divider" />
-        <div className="px-6 py-8 text-center">
-          <div
-            className="text-pixel"
-            style={{
-              fontSize: "8px",
-              color: "var(--text-muted)",
-              letterSpacing: "2px",
-            }}
-          >
-            ░░ AGENT FORGE © 2026 — POWERED BY AI ░░
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

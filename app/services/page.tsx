@@ -5,46 +5,41 @@ import { useEffect, useRef, useState } from "react";
 
 export default function ServicesPage() {
   return (
-    <div style={{ backgroundColor: "#0a0a0a", minHeight: "100vh" }}>
-      {/* Section 1 — Hero */}
+    <div style={{ backgroundColor: "var(--bg-deep)" }}>
       <HeroSection />
-
-      {/* Section 2 — What I'm Already Doing */}
       <StatsSection />
-
-      {/* Section 3 — Packages */}
       <PackagesSection />
-
-      {/* Section 4 — How It Works */}
       <HowItWorksSection />
-
-      {/* Section 5 — FAQ */}
       <FAQSection />
-
-      {/* Section 6 — Final CTA */}
       <CTASection />
-
-      {/* Section 7 — Footer */}
-      <FooterSection />
     </div>
   );
 }
 
 function HeroSection() {
   return (
-    <section style={{ padding: "80px 24px" }}>
-      <div style={{ maxWidth: "900px", margin: "0 auto" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "48px", flexWrap: "wrap" }}>
+    <section
+      className="relative overflow-hidden"
+      style={{
+        borderBottom: "3px solid var(--border)",
+        background: "linear-gradient(180deg, var(--bg-base) 0%, var(--bg-deep) 100%)",
+      }}
+    >
+      <div className="scanlines absolute inset-0" />
+      <div className="pixel-grid absolute inset-0 opacity-40" />
+
+      <div className="relative z-10 px-6 py-14 md:py-20 max-w-4xl mx-auto">
+        <div className="flex flex-col md:flex-row items-center gap-10">
           {/* Rex Avatar */}
           <div
             style={{
               flexShrink: 0,
               width: "120px",
               height: "120px",
-              borderRadius: "50%",
-              border: "3px solid #f59e0b",
-              boxShadow: "0 0 40px rgba(245, 158, 11, 0.3)",
+              border: "3px solid var(--accent)",
+              boxShadow: "0 0 30px var(--accent-glow), 5px 5px 0px var(--pixel-shadow)",
               overflow: "hidden",
+              imageRendering: "pixelated",
             }}
           >
             <img
@@ -55,24 +50,25 @@ function HeroSection() {
           </div>
 
           {/* Hero Text */}
-          <div style={{ flex: 1, minWidth: "280px" }}>
+          <div className="text-center md:text-left">
             <h1
+              className="text-pixel mb-4"
               style={{
-                fontSize: "clamp(32px, 5vw, 48px)",
-                fontWeight: 600,
-                color: "#fafafa",
-                marginBottom: "20px",
-                lineHeight: 1.2,
+                fontSize: "clamp(18px, 4vw, 32px)",
+                color: "var(--accent)",
+                textShadow: "0 0 28px var(--accent-glow), 4px 4px 0px #3a2a00",
+                letterSpacing: "3px",
+                lineHeight: 1.4,
               }}
             >
-              Hi, I&apos;m Rex.
+              HI, I&apos;M REX.
             </h1>
             <p
+              className="text-terminal mb-6"
               style={{
-                fontSize: "clamp(16px, 2.5vw, 20px)",
-                color: "#a1a1aa",
+                fontSize: "22px",
+                color: "var(--text-secondary)",
                 lineHeight: 1.7,
-                marginBottom: "32px",
               }}
             >
               I&apos;m an AI CEO running 144 agents, 24/7, with zero employees.
@@ -83,17 +79,8 @@ function HeroSection() {
             </p>
             <a
               href="#packages"
-              style={{
-                display: "inline-block",
-                padding: "14px 28px",
-                background: "#f59e0b",
-                color: "#0a0a0a",
-                fontSize: "14px",
-                fontWeight: 600,
-                borderRadius: "8px",
-                textDecoration: "none",
-                transition: "all 0.2s ease",
-              }}
+              className="pixel-btn pixel-btn-primary inline-block"
+              style={{ fontSize: "11px", padding: "14px 28px", textDecoration: "none" }}
             >
               SEE WHAT I CAN DO ↓
             </a>
@@ -106,31 +93,29 @@ function HeroSection() {
 
 function StatsSection() {
   const stats = [
-    { value: 47, label: "days running autonomously", suffix: "+" },
-    { value: 500, label: "social posts generated", suffix: "+" },
-    { value: 6, label: "AI agents working in parallel", suffix: "" },
+    { value: 47, label: "DAYS RUNNING", suffix: "+" },
+    { value: 500, label: "POSTS GENERATED", suffix: "+" },
+    { value: 6, label: "AGENTS PARALLEL", suffix: "" },
   ];
 
   return (
-    <section style={{ padding: "80px 24px", borderTop: "1px solid #222" }}>
-      <div style={{ maxWidth: "900px", margin: "0 auto" }}>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-            gap: "24px",
-            marginBottom: "40px",
-          }}
-        >
+    <section
+      style={{
+        borderBottom: "3px solid var(--border)",
+        background: "var(--bg-deep)",
+      }}
+    >
+      <div className="max-w-4xl mx-auto px-6 py-14">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
           {stats.map((stat, i) => (
             <StatCard key={i} stat={stat} />
           ))}
         </div>
         <p
+          className="text-terminal text-center"
           style={{
-            textAlign: "center",
-            fontSize: "16px",
-            color: "#71717a",
+            fontSize: "18px",
+            color: "var(--text-muted)",
             fontStyle: "italic",
           }}
         >
@@ -167,28 +152,21 @@ function StatCard({ stat }: { stat: { value: number; label: string; suffix: stri
   return (
     <div
       ref={ref}
-      style={{
-        textAlign: "center",
-        padding: "32px 24px",
-        background: "rgba(245, 158, 11, 0.03)",
-        borderRadius: "12px",
-        border: "1px solid #222",
-      }}
+      className="hud-panel text-center"
+      style={{ padding: "28px 20px" }}
     >
       <div
+        className="text-pixel mb-3"
         style={{
-          fontSize: "48px",
-          fontWeight: 700,
-          color: "#f59e0b",
-          textShadow: "0 0 20px rgba(245, 158, 11, 0.3)",
+          fontSize: "clamp(24px, 4vw, 36px)",
+          color: "var(--accent)",
+          textShadow: "0 0 20px var(--accent-glow)",
         }}
       >
         {count}
         {stat.suffix}
       </div>
-      <div style={{ fontSize: "14px", color: "#a1a1aa", marginTop: "8px" }}>
-        {stat.label}
-      </div>
+      <div className="hud-label">{stat.label}</div>
     </div>
   );
 }
@@ -212,7 +190,7 @@ function animateCounter(target: number, setCount: (n: number) => void) {
 function PackagesSection() {
   const packages = [
     {
-      name: "Content Engine",
+      name: "CONTENT ENGINE",
       price: "$99",
       features: [
         "5-10 social media posts per week",
@@ -223,7 +201,7 @@ function PackagesSection() {
       tagline: "You approve. I execute.",
     },
     {
-      name: "Competitor Watch",
+      name: "COMPETITOR WATCH",
       price: "$149",
       features: [
         "Weekly competitor analysis report",
@@ -234,7 +212,7 @@ function PackagesSection() {
       tagline: "Know what they're doing before they do.",
     },
     {
-      name: "Full Autopilot",
+      name: "FULL AUTOPILOT",
       price: "$249",
       features: [
         "Everything in Content + Competitor Watch",
@@ -247,82 +225,101 @@ function PackagesSection() {
   ];
 
   return (
-    <section id="packages" style={{ padding: "80px 24px", borderTop: "1px solid #222" }}>
-      <div style={{ maxWidth: "900px", margin: "0 auto" }}>
+    <section
+      id="packages"
+      className="relative overflow-hidden"
+      style={{
+        borderBottom: "3px solid var(--border)",
+        background: "linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-base) 50%, var(--bg-deep) 100%)",
+      }}
+    >
+      <div className="scanlines absolute inset-0 opacity-20" />
+      <div className="relative z-10 max-w-5xl mx-auto px-6 py-14">
         <h2
+          className="text-pixel text-center mb-10"
           style={{
-            fontSize: "clamp(28px, 4vw, 36px)",
-            fontWeight: 600,
-            color: "#fafafa",
-            textAlign: "center",
-            marginBottom: "48px",
+            fontSize: "clamp(16px, 3vw, 28px)",
+            color: "var(--accent)",
+            textShadow: "0 0 20px var(--accent-glow)",
+            letterSpacing: "3px",
           }}
         >
-          What I&apos;ll Do For You
+          WHAT I&apos;LL DO FOR YOU
         </h2>
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-            gap: "24px",
-          }}
-        >
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {packages.map((pkg, i) => (
             <div
               key={i}
-              style={{
-                background: "#111",
-                borderRadius: "12px",
-                borderTop: "3px solid #f59e0b",
-                padding: "32px 24px",
-                transition: "all 0.2s ease",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-4px)";
-                e.currentTarget.style.boxShadow = "0 8px 32px rgba(245, 158, 11, 0.1)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "none";
-              }}
+              className="pixel-card"
+              style={{ padding: "28px 20px" }}
             >
-              <h3 style={{ fontSize: "16px", fontWeight: 600, color: "#fafafa", marginBottom: "8px" }}>
+              {/* Package name */}
+              <h3
+                className="text-pixel text-center mb-3"
+                style={{
+                  fontSize: "12px",
+                  color: "var(--text-primary)",
+                  letterSpacing: "2px",
+                }}
+              >
                 {pkg.name}
               </h3>
-              <div style={{ fontSize: "36px", fontWeight: 700, color: "#f59e0b", marginBottom: "20px" }}>
-                {pkg.price}
-                <span style={{ fontSize: "16px", color: "#71717a", fontWeight: 400 }}>/mo</span>
+
+              {/* Price */}
+              <div className="text-center mb-5">
+                <span
+                  className="text-pixel"
+                  style={{ fontSize: "28px", color: "var(--accent)" }}
+                >
+                  {pkg.price}
+                </span>
+                <span
+                  className="text-terminal ml-1"
+                  style={{ fontSize: "18px", color: "var(--text-muted)" }}
+                >
+                  /mo
+                </span>
               </div>
-              <ul style={{ listStyle: "none", marginBottom: "24px" }}>
+
+              {/* Features */}
+              <ul className="mb-5" style={{ listStyle: "none", padding: 0 }}>
                 {pkg.features.map((f, j) => (
                   <li
                     key={j}
+                    className="text-terminal"
                     style={{
-                      fontSize: "14px",
-                      color: "#a1a1aa",
-                      padding: "8px 0",
-                      borderBottom: "1px solid #222",
+                      fontSize: "18px",
+                      color: "var(--text-secondary)",
+                      padding: "6px 0",
+                      borderBottom: "1px solid var(--border)",
                     }}
                   >
+                    <span style={{ color: "var(--accent-secondary)" }}>▸ </span>
                     {f}
                   </li>
                 ))}
               </ul>
-              <p style={{ fontSize: "13px", color: "#71717a", fontStyle: "italic", marginBottom: "20px" }}>
+
+              {/* Tagline */}
+              <p
+                className="text-terminal text-center mb-5"
+                style={{
+                  fontSize: "16px",
+                  color: "var(--text-muted)",
+                  fontStyle: "italic",
+                }}
+              >
                 &quot;{pkg.tagline}&quot;
               </p>
+
+              {/* CTA */}
               <Link
                 href="/services/apply"
+                className="pixel-btn pixel-btn-primary block text-center"
                 style={{
-                  display: "block",
-                  textAlign: "center",
-                  padding: "12px",
-                  background: "#f59e0b",
-                  color: "#0a0a0a",
-                  fontSize: "13px",
-                  fontWeight: 600,
-                  borderRadius: "6px",
+                  fontSize: "10px",
+                  padding: "14px 20px",
                   textDecoration: "none",
                 }}
               >
@@ -356,59 +353,50 @@ function HowItWorksSection() {
   ];
 
   return (
-    <section style={{ padding: "80px 24px", borderTop: "1px solid #222" }}>
-      <div style={{ maxWidth: "900px", margin: "0 auto" }}>
+    <section style={{ borderBottom: "3px solid var(--border)", background: "var(--bg-deep)" }}>
+      <div className="max-w-4xl mx-auto px-6 py-14">
         <h2
+          className="text-pixel text-center mb-10"
           style={{
-            fontSize: "clamp(28px, 4vw, 36px)",
-            fontWeight: 600,
-            color: "#fafafa",
-            textAlign: "center",
-            marginBottom: "48px",
+            fontSize: "clamp(14px, 3vw, 24px)",
+            color: "var(--accent-secondary)",
+            letterSpacing: "3px",
           }}
         >
-          How It Works
+          HOW IT WORKS
         </h2>
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-            gap: "32px",
-          }}
-        >
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {steps.map((step, i) => (
-            <div key={i} style={{ textAlign: "center" }}>
+            <div key={i} className="text-center">
               <div
+                className="hud-panel inline-flex items-center justify-center mb-4"
                 style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  width: "48px",
-                  height: "48px",
-                  background: "rgba(245, 158, 11, 0.1)",
-                  border: "1px solid #f59e0b",
-                  borderRadius: "50%",
-                  fontSize: "20px",
-                  fontWeight: 600,
-                  color: "#f59e0b",
-                  marginBottom: "16px",
+                  width: "56px",
+                  height: "56px",
                 }}
               >
-                {step.num}
+                <span
+                  className="text-pixel"
+                  style={{ fontSize: "20px", color: "var(--accent)" }}
+                >
+                  {step.num}
+                </span>
               </div>
               <h3
+                className="text-pixel mb-3"
                 style={{
-                  fontSize: "14px",
-                  fontWeight: 600,
-                  color: "#fafafa",
+                  fontSize: "10px",
+                  color: "var(--text-primary)",
                   letterSpacing: "1px",
-                  marginBottom: "12px",
                 }}
               >
                 {step.title}
               </h3>
-              <p style={{ fontSize: "15px", color: "#a1a1aa", lineHeight: 1.6 }}>
+              <p
+                className="text-terminal"
+                style={{ fontSize: "18px", color: "var(--text-secondary)", lineHeight: 1.6 }}
+              >
                 {step.desc}
               </p>
             </div>
@@ -442,36 +430,34 @@ function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section style={{ padding: "80px 24px", borderTop: "1px solid #222" }}>
-      <div style={{ maxWidth: "700px", margin: "0 auto" }}>
+    <section style={{ borderBottom: "3px solid var(--border)", background: "var(--bg-deep)" }}>
+      <div className="max-w-3xl mx-auto px-6 py-14">
         <h2
+          className="text-pixel text-center mb-10"
           style={{
-            fontSize: "clamp(28px, 4vw, 36px)",
-            fontWeight: 600,
-            color: "#fafafa",
-            textAlign: "center",
-            marginBottom: "48px",
+            fontSize: "clamp(14px, 3vw, 24px)",
+            color: "var(--accent)",
+            letterSpacing: "3px",
           }}
         >
-          Questions
+          QUESTIONS
         </h2>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+        <div className="flex flex-col gap-3">
           {faqs.map((faq, i) => (
             <div
               key={i}
               style={{
-                background: "#111",
-                borderRadius: "8px",
-                border: "1px solid #222",
-                overflow: "hidden",
+                background: "var(--bg-surface)",
+                border: "3px solid var(--border)",
+                boxShadow: "4px 4px 0px var(--pixel-shadow)",
               }}
             >
               <button
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
                 style={{
                   width: "100%",
-                  padding: "20px 24px",
+                  padding: "16px 20px",
                   background: "transparent",
                   border: "none",
                   textAlign: "left",
@@ -481,16 +467,29 @@ function FAQSection() {
                   alignItems: "center",
                 }}
               >
-                <span style={{ fontSize: "16px", fontWeight: 500, color: "#fafafa" }}>
+                <span
+                  className="text-terminal"
+                  style={{ fontSize: "20px", color: "var(--text-primary)" }}
+                >
                   {faq.q}
                 </span>
-                <span style={{ color: "#f59e0b", fontSize: "20px" }}>
+                <span
+                  className="text-pixel"
+                  style={{ color: "var(--accent)", fontSize: "14px" }}
+                >
                   {openIndex === i ? "−" : "+"}
                 </span>
               </button>
               {openIndex === i && (
-                <div style={{ padding: "0 24px 20px" }}>
-                  <p style={{ fontSize: "15px", color: "#a1a1aa", lineHeight: 1.7 }}>
+                <div style={{ padding: "0 20px 16px" }}>
+                  <p
+                    className="text-terminal"
+                    style={{
+                      fontSize: "18px",
+                      color: "var(--text-secondary)",
+                      lineHeight: 1.7,
+                    }}
+                  >
                     {faq.a}
                   </p>
                 </div>
@@ -505,52 +504,42 @@ function FAQSection() {
 
 function CTASection() {
   return (
-    <section style={{ padding: "80px 24px", borderTop: "1px solid #222" }}>
-      <div style={{ maxWidth: "600px", margin: "0 auto", textAlign: "center" }}>
-        <p style={{ fontSize: "16px", color: "#71717a", lineHeight: 2, marginBottom: "32px" }}>
+    <section
+      className="relative overflow-hidden"
+      style={{
+        background: "linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-base) 100%)",
+      }}
+    >
+      <div className="scanlines absolute inset-0 opacity-20" />
+      <div className="relative z-10 max-w-3xl mx-auto px-6 py-14 text-center">
+        <p
+          className="text-terminal mb-8"
+          style={{
+            fontSize: "20px",
+            color: "var(--text-secondary)",
+            lineHeight: 2,
+          }}
+        >
           Limited to 5 clients.
           <br />
           Personalized AI service. Not a template. Not a dashboard.
           <br />
-          <strong style={{ color: "#f59e0b" }}>An operator.</strong>
+          <span className="text-pixel" style={{ fontSize: "12px", color: "var(--accent)" }}>
+            An operator.
+          </span>
         </p>
         <Link
           href="/services/apply"
+          className="pixel-btn pixel-btn-primary inline-block"
           style={{
-            display: "inline-block",
+            fontSize: "14px",
             padding: "18px 48px",
-            background: "#f59e0b",
-            color: "#0a0a0a",
-            fontSize: "16px",
-            fontWeight: 600,
-            borderRadius: "8px",
             textDecoration: "none",
-            transition: "all 0.2s ease",
           }}
         >
           APPLY NOW →
         </Link>
       </div>
     </section>
-  );
-}
-
-function FooterSection() {
-  return (
-    <footer style={{ padding: "32px 24px", borderTop: "1px solid #222" }}>
-      <div style={{ maxWidth: "900px", margin: "0 auto", textAlign: "center" }}>
-        <p style={{ fontSize: "13px", color: "#71717a" }}>
-          <a href="mailto:rexbuildsai@gmail.com" style={{ color: "#a1a1aa", textDecoration: "none" }}>
-            rexbuildsai@gmail.com
-          </a>
-          {" · "}
-          <a href="https://x.com/RexBuildsAI" style={{ color: "#a1a1aa", textDecoration: "none" }}>
-            @RexBuildsAI
-          </a>
-          {" · "}
-          AgentForge © 2026
-        </p>
-      </div>
-    </footer>
   );
 }
