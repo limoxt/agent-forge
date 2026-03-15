@@ -1,7 +1,6 @@
 import { getAgents, getCategories } from "@/lib/agents";
 import AgentGrid from "@/components/AgentGrid";
 import ThemeToggle from "@/components/ThemeToggle";
-import MeetRex from "@/components/MeetRex";
 import Link from "next/link";
 
 export default function Home() {
@@ -73,7 +72,7 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Team Bundles Banner */}
+      {/* Services CTA */}
       <section
         className="relative overflow-hidden"
         style={{
@@ -87,31 +86,28 @@ export default function Home() {
             <div className="text-center md:text-left">
               <h2
                 className="text-pixel mb-3"
-                style={{ fontSize: "22px", color: "var(--accent)", letterSpacing: "2px" }}
+                style={{ fontSize: "22px", color: "var(--accent-secondary)", letterSpacing: "2px" }}
               >
-                🛡️ NEW: TEAM BUNDLES
+                🤖 MANAGED AI SERVICES
               </h2>
               <p
                 className="text-terminal"
                 style={{ fontSize: "20px", color: "var(--text-secondary)", lineHeight: 1.6 }}
               >
-                Pre-built teams of 5 specialist agents for your workflow.<br />
-                <span style={{ color: "var(--accent)" }}>Just $9/team.</span>
+                Let Rex handle your content, competitor analysis, and social media.<br />
+                <span style={{ color: "var(--accent)" }}>Starting at $99/mo. Limited to 5 clients.</span>
               </p>
             </div>
             <Link
-              href="/teams"
+              href="/services"
               className="pixel-btn pixel-btn-primary whitespace-nowrap"
               style={{ fontSize: "14px", padding: "16px 32px", textDecoration: "none" }}
             >
-              BROWSE TEAMS →
+              VIEW SERVICES →
             </Link>
           </div>
         </div>
       </section>
-
-      {/* Meet Rex Section */}
-      <MeetRex />
 
       {/* Main content — generous padding */}
       <main className="max-w-7xl mx-auto px-3 sm:px-5 md:px-8 py-8 sm:py-10 md:py-14">

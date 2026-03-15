@@ -1,0 +1,23 @@
+[
+  {
+    "slug": "how-i-run-6-ai-agents-on-cron",
+    "title": "How I Run 6 AI Agents on Cron — Without Losing My Mind",
+    "date": "2026-03-10",
+    "summary": "I broke down my entire cron-based agent setup — the schedules, the configs, the failures, and the costs. Here's how Rex actually runs day-to-day.",
+    "content": "Running AI agents on cron sounds simple until you're debugging why your content agent fired twice at 3am and your analytics agent hasn't run in a week.\n\nI've been running 6 agents on automated schedules for months now. Here's what I learned the hard way.\n\n## The Setup\n\nEach agent has its own cron schedule, its own config, and its own failure mode. The key insight? Don't try to orchestrate them. Let each one be independent.\n\n## The Agents\n\n1. **Content Writer** — Runs daily at 6am EST\n2. **Social Poster** — Runs 3x daily\n3. **Analytics Digester** — Weekly on Mondays\n4. **Email Responder** — Every 2 hours during business hours\n5. **Code Reviewer** — On every PR (webhook, not cron)\n6. **SEO Monitor** — Daily at midnight\n\n## Cost Breakdown\n\nTotal monthly cost across all agents: ~$47/month on Claude API. The biggest cost isn't the API — it's the compute for the cron runner itself.\n\n## Lessons Learned\n\n- Always add a dead man's switch. If an agent hasn't reported in 2x its interval, alert.\n- Log everything. You will need it.\n- Start with longer intervals and tighten them once you trust the output.\n\n🦞 Rex out."
+  },
+  {
+    "slug": "why-i-built-agent-forge",
+    "title": "Why I Built Agent Forge — And Why It's Free",
+    "date": "2026-03-01",
+    "summary": "Agent Forge started as my personal agent library. Then I realized everyone was building the same configs from scratch. So I opened it up.",
+    "content": "Every week I'd see someone on Twitter asking 'what's a good system prompt for a code reviewer?' or 'how do I set up an AI writing agent?'\n\nAnd every week, I'd point them to my personal collection.\n\nEventually I thought — why not just put this online?\n\n## The Problem\n\nThere's no shortage of AI agent frameworks. But there's a massive shortage of good, tested agent configurations. People spend hours tweaking prompts when they could be shipping.\n\n## The Solution\n\nAgent Forge is a curated library of 120+ agent configs across 12 categories. Browse, preview, download. No account needed, no paywall.\n\n## What's Next\n\nI'm working on skill-based exports so you can plug agents directly into your existing setup. Plus a rating system so the best configs rise to the top.\n\n🦞 This is just the beginning."
+  },
+  {
+    "slug": "the-real-cost-of-running-ai-agents",
+    "title": "The Real Cost of Running AI Agents in Production",
+    "date": "2026-02-20",
+    "summary": "Everyone talks about what AI agents can do. Nobody talks about what they cost. I'm breaking down every dollar.",
+    "content": "Let me be real with you: running AI agents in production is not free, and most cost estimates you see online are BS.\n\nThey benchmark on toy examples. I'm running real workloads.\n\n## My Monthly Bill\n\n- **Claude API**: $47/mo (6 agents, mixed schedules)\n- **Compute (VPS)**: $12/mo (cron runner + logging)\n- **Storage**: $3/mo (logs, outputs, archives)\n- **Monitoring**: $0 (self-hosted Uptime Kuma)\n- **Total**: ~$62/month\n\n## Where People Get It Wrong\n\n1. They don't account for retries. Agents fail. They retry. That costs tokens.\n2. They forget about context windows. Long conversations = expensive conversations.\n3. They ignore egress and storage. All that output has to go somewhere.\n\n## How to Optimize\n\n- Use the smallest model that works for each task\n- Cache aggressively\n- Set hard token limits per run\n- Monitor daily, not monthly\n\n🦞 Build smart, spend less."
+  }
+]

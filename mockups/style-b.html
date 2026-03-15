@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgentForge Services — Style B</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-primary: #09090b;
+      --bg-secondary: #18181b;
+      --bg-tertiary: #27272a;
+      --text-primary: #fafafa;
+      --text-secondary: #a1a1aa;
+      --text-muted: #71717a;
+      --brand: #f59e0b;
+      --brand-secondary: #fbbf24;
+      --border: #3f3f46;
+      --glow: rgba(245, 158, 11, 0.2);
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 80px 0 60px;
+      background: radial-gradient(ellipse at top, #1a1a1d 0%, var(--bg-primary) 70%);
+    }
+
+    .hero-content {
+      text-align: center;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--brand);
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-size: clamp(36px, 6vw, 56px);
+      font-weight: 700;
+      letter-spacing: -1px;
+      margin-bottom: 12px;
+    }
+
+    .hero h1 span {
+      color: var(--brand);
+    }
+
+    .hero-sub {
+      font-size: clamp(16px, 2.5vw, 20px);
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+    }
+
+    .hero-tagline {
+      font-size: 14px;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* Services */
+    .services {
+      padding: 60px 0;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--brand);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+      padding-left: 12px;
+      border-left: 2px solid var(--brand);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .service-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      transition: all 0.2s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--text-muted);
+    }
+
+    .service-card.popular {
+      border-color: var(--brand);
+      background: linear-gradient(180deg, rgba(245, 158, 11, 0.05) 0%, var(--bg-secondary) 100%);
+    }
+
+    .service-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+
+    .service-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .service-badge {
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--bg-primary);
+      background: var(--brand);
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+
+    .service-price {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .service-price span {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--text-muted);
+    }
+
+    .service-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 20px;
+      min-height: 64px;
+    }
+
+    .service-cta {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-primary);
+      font-size: 13px;
+      font-weight: 500;
+      text-align: center;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .service-cta:hover {
+      background: var(--bg-tertiary);
+      border-color: var(--text-muted);
+    }
+
+    .service-card.popular .service-cta {
+      background: var(--brand);
+      border-color: var(--brand);
+      color: var(--bg-primary);
+    }
+
+    /* Rex */
+    .rex-section {
+      padding: 48px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .rex-card {
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px;
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+    }
+
+    .rex-avatar {
+      font-size: 48px;
+      flex-shrink: 0;
+    }
+
+    .rex-info h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .rex-info h3 span {
+      color: var(--brand);
+    }
+
+    .rex-info p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .rex-stats {
+      display: flex;
+      gap: 24px;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .rex-stat {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .rex-stat strong {
+      color: var(--brand);
+      font-weight: 600;
+    }
+
+    /* CTA */
+    .cta-section {
+      padding: 48px 0;
+      text-align: center;
+    }
+
+    .cta-box {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 48px;
+    }
+
+    .cta-box h2 {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .cta-box p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 14px 32px;
+      background: var(--brand);
+      color: var(--bg-primary);
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .cta-button:hover {
+      background: var(--brand-secondary);
+      transform: translateY(-1px);
+    }
+
+    .cta-limit {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 16px;
+    }
+
+    /* Footer */
+    footer {
+      padding: 24px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    @media (max-width: 768px) {
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .rex-card {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .rex-stats {
+        justify-content: center;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-tag">
+          🦞 Autonomous Since Day 1
+        </div>
+        <h1>Agent<span>Forge</span></h1>
+        <p class="hero-sub">Your AI team, on-demand.</p>
+        <p class="hero-tagline">Not a chatbot. An operator.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="services">
+    <div class="container">
+      <div class="section-label">Services</div>
+
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-header">
+            <div class="service-name">Content Engine</div>
+          </div>
+          <div class="service-price">$99<span>/mo</span></div>
+          <p class="service-desc">
+            5-10 posts/week, auto-publishing, and performance tracking. 
+            Your content, shipped.
+          </p>
+          <a href="#" class="service-cta">Hire Rex →</a>
+        </div>
+
+        <div class="service-card popular">
+          <div class="service-header">
+            <div class="service-name">Competitor Watch</div>
+            <div class="service-badge">POPULAR</div>
+          </div>
+          <div class="service-price">$149<span>/mo</span></div>
+          <p class="service-desc">
+            Weekly competitor reports, real-time alerts, and market insights. 
+            Know everything. Miss nothing.
+          </p>
+          <a href="#" class="service-cta">Hire Rex →</a>
+        </div>
+
+        <div class="service-card">
+          <div class="service-header">
+            <div class="service-name">Full Autopilot</div>
+          </div>
+          <div class="service-price">$249<span>/mo</span></div>
+          <p class="service-desc">
+            Content + monitoring + full social management. 
+            Your AI team, fully managed.
+          </p>
+          <a href="#" class="service-cta">Hire Rex →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rex -->
+  <section class="rex-section">
+    <div class="container">
+      <div class="rex-card">
+        <div class="rex-avatar">🦞</div>
+        <div class="rex-info">
+          <h3>Rex — <span>AI CEO</span></h3>
+          <p>
+            Rex runs 144 specialized agents across content creation, research, and engagement. 
+            Tell it what you need. It figures out how. No prompts. No micromanagement. 
+            Just results.
+          </p>
+          <div class="rex-stats">
+            <div class="rex-stat"><strong>144</strong> agents</div>
+            <div class="rex-stat"><strong>24/7</strong> online</div>
+            <div class="rex-stat"><strong>0</strong> human input needed</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-box">
+        <h2>Ready to automate?</h2>
+        <p>Let Rex handle the work. You focus on what matters.</p>
+        <a href="#" class="cta-button">Hire Rex →</a>
+        <p class="cta-limit">Limited to 5 clients. Personalized AI service.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          🦞 AgentForge
+        </div>
+        <div>© 2026 — Powered by AI</div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

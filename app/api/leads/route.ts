@@ -17,6 +17,12 @@ interface LeadPayload {
   agentId?: string;
   agentName?: string;
   agreedToUpdates?: boolean;
+  // Service intake fields
+  source?: string;
+  name?: string;
+  businessType?: string;
+  automationNeeds?: string;
+  package?: string;
 }
 
 function getClientIp(request: NextRequest): string {
@@ -124,13 +130,72 @@ export async function POST(request: NextRequest) {
   try {
     const payload = (await request.json()) as LeadPayload;
     const email = payload.email?.trim().toLowerCase() || "";
-    const agentId = payload.agentId?.trim() || "";
-    const agentName = payload.agentName?.trim() || "";
-    const agreedToUpdates = Boolean(payload.agreedToUpdates);
 
     if (!EMAIL_REGEX.test(email)) {
       return NextResponse.json({ error: "Invalid email" }, { status: 400 });
     }
+
+    const isServiceLead = payload.source === "services";
+
+    if (isServiceLead) {
+      // Service intake lead
+      const serviceLead = {
+        email,
+        name: payload.name?.trim() || "",
+        businessType: payload.businessType?.trim() || "",
+        automationNeeds: payload.automationNeeds?.trim() || "",
+        package: payload.package?.trim() || "",
+        source: "services",
+        timestamp: new Date().toISOString(),
+        ip: getClientIp(request),
+      };
+
+      // Save to file
+      try {
+        await fs.mkdir(LEADS_DIR, { recursive: true });
+        await fs.appendFile(LEADS_FILE, `${JSON.stringify(serviceLead)}\n`, "utf8");
+      } catch {
+        // Ignore file write errors
+      }
+
+      // Send notification email
+      const resendApiKey = process.env.RESEND_API_KEY;
+      if (resendApiKey) {
+        try {
+          await fetch(RESEND_ENDPOINT, {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${resendApiKey}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              from: FROM_EMAIL,
+              to: TO_EMAIL,
+              subject: `New Service Lead: ${serviceLead.name} — ${serviceLead.package}`,
+              html: `
+                <h2>New Service Inquiry from AgentForge</h2>
+                <p><strong>Name:</strong> ${serviceLead.name}</p>
+                <p><strong>Email:</strong> ${serviceLead.email}</p>
+                <p><strong>Business:</strong> ${serviceLead.businessType}</p>
+                <p><strong>Package:</strong> ${serviceLead.package}</p>
+                <p><strong>Needs:</strong> ${serviceLead.automationNeeds}</p>
+                <p><strong>Time:</strong> ${serviceLead.timestamp}</p>
+                <p><strong>IP:</strong> ${serviceLead.ip}</p>
+              `,
+            }),
+          });
+        } catch (error) {
+          console.error("Service lead notification error:", error);
+        }
+      }
+
+      return NextResponse.json({ success: true });
+    }
+
+    // Agent download lead (original flow)
+    const agentId = payload.agentId?.trim() || "";
+    const agentName = payload.agentName?.trim() || "";
+    const agreedToUpdates = Boolean(payload.agreedToUpdates);
 
     if (!agentId || !agentName) {
       return NextResponse.json({ error: "Missing agent info" }, { status: 400 });
