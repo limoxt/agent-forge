@@ -1,12 +1,8 @@
-import { getAgents, getCategories } from "@/lib/agents";
-import AgentGrid from "@/components/AgentGrid";
 import ThemeToggle from "@/components/ThemeToggle";
+import AgentGrid from "@/components/AgentGrid";
 import Link from "next/link";
 
 export default function Home() {
-  const agents = getAgents();
-  const categories = getCategories();
-
   return (
     <div className="min-h-screen" style={{ backgroundColor: "var(--bg-deep)" }}>
       <ThemeToggle />
@@ -48,18 +44,18 @@ export default function Home() {
             ╚══════════════════════════════╝
           </div>
 
-          {/* HUD Stats */}
+          {/* HUD Stats — static, no server data */}
           <div className="flex justify-center gap-3 sm:gap-5 md:gap-8">
             <div className="hud-panel px-3 py-3 sm:px-6 sm:py-4 text-center">
               <div className="hud-label mb-2">AGENTS</div>
               <div className="hud-value" style={{ color: "var(--accent)" }}>
-                ⚔ {agents.length}
+                ⚔ 144
               </div>
             </div>
             <div className="hud-panel px-3 py-3 sm:px-6 sm:py-4 text-center">
               <div className="hud-label mb-2">CLASSES</div>
               <div className="hud-value" style={{ color: "var(--accent-secondary)" }}>
-                🏰 {categories.length}
+                🏰 12
               </div>
             </div>
             <div className="hud-panel px-3 py-3 sm:px-6 sm:py-4 text-center">
@@ -111,7 +107,7 @@ export default function Home() {
 
       {/* Main content — generous padding */}
       <main className="max-w-7xl mx-auto px-3 sm:px-5 md:px-8 py-8 sm:py-10 md:py-14">
-        <AgentGrid agents={agents} categories={categories} />
+        <AgentGrid />
       </main>
 
       {/* Footer */}

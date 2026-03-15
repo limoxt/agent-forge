@@ -1,20 +1,39 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Agent } from "@/types/agent";
 import { getCategoryColor } from "@/lib/colors";
 import AgentCard from "./AgentCard";
 
 interface AgentGridProps {
-  agents: Agent[];
-  categories: string[];
+  initialAgents?: Agent[];
 }
 
-export default function AgentGrid({ agents, categories }: AgentGridProps) {
+export default function AgentGrid({ initialAgents }: AgentGridProps) {
+  const [agents, setAgents] = useState<Agent[]>(initialAgents || []);
+  const [categories, setCategories] = useState<string[]>([]);
+  const [loading, setLoading] = useState(!initialAgents?.length);
   const [activeCategory, setActiveCategory] = useState<string>("All");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [showAll, setShowAll] = useState(false);
   const INITIAL_COUNT = 12;
+
+  useEffect(() => {
+    if (!initialAgents?.length) {
+      fetch("/api/agents")
+        .then((res) => res.json())
+        .then((data) => {
+          setAgents(data);
+          const cats = new Set((data as Agent[]).map((a: Agent) => a.category));
+          setCategories(Array.from(cats).sort());
+          setLoading(false);
+        })
+        .catch(() => setLoading(false));
+    } else {
+      const cats = new Set(initialAgents.map((a) => a.category));
+      setCategories(Array.from(cats).sort());
+    }
+  }, [initialAgents]);
 
   const filtered = agents.filter((a) => {
     const matchesCategory = activeCategory === "All" || a.category === activeCategory;
@@ -26,6 +45,16 @@ export default function AgentGrid({ agents, categories }: AgentGridProps) {
   });
 
   const allCategories = ["All", ...categories];
+
+  if (loading) {
+    return (
+      <div className="text-center py-20">
+        <div className="text-terminal animate-pulse" style={{ fontSize: "26px", color: "var(--accent)" }}>
+          LOADING AGENTS...
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
