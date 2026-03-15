@@ -2,7 +2,6 @@ import { getAgents, getCategories } from "@/lib/agents";
 import AgentGrid from "@/components/AgentGrid";
 import ThemeToggle from "@/components/ThemeToggle";
 import MeetRex from "@/components/MeetRex";
-import EmailSignup from "@/components/EmailSignup";
 import Link from "next/link";
 
 export default function Home() {
@@ -73,9 +72,6 @@ export default function Home() {
           </div>
         </div>
       </header>
-
-      {/* Email Signup */}
-      <EmailSignup />
 
       {/* Team Bundles Banner */}
       <section
