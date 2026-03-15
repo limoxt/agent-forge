@@ -1,5 +1,8 @@
-@import "@fontsource/press-start-2p";
-@import "@fontsource/vt323";
+/* Only load latin fonts - site is English only */
+@import "@fontsource/press-start-2p/latin.css";
+@import "@fontsource/press-start-2p/latin-ext.css";
+@import "@fontsource/vt323/latin.css";
+@import "@fontsource/vt323/latin-ext.css";
 
 @tailwind base;
 @tailwind components;
